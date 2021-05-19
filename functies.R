@@ -48,7 +48,8 @@ plotTrends <- function(df, parname) {
     geom_smooth(method = "lm", fill = "blue", alpha = 0.2) +
     facet_wrap(~Station) +
     theme_minimal() +
-    ylab(parname)
+    ylab(parname) +
+    coord_cartesian(ylim = c(0,NA))
 }
 
 plotMeanMap <- function(df, parname) {

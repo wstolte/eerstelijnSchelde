@@ -11,11 +11,9 @@ require(sf)
 require(leaflet)
 
 source("functies.R")
-# hieronder eerste versies van functies. nog nakijken
+
 # wat te doen met valuesigns? nakijken in matlab scripts
 # hoe wordt statistiek berekend? nakijken in matlab scripts
-# 
-
 
 ```
 
@@ -185,7 +183,7 @@ knitr::kable(dt,
 ```{r fysischAmmonium, fig.cap="Jaarlijks gemiddelde, minimum en maximum van het ammoniumgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 
 parname = "Ammonium in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
-plotTrends(df, parname)
+plotTrends(df, parname) + coord_cartesian(ylim = c(0,0.5))
 ```
 
 ### Nitriet {#nitriet}
@@ -200,7 +198,7 @@ In benedenstroomse richting nemen de concentraties van nitriet af, zie Figuur \@
 parname = "Nitriet in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
 dt <- statTable(df, parname, 3)
 knitr::kable(dt,
-             caption = "Gemiddelde, minimale en maximale waardes van het nirtietgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+             caption = "Gemiddelde, minimale en maximale waardes van het nitrietgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 
@@ -303,7 +301,7 @@ De resultaten lijken sprekend op die van orthofosfaat, vooral op de bovenstrooms
 
 ```{r fysischFosfaatFilTab}
 parname <- "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater"
-statTable(df, parname, 3)
+dt <- statTable(df, parname, 3)
 knitr::kable(dt, 
              caption = "Gemiddelde, minimale en maximale waardes van het fosfaatgehalte na filtratie in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
@@ -385,9 +383,9 @@ parname <- "Silicaat in mg/l uitgedrukt in silicium na filtratie in oppervlaktew
 plotMeanMap(df, parname)
 ```
 
-### Organisch koolstof {#organisch-koolstof}
+<!-- ### Organisch koolstof {#organisch-koolstof} -->
 
-In deze paragraaf worden de metingen weergegeven van particulair organisch koolstof (POC) en opgelost organisch koolstof (DOC). Dit is alle koolstof van organische oorsprong die particulair gebonden respectievelijk opgelost aanwezig is.
+<!-- In deze paragraaf worden de metingen weergegeven van particulair organisch koolstof (POC) en opgelost organisch koolstof (DOC). Dit is alle koolstof van organische oorsprong die particulair gebonden respectievelijk opgelost aanwezig is. -->
 
 <!-- #### Opgelost organisch koolstof {#opgelost-organisch-koolstof} -->
 
@@ -395,12 +393,6 @@ In deze paragraaf worden de metingen weergegeven van particulair organisch kools
 
 <!-- De gehaltes dalen in stroomafwaartse richting (met toenemende saliniteit), zie ook Figuur \@ref(fig:gemiddeldekoolstofopg). In het estuarium treedt een dalende trend op. Specifiek stations Hansweert geul en Terneuzen boei 20 dalen  0.06 tot 0.07 mg/L per jaar (met beperkte statistische significantie). Deze afname wordt mogelijk verklaard door een afname in DOC lozingen. De laatste jaren zet de dalende trend niet door en lijkt de concentratie zich te stabiliseren (met jaarlijkse variaties). Voor de Walcheren locaties is een lichte stijging zichtbaar sinds 2016 die niet voor de overige stations wordt waargenomen. -->
 
-<!-- <!-- \begin{table}[!ht] --> -->
-<!-- <!--  \centering --> -->
-<!-- <!--  \input{../Figuren/Fysisch/Koolstof_opg/meanvalues.tex} --> -->
-<!-- <!--  \caption[Waardes van het opgeloste koolstofgehalte in het oppervlaktewater]{Gemiddelde, minimale en maximale waardes van het opgeloste koolstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data tussen 1996 en 2018.}  --> -->
-<!-- <!--  \label{tab:fysisch_koolstof_opg} --> -->
-<!-- <!-- \end{table} --> -->
 
 <!-- ```{r fysischKoolstofOpgTab} -->
 <!-- dt <- tex2dt("Figuren/Fysisch/Koolstof_opg/meanvalues.tex") -->
@@ -408,12 +400,7 @@ In deze paragraaf worden de metingen weergegeven van particulair organisch kools
 <!--              caption = "Gemiddelde, minimale en maximale waardes van het opgeloste koolstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.") -->
 <!-- ``` -->
 
-<!-- <!-- \begin{figure}[h!]  --> -->
-<!-- <!-- \centering --> -->
-<!-- <!--  \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Koolstof_opg/jaar.png} --> -->
-<!-- <!--  \caption[Jaarlijks gemiddelde opgeloste koolstofgehalte in het oppervlaktewater]{Jaarlijks gemiddelde, minimum en maximum van het opgeloste koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding. Wielingen wordt sinds 2009 niet meer gemeten.}  --> -->
-<!-- <!--  \label{fig:fysisch_koolstof_opg} --> -->
-<!-- <!-- \end{figure}  --> -->
+
 
 <!-- ```{r fysischKoolstofOpg, fig.cap="Jaarlijks gemiddelde, minimum en maximum van het opgeloste koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding."} -->
 <!-- knitr::include_graphics("Figuren/Fysisch/Koolstof_opg/jaar.png") -->
@@ -427,12 +414,7 @@ In deze paragraaf worden de metingen weergegeven van particulair organisch kools
 
 <!-- De hoeveelheid particulair organisch koolstof varieert sterk van jaar tot jaar. Ver uit de kust (Walcheren 20 km uit de kust) is de concentratie een stuk lager dan op de andere stations. Er zijn geen duidelijke temporele trends waarneembaar, zie ook Figuur \@ref(fig:gemiddeldekoolstofpar). -->
 
-<!-- <!-- \begin{table}[!ht] --> -->
-<!-- <!--  \centering --> -->
-<!-- <!--  \input{../Figuren/Fysisch/Koolstof_par/meanvalues.tex} --> -->
-<!-- <!--  \caption[Waardes van het particulair gebonden koolstofgehalte in het oppervlaktewater]{Gemiddelde, minimale en maximale waardes van het particulaire koolstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data tussen 1996 en 2018.}  --> -->
-<!-- <!--  \label{tab:fysisch_koolstof_par} --> -->
-<!-- <!-- \end{table} --> -->
+
 
 <!-- ```{r fysischKoolstofParTab} -->
 <!-- dt <- tex2dt("Figuren/Fysisch/Koolstof_par/meanvalues.tex") -->
@@ -440,12 +422,6 @@ In deze paragraaf worden de metingen weergegeven van particulair organisch kools
 <!--              caption = "Gemiddelde, minimale en maximale waardes van het particulaire koolstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.") -->
 <!-- ``` -->
 
-<!-- <!-- \begin{figure}[h!]  --> -->
-<!-- <!-- \centering --> -->
-<!-- <!--  \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Koolstof_par/jaar.png} --> -->
-<!-- <!--  \caption[Jaarlijks gemiddelde particulaire koolstofgehalte in het oppervlaktewater]{Jaarlijks gemiddelde, minimum en maximum van het particulaire koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding. Wielingen wordt sinds 2009 niet meer gemeten.}  --> -->
-<!-- <!--  \label{fig:fysisch_koolstof_par} --> -->
-<!-- <!-- \end{figure}  --> -->
 
 <!-- ```{r fysischKoolstofPar, fig.cap="Jaarlijks gemiddelde, minimum en maximum van het particulaire koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding."} -->
 <!-- knitr::include_graphics("Figuren/Fysisch/Koolstof_par/jaar.png") -->
@@ -455,34 +431,19 @@ In deze paragraaf worden de metingen weergegeven van particulair organisch kools
 
 <!-- Figuur \@ref(fig:fysischKoolstofParZomerWinter) toont het seizoensgemiddelde gehalte particulaire koolstofgehalte per station voor de periode 1996-2018. Er is geen duidelijk verschil tussen zomer en winterwaarden, wat laat zien dat de fytoplanktonbloei wegvalt in de achtergrondwaarden. Ook is de variatie per station beperkt te noemen. -->
 
-<!-- <!-- \begin{figure}[h!]  --> -->
-<!-- <!-- \centering --> -->
-<!-- <!--  \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Koolstof_par/Zomer_winter.png} --> -->
-<!-- <!--  \caption[Particulaire koolstofgehalte gedurende zomer en winter in het oppervlaktewater]{Gemiddeld waardes voor de hoeveelheid particulaire koolstofgehalte gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding} --> -->
-<!-- <!--  \label{fig:fysisch_koolstof_par_Zomer_winter} --> -->
-<!-- <!-- \end{figure}  --> -->
+
 
 <!-- ```{r fysischKoolstofParZomerWinter, fig.cap="Gemiddeld waardes voor de hoeveelheid particulaire koolstofgehalte gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding."} -->
 <!-- knitr::include_graphics("Figuren/Fysisch/Koolstof_par/Zomer_winter.png") -->
 <!-- ``` -->
 
-<!-- <!-- \begin{figure}[h!]  --> -->
-<!-- <!-- \centering --> -->
-<!-- <!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Koolstof_opg/gemiddelde_waardes.png} --> -->
-<!-- <!--  \caption[Gemiddeld opgeloste koolstofgehalte per station op een kaart]{Gemiddelde opgeloste koolstofgehalte station berekend op alle beschikbare data tussen 1996 en 2018} --> -->
-<!-- <!--  \label{fig:gemiddeldekoolstofopg} --> -->
-<!-- <!-- \end{figure}  --> -->
+
 
 <!-- ```{r gemiddeldekoolstofopg, fig.cap="Gemiddelde opgeloste koolstofgehalte per station berekend op alle beschikbare data vanaf 1996."} -->
 <!-- knitr::include_graphics("Figuren/Fysisch/Koolstof_opg/gemiddelde_waardes.png") -->
 <!-- ``` -->
 
-<!-- <!-- \begin{figure}[h!]  --> -->
-<!-- <!-- \centering --> -->
-<!-- <!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Koolstof_par/gemiddelde_waardes.png} --> -->
-<!-- <!--  \caption[Gemiddeld  particulaire koolstofgehalte per station op een kaart]{Gemiddelde particulaire koolstofgehalte station berekend op alle beschikbare data tussen 1996 en 2018} --> -->
-<!-- <!--  \label{fig:gemiddeldekoolstofpar} --> -->
-<!-- <!-- \end{figure}  --> -->
+
 
 <!-- ```{r gemiddeldekoolstofpar, fig.cap="Gemiddelde particulaire koolstofgehalte per station berekend op alle beschikbare data vanaf 1996."} -->
 <!-- knitr::include_graphics("Figuren/Fysisch/Koolstof_par/gemiddelde_waardes.png") -->
@@ -490,25 +451,20 @@ In deze paragraaf worden de metingen weergegeven van particulair organisch kools
 
 <!-- ## C:N:P ratio's {#cnp-ratio} -->
 
-<!-- De molaire C:N:P ratio’s zijn berekend uit jaargemiddelden van particulair organisch koolstof (POC), particulair gebonden stikstof (PN) en particulair gebonden fosfaat (PP). De molaire NC-ratio  en de molaire PC-ratio zijn uitgedrukt ten opzichte van een gehalte C van 106, om de vergelijking met de zogenaamde Redfield-ratio (C:N:P = 106:16:1) mogelijk te maken:  -->
+<!-- De molaire C:N:P ratio’s zijn berekend uit jaargemiddelden van particulair organisch koolstof (POC), particulair gebonden stikstof (PN) en particulair gebonden fosfaat (PP). De molaire NC-ratio  en de molaire PC-ratio zijn uitgedrukt ten opzichte van een gehalte C van 106, om de vergelijking met de zogenaamde Redfield-ratio (C:N:P = 106:16:1) mogelijk te maken: -->
 
 <!-- $N = 106*\frac{{PN/14}}{{POC/12}}$ -->
 <!-- $P = 106*\frac{{PP/31}}{{POC/12}}$ -->
 
-<!-- De Redfield-ratio gaat over de verhoudingen van organisch C, N en P in particulair materiaal. Omdat totaal N en P in particulair materiaal gemeten zijn, zit er ook particulair anorganisch P (PAP) bij. Dit leidt tot een overschatting van de hoeveelheid P in de data ten opzichte van de Redfield-ratio. Er is geen particulair anorganisch N.  -->
+<!-- De Redfield-ratio gaat over de verhoudingen van organisch C, N en P in particulair materiaal. Omdat totaal N en P in particulair materiaal gemeten zijn, zit er ook particulair anorganisch P (PAP) bij. Dit leidt tot een overschatting van de hoeveelheid P in de data ten opzichte van de Redfield-ratio. Er is geen particulair anorganisch N. -->
 
 <!-- Figuur \@ref(fig:fysischNJaar), Figuur \@ref(fig:fysischPJaar) en Figuur \@ref(fig:fysischNPJaar) tonen de jaarwaardes per station. De gemiddelde waardes in de zomer en winter kunnen worden gevonden in Figuur \@ref(fig:fysischNzw), Figuur \@ref(fig:fysischPzw) en Figuur \@ref(fig:fysischNPzw). Daarnaast zijn in Tabel \@ref(tab:fysischCNP) de gemiddelde waardes te vinden. De gemiddelde waardes uit Figuur \@ref(fig:fysischNJaar) en Figuur \@ref(fig:fysischPJaar) kunnen het best worden vergeleken met Tabel \@ref(tab:fysischCNP). -->
 
 <!-- Bij Walcheren 20 km komen de hoogste stikstofratios voor en over het algemeen neemt de N-C-ratio toe naar mate men verder uit het estuarium gaat. Dit kan verklaard worden door een afname van terrestrisch materiaal (met lage N-C ratio) en toename van vers organisch materiaal (hoge N-C ratio) in stroomafwaartse richting. Een tegenoverstelde trend is zichtbaar voor de P-C-ratio's aangezien de laagste waarde wordt gevonden bij Walcheren 20 km en over het algemeen neemt de fosforratio toe naar mate men verder in het estuarium komt. Dit kan verklaard worden door een hogere bijdrage van anorganisch particulair P in stroomopwaartse richting. Bij Walcheren 20 km is de stoichiometrische verhouding ook het dichtst bij Redfield. Dit vertaalt zich ook in de N:P ratio die het hoogst is bij Walcheren 20 km en het laagst bij Hansweert Geul. -->
 
-<!-- De N-C-ratio (stikstof) is over het algemeen hoger in de zomerperiode, als er meer algen zijn. De P-C-ratio (fosfor) is over het algemeen hoger in de winterperiode, als de hoeveelheid particulair gebonden fosfaat over het algemeen hoger is. Dit is ook terug te zien in de N:P ratio, met hogere waarden in de zomer dan in de winter.  -->
+<!-- De N-C-ratio (stikstof) is over het algemeen hoger in de zomerperiode, als er meer algen zijn. De P-C-ratio (fosfor) is over het algemeen hoger in de winterperiode, als de hoeveelheid particulair gebonden fosfaat over het algemeen hoger is. Dit is ook terug te zien in de N:P ratio, met hogere waarden in de zomer dan in de winter. -->
 
-<!-- <!-- \begin{table}[!ht] --> -->
-<!-- <!--  \centering --> -->
-<!-- <!--  \input{../Figuren/Fysisch/CNP/meanvalues.tex} --> -->
-<!-- <!--  \caption[Waardes van de CNP ratio's van het oppervlaktewater]{Gemiddelde molaire C-N-P-ratio uitgedrukt ten opzichte van een gehalte C van 106 gemiddeld over alle data van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data tussen 1996 en 2018.}  --> -->
-<!-- <!--  \label{tab:fysisch_CNP} --> -->
-<!-- <!-- \end{table} --> -->
+
 
 <!-- ```{r fysischCNP} -->
 <!-- dt <- tex2dt("Figuren/Fysisch/CNP/meanvalues.tex") -->
@@ -516,68 +472,36 @@ In deze paragraaf worden de metingen weergegeven van particulair organisch kools
 <!--              caption = "Gemiddelde molaire C-N-P-ratio uitgedrukt ten opzichte van een gehalte C van 106 gemiddeld over alle data van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.") -->
 <!-- ``` -->
 
-<!-- <!-- \clearpage --> -->
-<!-- <!-- \begin{figure}[h!]  --> -->
-<!-- <!-- \centering --> -->
-<!-- <!--  \includegraphics[width=1\linewidth]{../Figuren/Fysisch/CNP/N_jaar.png} --> -->
-<!-- <!--  \caption[Jaarlijks gemiddelde N-C ratio van het oppervlaktewater]{De molaire N-C-ratio, N uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding.}  --> -->
-<!-- <!--  \label{fig:fysisch_N_jaar} --> -->
-<!-- <!-- \end{figure}  --> -->
+
 
 <!-- ```{r fysischNJaar, fig.cap="De molaire N-C-ratio, N uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding."} -->
 <!-- knitr::include_graphics("Figuren/Fysisch/CNP/N_jaar.png") -->
 <!-- ``` -->
 
-<!-- <!-- \begin{figure}[h!]  --> -->
-<!-- <!-- \centering --> -->
-<!-- <!--  \includegraphics[width=1\linewidth]{../Figuren/Fysisch/CNP/P_jaar.png} --> -->
-<!-- <!--  \caption[Jaarlijks gemiddelde PC ratio van het oppervlaktewater]{De molaire P-C-ratio, P uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding.}  --> -->
-<!-- <!--  \label{fig:fysisch_P_jaar} --> -->
-<!-- <!-- \end{figure}  --> -->
 
 <!-- ```{r fysischPJaar, fig.cap="De molaire P-C-ratio, P uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding."} -->
 <!-- knitr::include_graphics("Figuren/Fysisch/CNP/P_jaar.png") -->
 <!-- ``` -->
 
-<!-- <!-- \begin{figure}[h!]  --> -->
-<!-- <!-- \centering --> -->
-<!-- <!--  \includegraphics[width=1\linewidth]{../Figuren/Fysisch/CNP/NP_jaar.png} --> -->
-<!-- <!--  \caption[Jaarlijks gemiddelde NP ratio van het oppervlaktewater]{De molaire N-P-ratio, N uitgedrukt ten opzichte van een gehalte P, over een jaar in het oppervlaktewater van de Westerschelde en de monding.}  --> -->
-<!-- <!--  \label{fig:fysisch_NP_jaar} --> -->
-<!-- <!-- \end{figure}  --> -->
+
 
 <!-- ```{r fysischNPJaar, fig.cap="De molaire N-P-ratio, N uitgedrukt ten opzichte van een gehalte P, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding."} -->
 <!-- knitr::include_graphics("Figuren/Fysisch/CNP/NP_jaar.png") -->
 <!-- ``` -->
 
-<!-- <!-- \begin{figure}[h!]  --> -->
-<!-- <!-- \centering --> -->
-<!-- <!--  \includegraphics[width=1\linewidth]{../Figuren/Fysisch/CNP/N_Zomer_winter.png} --> -->
-<!-- <!--  \caption[NC ratio's gedurende zomer en winter van het oppervlaktewater]{De molaire N-C-ratio, N uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding.}  --> -->
-<!-- <!--  \label{fig:fysisch_N_zw} --> -->
-<!-- <!-- \end{figure}  --> -->
+
 
 <!-- ```{r fysischNzw, fig.cap="De molaire N-C-ratio, N uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding."} -->
 <!-- knitr::include_graphics("Figuren/Fysisch/CNP/N_Zomer_winter.png") -->
 <!-- ``` -->
 
-<!-- <!-- \begin{figure}[h!]  --> -->
-<!-- <!-- \centering --> -->
-<!-- <!--  \includegraphics[width=1\linewidth]{../Figuren/Fysisch/CNP/P_Zomer_winter.png} --> -->
-<!-- <!--  \caption[PC ratio's gedurende zomer en winter van het oppervlaktewater]{De molaire P-C-ratio, P uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding.}  --> -->
-<!-- <!--  \label{fig:fysisch_P_zw} --> -->
-<!-- <!-- \end{figure}  --> -->
+
 
 <!-- ```{r fysischPzw, fig.cap="De molaire P-C-ratio, P uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding."} -->
 <!-- knitr::include_graphics("Figuren/Fysisch/CNP/P_Zomer_winter.png") -->
 <!-- ``` -->
 
-<!-- <!-- \begin{figure}[h!]  --> -->
-<!-- <!-- \centering --> -->
-<!-- <!--  \includegraphics[width=1\linewidth]{../Figuren/Fysisch/CNP/NP_Zomer_winter.png} --> -->
-<!-- <!--  \caption[NP ratio's gedurende zomer en winter van het oppervlaktewater]{De molaire N-P-ratio, P uitgedrukt ten opzichte van een gehalte P, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding.}  --> -->
-<!-- <!--  \label{fig:fysisch_NP_zw} --> -->
-<!-- <!-- \end{figure}  --> -->
+
 
 <!-- ```{r fysischNPzw, fig.cap="De molaire N-P-ratio, N uitgedrukt ten opzichte van een gehalte P, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding."} -->
 <!-- knitr::include_graphics("Figuren/Fysisch/CNP/NP_Zomer_winter.png") -->

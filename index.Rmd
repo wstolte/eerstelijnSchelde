@@ -16,7 +16,7 @@ output:
       in_header: clickandzoom.html
   pdf_document:
     keep_tex: true
-bibliography: ["Latex_rapport/library.bib"]
+bibliography: ["bib/library.bib"]
 biblio-style: "apalike"
 link-citations: yes
 ---
