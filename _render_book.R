@@ -4,11 +4,6 @@
 # install.packages("tinytex")
 # tinytex::install_tinytex()  # install TinyTeX
 
-## convert refs to better format 
-# require(RefManageR)
-# refs <- RefManageR::ReadBib("bib/Oosterschelde.bib")
-# RefManageR::WriteBib(refs, file = "bib/Oosterschelde_adapted.bib", biblatex = T)
-
 rm(list = ls())
 bookdown::clean_book()
 bookdown::clean_book(TRUE)
@@ -29,9 +24,9 @@ bookdown::render_book("index.Rmd",
 
 # "normal pdf
 # options(tinytex.verbose = TRUE)
-file.remove("_main.md")
-bookdown::render_book("index.Rmd", output_format = bookdown::pdf_book(), 
-                      new_session = T, clean_envir = T)
+# file.remove("_main.md")
+# bookdown::render_book("index.Rmd", output_format = bookdown::pdf_book(), 
+#                       new_session = T, clean_envir = T)
 
 
 
