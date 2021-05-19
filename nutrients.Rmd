@@ -3,14 +3,14 @@
 knitr::opts_chunk$set(echo = F,message = F,
                       warning = F, comment = F,
                       out.width = "90%" )
-source("getDataFunctions.R")
+source("r/getDataFunctions.R")
 
 require(tidyverse)
 require(lubridate)
 require(sf)
 require(leaflet)
 
-source("functies.R")
+source("r/functies.R")
 
 # wat te doen met valuesigns? nakijken in matlab scripts
 # hoe wordt statistiek berekend? nakijken in matlab scripts
