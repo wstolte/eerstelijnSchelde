@@ -34,15 +34,15 @@ df <- df %>%
 df$stationname <- factor(df$stationname, levels = trendstations)
 ```
 
-# Nutrienten {#nutrienten}
+# Nutriënten {#nutrienten}
 
 Nutriënten zijn vooral van belang voor de biologische activiteit in de Westerschelde. Stikstof (N) en fosfor (P) zijn van belang omdat het voedingsstoffen (nutriënten) zijn, die als gevolg van puntlozingen en diffuse bronnen in verhoogde concentraties aanwezig kunnen zijn, en aanleiding kunnen geven tot eutrofiëring. 
 
 Stikstof komt in het oppervlaktewater voor in verschillende vormen:
 * anorganisch:
-  + ammonium (NH4+);
-  + nitriet (NO2-);
-  + nitraat (NO3-);
+  + ammonium ($NH_4^+$);
+  + nitriet ($NO_2^-$);
+  + nitraat ($NO_3^-$);
 * organisch (meestal gemeten samen met ammonium als ‘Kjeldahl-stikstof’):
   + opgelost, bv. in de vorm van humuszuren;
   + particulair, bv. materiaal afkomstig van lozingen of van algengroei.
@@ -55,7 +55,7 @@ Door de menging van relatief nutriëntenrijk zoet water en relatief nutriëntena
 
 Fosfor komt in het oppervlaktewater in de volgende vormen voor:
 * anorganisch
-  + orthofosfaat (opgelost, o-PO43-);
+  + orthofosfaat (opgelost, o-$PO_4^{3-}$);
   + gebonden aan slib
 * organisch
   + opgelost, bv. in de vorm van humuszuren;
@@ -73,7 +73,7 @@ Door de menging van relatief silicaatrijk zoet water en relatief silicaatarm zou
 
 Net als in de Eerstelijnsrapportage 2015 is ervoor gekozen (in tegenstelling tot eerdere rapportages) om nutrienten in dit rapport te presenteren als jaargemiddelde (in plaats van tijdseries). De reden hiervoor is dat deze methode de lezer meer inzicht geeft in de temporale trends.
 
-### Stikstof {#stikstof}
+## Stikstof {#stikstof}
 
 Opgelost stikstof (DN) is de som van alle vormen van anorganisch stikstof (ammonium, nitriet, nitraat) en opgelost organisch stikstof. Figuur \@ref(fig:fysischStikstofFil) toont de jaargemiddelden per station, samen met de minimaal en maximaal gemeten waardes per jaar.  Daarnaast zijn in Tabel \@ref(tab:fysischStikstofFilTab) de gemiddelde, minimale en maximale waardes per station weergegeven. In Schaar van Ouden Doel is het opgelost stikstofgehalte niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.
 
@@ -99,18 +99,12 @@ plotTrends(df, parname)
 
 
 
-### Particulair gebonden stikstof {#part-gebonden-stikstof}
+## Particulair gebonden stikstof {#part-gebonden-stikstof}
 
 Figuur \@ref(fig:fysischStikstofPar) toont de jaargemiddelden per station, samen met de minimaal en maximaal gemeten waardes per jaar.  Daarnaast zijn in Tabel \@ref(tab:fysischStikstofParTab) de gemiddelde, minimale en maximale waardes per station weergegeven. In Schaar van Ouden Doel is het particulair gebonden stikstofgehalte niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.
 
 De concentraties particulair stikstof tonen een totaal ander verloop dan opgelost stikstof. Er zijn geen duidelijke longitudinale of temporele gradiënten waarneembaar, zie Figuur \@ref(fig:gemiddeldestikstofpar). Net als voor zwevend stof fluctueert de concentratie sterk, en zijn de gehaltes op de meeste stations vergelijkbaar, behalve op Walcheren 20 km uit de kust. De gehaltes particulair stikstof vormen maar een heel klein deel van de concentratie totaal stikstof. 
 
-<!-- \begin{table}[!ht] -->
-<!--  \centering -->
-<!--  \input{../Figuren/Fysisch/Stikstof_par/meanvalues.tex} -->
-<!--  \caption[Waardes van het particulair stikstofgehalte in het oppervlaktewater]{Gemiddelde, minimale en maximale waardes van het particulair stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data tussen 1996 en 2018.}  -->
-<!--  \label{tab:fysisch_stikstof_par} -->
-<!-- \end{table} -->
 
 ```{r fysischStikstofParTab}
 
@@ -122,12 +116,7 @@ knitr::kable(dt,
              caption = "Gemiddelde, 10-percentiel en 90-percentiel waardes en de trend en p waarde van de trend van het particulair stikstofgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--  \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Stikstof_par/jaar.png} -->
-<!--  \caption[Jaarlijks gemiddelde particulair stikstofgehalte in het oppervlaktewater]{Jaarlijks gemiddelde, minimum en maximum van het particulair stikstofgehalte in het oppervlaktewater van de Westerschelde en de monding.}  -->
-<!--  \label{fig:fysisch_stikstof_par} -->
-<!-- \end{figure}  -->
+
 
 ```{r fysischStikstofPar, fig.cap="Jaarlijks gemiddelde, 10-percentiel en 90-percentiel van het particulair stikstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 parname = "Stikstof in mg/l particulair gebonden in oppervlaktewater"
@@ -142,12 +131,7 @@ parname = "Stikstof in mg/l na filtratie in oppervlaktewater"
 plotMeanMap(df, parname = parname)
 ```
 
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Stikstof_par/gemiddelde_waardes.png} -->
-<!--  \caption[Gemiddeld particulair stikstofgehalte  per station op een kaart]{Gemiddelde hoeveelheid particulair stikstofgehalte na filtratie per station berekend op alle beschikbare data tussen 1997 en 2018} -->
-<!--  \label{fig:gemiddeldestikstof_par} -->
-<!-- \end{figure}  -->
+
 
 ```{r gemiddeldestikstofpar, fig.cap="Gemiddelde hoeveelheid particulair stikstofgehalte na filtratie per station berekend op alle beschikbare data vanaf 1996."}
 
@@ -156,7 +140,7 @@ parname = "Stikstof in mg/l particulair gebonden in oppervlaktewater"
 plotMeanMap(df, parname)
 ```
 
-### Ammonium {#ammonium}
+## Ammonium {#ammonium}
 
 Figuur \@ref(fig:fysischAmmonium) toont de jaargemiddelden ammonium per station, samen met de minimaal en maximaal gemeten waardes per jaar.  Daarnaast zijn in Tabel \@ref(tab:fysischAmmoniumTab) de gemiddelde, minimale en maximale waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.
 
@@ -164,12 +148,7 @@ In benedenstroomse richting nemen de concentraties van ammonium sterk af, zie Fi
 
 *Let op: de y-assen van subfiguren van Figuur \@ref(fig:fysischAmmonium) verschillen. Y-assen voor de linker en rechter figuur zijn wel hetzelfde.*
 
-<!-- \begin{table}[!ht] -->
-<!--  \centering -->
-<!--  \input{../Figuren/Fysisch/Ammonium/meanvalues.tex} -->
-<!--  \caption[Waardes van het ammoniumgehalte in het oppervlaktewater]{Gemiddelde, minimale en maximale waardes van het ammoniumgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data tussen 1996 en 2018.}  -->
-<!--  \label{tab:fysisch_Ammonium} -->
-<!-- \end{table} -->
+
 
 ```{r fysischAmmoniumTab}
 parname = "Ammonium in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
@@ -186,7 +165,7 @@ parname = "Ammonium in mg/l uitgedrukt in stikstof / na filtratie in oppervlakte
 plotTrends(df, parname) + coord_cartesian(ylim = c(0,0.5))
 ```
 
-### Nitriet {#nitriet}
+## Nitriet {#nitriet}
 
 Figuur \@ref(fig:fysischNitriet) toont de jaargemiddelden nitriet per station, samen met de minimaal en maximaal gemeten waardes per jaar.  Daarnaast zijn in Tabel \@ref(tab:fysischNitrietTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
 
@@ -224,7 +203,7 @@ parname = "Nitriet in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktew
 plotMeanMap(df, parname)
 ```
 
-### Nitraat {#nitraat}
+## Nitraat {#nitraat}
 
 Figuur \@ref(fig:fysischNitraat) toont de jaargemiddelden per station, samen met de minimaal en maximaal gemeten waardes per jaar.  Daarnaast zijn in Tabel \@ref(tab:fysischNitraatTab) de gemiddelde, minimale en maximale waardes per station weergegeven. 
 
@@ -248,7 +227,7 @@ parname <- "Nitraat in mg/l uitgedrukt in stikstof / na filtratie in oppervlakte
 plotTrends(df, parname)
 ```
 
-### Orthofosfaat {#orthofosfaat}
+## Orthofosfaat {#orthofosfaat}
 
 Figuur \@ref(fig:fysischOrthofosfaat) toont de jaargemiddelden orthofosfaat per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischOrthofosfaatTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Voor deze variabele is er slechts data vanaf 2009 tot en met 2018.
 
@@ -291,7 +270,7 @@ parname <- "Orthofosfaat in mg/l Uitgedrukt in Fosfor / Na filtratie in oppervla
 plotMeanMap(df, parname)
 ```
 
-### Totaal fosfaat {#totaal-fosfaat}
+## Totaal fosfaat {#totaal-fosfaat}
 
 Figuur \@ref(fig:fysischFosfaatFil) toont de jaargemiddelden fosfaat na filtratie per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischFosfaatFilTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het fosfaat na filtratie niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.
 
@@ -313,7 +292,7 @@ parname <- "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater"
 plotTrends(df, parname) + coord_cartesian(ylim = c(0,0.25))
 ```
 
-### Particulair gebonden fosfaat {#part-gebonden-fosfaat}
+## Particulair gebonden fosfaat {#part-gebonden-fosfaat}
 
 Figuur \@ref(fig:fysischFosfaatPar) toont de jaargemiddelden particulair gebonden fosfaat per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischFosfaatParTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het  particulair gebonden fosfaat niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting.
 
@@ -352,7 +331,7 @@ parname = "Fosfaat, totaal in mg/l particulair gebonden in oppervlaktewater"
 plotMeanMap(df, parname)
 ```
 
-### Silicaat {#silicaat}
+## Silicaat {#silicaat}
 
 Figuur \@ref(fig:fysischSilicaat) toont de jaargemiddelden silicaat per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischSilicaatTab) de gemiddelde, minimale en maximale waardes per station weergegeven. De stations zijn gerangschikt in stroomafwaartse richting.
 
@@ -383,11 +362,11 @@ parname <- "Silicaat in mg/l uitgedrukt in silicium na filtratie in oppervlaktew
 plotMeanMap(df, parname)
 ```
 
-<!-- ### Organisch koolstof {#organisch-koolstof} -->
+<!-- ## Organisch koolstof {#organisch-koolstof} -->
 
 <!-- In deze paragraaf worden de metingen weergegeven van particulair organisch koolstof (POC) en opgelost organisch koolstof (DOC). Dit is alle koolstof van organische oorsprong die particulair gebonden respectievelijk opgelost aanwezig is. -->
 
-<!-- #### Opgelost organisch koolstof {#opgelost-organisch-koolstof} -->
+<!-- ### Opgelost organisch koolstof {#opgelost-organisch-koolstof} -->
 
 <!-- Figuur \@ref(fig:fysischKoolstofOpg} toont de jaargemiddelden per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischKoolstofOpgTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het opgelost organisch koolstof niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting. -->
 
@@ -406,9 +385,9 @@ plotMeanMap(df, parname)
 <!-- knitr::include_graphics("Figuren/Fysisch/Koolstof_opg/jaar.png") -->
 <!-- ``` -->
 
-<!-- #### Particulair gebonden organisch koolstof {#part-gebonden-organisch-koolstof} -->
+<!-- ### Particulair gebonden organisch koolstof {#part-gebonden-organisch-koolstof} -->
 
-<!-- ##### Jaargemiddelden {#part-gebonden-organisch-koolstof-jaar} -->
+<!-- #### Jaargemiddelden {#part-gebonden-organisch-koolstof-jaar} -->
 
 <!-- Figuur \@ref(fig:fysischKoolstofPar) toont de jaargemiddelden particulair gebonden organisch koolstof per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel \@ref(tab:fysischKoolstofParTab) de gemiddelde, minimale en maximale waardes per station weergegeven. Bij Schaar van Ouden Doel wordt het particulair organisch koolstof niet bepaald. In plaats daarvan is station Wielingen gepresenteerd. De stations zijn gerangschikt in stroomafwaartse richting. -->
 
@@ -427,7 +406,7 @@ plotMeanMap(df, parname)
 <!-- knitr::include_graphics("Figuren/Fysisch/Koolstof_par/jaar.png") -->
 <!-- ``` -->
 
-<!-- ##### Jaargemiddelden {#part-gebonden-organisch-koolstof-zomerwinter} -->
+<!-- #### Jaargemiddelden {#part-gebonden-organisch-koolstof-zomerwinter} -->
 
 <!-- Figuur \@ref(fig:fysischKoolstofParZomerWinter) toont het seizoensgemiddelde gehalte particulaire koolstofgehalte per station voor de periode 1996-2018. Er is geen duidelijk verschil tussen zomer en winterwaarden, wat laat zien dat de fytoplanktonbloei wegvalt in de achtergrondwaarden. Ook is de variatie per station beperkt te noemen. -->
 
