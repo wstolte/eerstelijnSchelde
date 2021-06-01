@@ -10,7 +10,7 @@ require(lubridate)
 require(sf)
 require(leaflet)
 
-source("r/functies.R")
+source("r/functions.R")
 
 # wat te doen met valuesigns? nakijken in matlab scripts
 # hoe wordt statistiek berekend? nakijken in matlab scripts
@@ -23,8 +23,8 @@ source("r/functies.R")
 parID <- c(26,2829,1996,528,2370,529,530,531,1843,1019,828,834,866,1010,3217,833,1021,1022,1972)
 startyear = 1996
 endyear = 2019 #not included
-trendstations <- c("Schaar van Ouden Doel", "Hansweert geul", "Terneuzen boei",
-"Vlissingen boei SSVH", "Wielingen", "Walcheren 2 km uit de kust",
+trendstations <- c("Schaar van Ouden Doel", "Hansweert geul", "Terneuzen boei 20",
+"Vlissingen boei SSVH", "not_Wielingen", "Walcheren 2 km uit de kust",
 "Walcheren 20 km uit de kust")
 
 df <- getSMdata(startyear = startyear, endyear = endyear, parID = parID)

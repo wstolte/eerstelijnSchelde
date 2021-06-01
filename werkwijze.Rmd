@@ -1,0 +1,50 @@
+# (APPENDIX) Appendix {-} 
+
+# Appendix A - Werkwijze
+
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+# options(tinytex.verbose = TRUE)
+knitr::opts_chunk$set(echo = FALSE,	message = FALSE, warning = FALSE)
+```
+
+## Achtergrond
+
+Tekst RWS
+
+Deze rapportage volgt eerdere rapportages op. 
+
+
+## Proces
+
+### Datalevering
+
+RWS levert monitoringsdata aan de Scheldemonitor. De data worden hieruit met een script gedownloadt, en verwerkt tot deze rapportage. 
+
+```{r dataoverzicht}
+# code om dataoverzicht in nette tabel weer te geven. 
+
+
+```
+
+
+## Versies
+
+In \@ref(rapportversie) wordt de versie van de eerstelijnsrapportage beschreven. Een keer per jaar wordt de rapportage ververst. Eventuele bijzonderheden over deze versie staan hier ook.
+
+De code en tekst van de rapportage wordt bewaard op Github (url) onder versiebeheer. 
+
+## Software
+
+Voor de rapportage is R (`r version$version.string`)  in combinatie met Rmarkdown gebruikt.
+
+## R session info
+
+```{r}
+pander::pander(sessionInfo(), RNG = TRUE, locale = FALSE)
+```
+
+
+
+
+

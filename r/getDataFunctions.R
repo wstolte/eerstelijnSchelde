@@ -34,6 +34,7 @@ getSMdata = function(startyear, endyear, parID) {
   result <- sf::st_read(url) %>%
     mutate(value = na_if(value, "999999999999")) %>%
     mutate(value = as.numeric(value))
+  return(result)
 }
 
 
