@@ -1,5 +1,7 @@
 bookdown::gitbook:
   split_by: section
+  includes:
+    in_header: clickandzoom.html
   config:
     toc:
       collapse: section
