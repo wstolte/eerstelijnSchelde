@@ -1,7 +1,7 @@
 
 require(httr)
 require(sf)
-
+require(tidyverse)
 
 getSMdata = function(startyear, endyear, parID) {
   

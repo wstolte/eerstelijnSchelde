@@ -1,7 +1,7 @@
 
 
 # functions to be used in the eerstelijnsrapportage
-
+require(tidyverse)
 
 # Make table with statistics
 statTable <- function(df, parname, rounding, meanorder = "decreasing") {
