@@ -5,8 +5,8 @@
 # tinytex::install_tinytex()  # install TinyTeX
 
 rm(list = ls())
-bookdown::clean_book()
-bookdown::clean_book(TRUE)
+# bookdown::clean_book()
+# bookdown::clean_book(TRUE)
 
 require(rmarkdown)
 # require(tufte)
@@ -15,18 +15,17 @@ require(bookdown)
 file.remove("_main.Rmd")
 file.remove("_main.md")
 # gitbook formatted html pages (gebruikt op testpagina)
-bookdown::render_book("index.Rmd", 
-                      output_format = bookdown::gitbook(
-                        ), 
-                      new_session = F, clean_envir = F)
+bookdown::render_book("index.Rmd", output_dir = "docs",
+                      output_format = NULL, 
+                      new_session = F)
 
 
 
 # "normal pdf
 # options(tinytex.verbose = TRUE)
 # file.remove("_main.md")
-# bookdown::render_book("index.Rmd", output_format = bookdown::pdf_book(), 
-#                       new_session = T, clean_envir = T)
+bookdown::render_book("index.Rmd", output_format = bookdown::pdf_book(),
+                      new_session = T, clean_envir = T)
 
 
 

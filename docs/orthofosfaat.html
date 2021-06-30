@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.6 Orthofosfaat | _main.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.6 Orthofosfaat | _main.utf8" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.6 Orthofosfaat | _main.utf8" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="nitraat.html"/>
+<link rel="next" href="totaal-fosfaat.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<style>
+.zoomDiv {
+  opacity: 0;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 50;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 50px #888888;
+  max-height:100%; 
+  overflow: scroll;
+}
+
+.zoomImg {
+  width: 100%;
+}
+</style>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').prepend("<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"></div>");
+    // onClick function for all plots (img's)
+    $('img:not(.zoomImg)').click(function() {
+      $('.zoomImg').attr('src', $(this).attr('src'));
+      $('.zoomDiv').css({opacity: '1', width: '60%'});
+    });
+    // onClick function for zoomImg
+    $('img.zoomImg').click(function() {
+      $('.zoomDiv').css({opacity: '0', width: '0%'});
+    });
+  });
+</script>
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Voorwoord</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="samenvatting.html"><a href="samenvatting.html"><i class="fa fa-check"></i><b>1.1</b> Samenvatting</a></li>
+<li class="chapter" data-level="1.2" data-path="rapportversie.html"><a href="rapportversie.html"><i class="fa fa-check"></i><b>1.2</b> Versie</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="nutrienten.html"><a href="nutrienten.html"><i class="fa fa-check"></i><b>2</b> Nutriënten</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="stikstof.html"><a href="stikstof.html"><i class="fa fa-check"></i><b>2.1</b> Stikstof</a></li>
+<li class="chapter" data-level="2.2" data-path="part-gebonden-stikstof.html"><a href="part-gebonden-stikstof.html"><i class="fa fa-check"></i><b>2.2</b> Particulair gebonden stikstof</a></li>
+<li class="chapter" data-level="2.3" data-path="ammonium.html"><a href="ammonium.html"><i class="fa fa-check"></i><b>2.3</b> Ammonium</a></li>
+<li class="chapter" data-level="2.4" data-path="nitriet.html"><a href="nitriet.html"><i class="fa fa-check"></i><b>2.4</b> Nitriet</a></li>
+<li class="chapter" data-level="2.5" data-path="nitraat.html"><a href="nitraat.html"><i class="fa fa-check"></i><b>2.5</b> Nitraat</a></li>
+<li class="chapter" data-level="2.6" data-path="orthofosfaat.html"><a href="orthofosfaat.html"><i class="fa fa-check"></i><b>2.6</b> Orthofosfaat</a></li>
+<li class="chapter" data-level="2.7" data-path="totaal-fosfaat.html"><a href="totaal-fosfaat.html"><i class="fa fa-check"></i><b>2.7</b> Totaal fosfaat</a></li>
+<li class="chapter" data-level="2.8" data-path="part-gebonden-fosfaat.html"><a href="part-gebonden-fosfaat.html"><i class="fa fa-check"></i><b>2.8</b> Particulair gebonden fosfaat</a></li>
+<li class="chapter" data-level="2.9" data-path="silicaat.html"><a href="silicaat.html"><i class="fa fa-check"></i><b>2.9</b> Silicaat</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="appendix-a-werkwijze.html"><a href="appendix-a-werkwijze.html"><i class="fa fa-check"></i><b>A</b> Appendix A - Werkwijze</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="achtergrond.html"><a href="achtergrond.html"><i class="fa fa-check"></i><b>A.1</b> Achtergrond</a></li>
+<li class="chapter" data-level="A.2" data-path="proces.html"><a href="proces.html"><i class="fa fa-check"></i><b>A.2</b> Proces</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="proces.html"><a href="proces.html#datalevering"><i class="fa fa-check"></i><b>A.2.1</b> Datalevering</a></li>
+</ul></li>
+<li class="chapter" data-level="A.3" data-path="versies-van-het-rapport.html"><a href="versies-van-het-rapport.html"><i class="fa fa-check"></i><b>A.3</b> Versies van het rapport</a></li>
+<li class="chapter" data-level="A.4" data-path="versies-van-de-data.html"><a href="versies-van-de-data.html"><i class="fa fa-check"></i><b>A.4</b> Versies van de data</a></li>
+<li class="chapter" data-level="A.5" data-path="versiebeheer-van-de-code.html"><a href="versiebeheer-van-de-code.html"><i class="fa fa-check"></i><b>A.5</b> Versiebeheer van de code</a></li>
+<li class="chapter" data-level="A.6" data-path="gebruikte-software-en-packages.html"><a href="gebruikte-software-en-packages.html"><i class="fa fa-check"></i><b>A.6</b> Gebruikte software en packages</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="orthofosfaat" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> Orthofosfaat</h2>
+<p>Figuur <a href="orthofosfaat.html#fig:fysischOrthofosfaat">2.10</a> toont de jaargemiddelden orthofosfaat per station, samen met de minimaal en maximaal gemeten waardes per jaar. Daarnaast zijn in Tabel <a href="orthofosfaat.html#tab:fysischOrthofosfaatTab">2.6</a> de gemiddelde, minimale en maximale waardes per station weergegeven. Voor deze variabele is er slechts data vanaf 2009 tot en met 2018.</p>
+<p>De orthosfosfaatconcentraties na filtratie nemen af in stroomafwaartse richting, zie ook Figuur <a href="orthofosfaat.html#fig:gemiddeldeorthofosfaat">2.12</a>. Enkele hoge pieken vallen op in de meetdata, bijvoorbeeld op de stations Walcheren 2 km uit de kust en Walcheren 20 km uit de kust in het jaar 2010. In 2016 werd een dergelijke piek waargenomen voor de hoeveelheid orthofosfaat bij station Schaar van Ouden Doel. In 2017 en 2018 was deze piek niet meer aanwezig en bleef het gemiddelde ongeveer op het niveau van 2016. De resultaten van de overige stations illustreren dat de concentraties de laatste jaren redelijk constant in de tijd zijn.</p>
+<table>
+<caption><span id="tab:fysischOrthofosfaatTab">Table 2.6: </span>Gemiddelde, minimale en maximale waardes van het orthofosfaatgehalte in mg/L van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="left">Station</th>
+<th align="right">Mediaan</th>
+<th align="right">90-perc</th>
+<th align="right">10-perc</th>
+<th align="right">Trend</th>
+<th align="right">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Schaar van Ouden Doel</td>
+<td align="right">0.145</td>
+<td align="right">0.220</td>
+<td align="right">0.098</td>
+<td align="right">-0.003</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Hansweert geul</td>
+<td align="right">0.119</td>
+<td align="right">0.164</td>
+<td align="right">0.073</td>
+<td align="right">-0.004</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">Terneuzen boei 20</td>
+<td align="right">0.097</td>
+<td align="right">0.126</td>
+<td align="right">0.056</td>
+<td align="right">-0.002</td>
+<td align="right">0.024</td>
+</tr>
+<tr class="even">
+<td align="left">Vlissingen boei SSVH</td>
+<td align="right">0.046</td>
+<td align="right">0.071</td>
+<td align="right">0.017</td>
+<td align="right">-0.001</td>
+<td align="right">0.143</td>
+</tr>
+<tr class="odd">
+<td align="left">Walcheren 2 km uit de kust</td>
+<td align="right">0.027</td>
+<td align="right">0.044</td>
+<td align="right">0.005</td>
+<td align="right">0.000</td>
+<td align="right">0.753</td>
+</tr>
+<tr class="even">
+<td align="left">Walcheren 20 km uit de kust</td>
+<td align="right">0.015</td>
+<td align="right">0.031</td>
+<td align="right">0.004</td>
+<td align="right">0.000</td>
+<td align="right">0.501</td>
+</tr>
+</tbody>
+</table>
+<div class="figure"><span id="fig:fysischOrthofosfaat"></span>
+<img src="_main_files/figure-html/fysischOrthofosfaat-1.png" alt="Jaarlijks gemiddelde, minimum en maximum van het orthofosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding." width="90%" />
+<p class="caption">
+Figure 2.10: Jaarlijks gemiddelde, minimum en maximum van het orthofosfaatgehalte in het oppervlaktewater van de Westerschelde en de monding.
+</p>
+</div>
+<div class="figure"><span id="fig:gemiddeldenitraat"></span>
+<div id="htmlwidget-f792013134fd72b94076" style="width:90%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f792013134fd72b94076">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3504691678156,51.4370153669207,51.3474267612231,51.412887311109,51.5481122356688,51.6578061323529],[4.25104275097202,4.0143885341076,3.82569971794636,3.56579345309189,3.40957358598726,3.219242625],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#08306B","#4191C6","#64A8D3","#D8E7F5","#EFF6FC","#F7FBFF"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#F7FBFF , #E1EDF8 11.1523037743892%, #BED8EC 27.472631246756%, #85BCDB 43.7929587191227%, #4B97C9 60.1132861914895%, #1F6DB2 76.4336136638562%, #094387 92.753941136223%, #08306B "],"labels":["0.5","1.0","1.5","2.0","2.5","3.0"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.111523037743892,"p_n":0.92753941136223},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.3474267612231,51.6578061323529],"lng":[3.219242625,4.25104275097202]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 2.11: Gemiddelde nitraatgehalte per station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Orthofosfaat/gemiddelde_waardes.png} -->
+<!--  \caption[Gemiddeld orthofosfaatgehalte per station op een kaart]{Gemiddelde orthofosfaatgehalte  per station berekend op alle beschikbare data tussen 2009 en 2018} -->
+<!--  \label{fig:gemiddeldeorthofosfaat} -->
+<!-- \end{figure}  -->
+<div class="figure"><span id="fig:gemiddeldeorthofosfaat"></span>
+<div id="htmlwidget-6748dcf410ffd1b8e6bb" style="width:90%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6748dcf410ffd1b8e6bb">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.3505733561701,51.4370153669207,51.347426761223,51.412887311109,51.5481120857143,51.6578061323529],[4.25079918900649,4.0143885341076,3.82569971794637,3.56579345309189,3.40957334285714,3.219242625],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#08306B","#206FB3","#4695C8","#CADDF0","#E5EFF9","#F7FBFF"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#F7FBFF , #F3F8FE 2.07770761485108%, #D5E5F4 16.9516771171407%, #B0D2E7 31.8256466194303%, #79B5D9 46.6996161217199%, #4594C7 61.5735856240095%, #1F6DB2 76.4475551262991%, #09478D 91.3215246285887%, #08306B "],"labels":["0.02","0.04","0.06","0.08","0.10","0.12","0.14"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.0207770761485108,"p_n":0.913215246285887},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.347426761223,51.6578061323529],"lng":[3.219242625,4.25079918900649]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 2.12: Gemiddelde orthofosfaatgehalte per station berekend op alle beschikbare data vanaf 1996.
+</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="nitraat.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="totaal-fosfaat.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"toc_float": {
+"collapsed": false,
+"smooth_scroll": false
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

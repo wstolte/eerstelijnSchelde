@@ -17,7 +17,7 @@ Deze rapportage volgt eerdere rapportages op. Tot 2020 werd de rapportage als vo
 * manuele download van data uit Scheldemonitor of zending van RWS
 * manueel datamangement op projectschijf
 * data bewerking, maken van figuren en tabellen etc met Matlab
-* verweving van tekst en figuren met $\LaTeX$ en de Deltares template tot een pdf rapport. Dit rapport is in een frequentie van 1 keer per jaar verschenen. 
+* verweving van tekst en figuren met LaTeX en de Deltares template tot een pdf rapport. Dit rapport is in een frequentie van 1 keer per jaar verschenen. 
 
 In 2020 is besloten om deze werkwijze onder de loep te nemen, vanwege
 
@@ -27,7 +27,7 @@ In 2020 is besloten om deze werkwijze onder de loep te nemen, vanwege
 * Scheldemonitor heeft een webservice (wfs) in werking gebracht, waarmee data nu gemakkelijk met een script gedownloadt kunnen worden. 
 * Scheldemonitor heeft een online analyseplatform (Rstudio Server en R Shiny Server) in gebruik genomen. Dit is een online omgeving om R scripts te draaien en producten te publiceren.
 
-Voor de rapportage 2020 is daarom besloten om de $\LaTeX$ template over te zetten naar Rmarkdown. Figuren werden nog gemaakt met Matlab.
+Voor de rapportage 2020 is daarom besloten om de LaTeX template over te zetten naar Rmarkdown. Figuren werden nog gemaakt met Matlab.
 
 Voor de 2021 rapportage wordt ook de code voor grafieken en tabellen overgezet naar R, zodat het aansluit bij de Scheldemonitor. Tegelijk wordt de berekening van indicatoren afgestemd met het Schelde in Beeld consortium, door het delen van code. De huidige werkwijze voor de rapportage bestaat uit:
 
