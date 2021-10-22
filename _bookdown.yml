@@ -1,8 +1,13 @@
-title: "Concept Eerstelijnsrapportage Westerschelde"
-subtitle: 2020
-author: "Deltares, Rijkswaterstaat"
-date: '`r Sys.Date()`'
+
+delete_merged_file: true
+new_session: true
 rmd_subdir: 'Rmd/'
-bibliography: ["bib/library.bib"]
-biblio-style: "apalike"
-link-citations: yes
+rmd_files: [
+  "index.Rmd",
+  "nutrients.Rmd"
+]
+
+language:
+  label:
+    fig: "Figuur "
+    tab: "Tabel "

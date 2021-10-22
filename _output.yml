@@ -1,3 +1,9 @@
+bookdown::bs4_book:
+  theme:
+    primary: "#982a31"
+    fg: "#2b2121"
+    bg: "#ffffff"
+
 bookdown::gitbook:
   split_by: section
   config:

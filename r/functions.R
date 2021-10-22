@@ -41,19 +41,20 @@ statTable <- function(df, parname, rounding, meanorder = "decreasing") {
 }
 
 # Plot trends of nutrients
-plotTrends <- function(df, parname, sf = T) {
-if(sf) df <- df %>% #st_drop_geometry()
+plotTrends <- function(df, parname, sf = F) {
+  
+if(sf) df <- df %>% st_drop_geometry()
   df %>%
-    filter(parametername == parname) %>%
-    mutate(year = year(datetime), month = month(datetime)) %>%
-    group_by(stationname, year) %>% 
-    summarize(median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
-    select(Station = stationname,
+    dplyr::filter(parametername == parname) %>%
+    dplyr::mutate(year = year(datetime), month = month(datetime)) %>%
+    dplyr::group_by(stationname, year) %>% 
+    dplyr::summarize(median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
+    dplyr::select(Station = stationname,
            Jaar = year,
            Mediaan = median,
            `90-perc`,
            `10-perc`) %>%
-    arrange(-Mediaan) %>%
+    dplyr::arrange(-Mediaan) %>%
     ggplot(aes(Jaar, Mediaan)) +
     geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`), fill = "lightgrey") +
     geom_line() + geom_point(fill = "white", shape = 21) +

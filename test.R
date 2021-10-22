@@ -1,5 +1,8 @@
 
-install.packages("c:/git_checkouts/smwfs_0.1.0.tar.gz", repos = NULL, type="source")
+path_to_smwfs <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/smwfs_Rpackage/smwfs/smwfs_0.1.0.tar.gz"
+local_path_to_smwfs <- "c:/git_checkouts/smwfs_0.1.0.tar.gz"
+
+install.packages(path_to_smwfs, repos = NULL, type="source")
 
 
 # source("getDataFunctions.R")

@@ -10,7 +10,7 @@ require(lubridate)
 require(sf)
 require(leaflet)
 
-source("../r/functions.R")
+source("R/functions.R")
 
 # wat te doen met valuesigns? nakijken in matlab scripts
 # hoe wordt statistiek berekend? nakijken in matlab scripts
@@ -484,10 +484,11 @@ parname1 = "stikstof totaal in mg/l in oppervlaktewater"
 parname2 = "fosfor totaal in mg/l in oppervlaktewater"
 parname3 = "koolstof totaal in mg/l in oppervlaktewater"
 
+newparname = "N/C"
 # calculate ratio; this can be more automized, but perhaps not worth the trouble
 # Later ALLE ratios hierin berekenen en behandelen als parameter
 
-dfm <- df %>% st_drop_geometry() %>%
+dfm <- df %>%
   filter(parametername %in% c(parname1a, parname1b, parname2a, parname2b, parname3a, parname3b)) %>%
   pivot_wider(id_cols = c(latitude, longitude, datetime, stationname), names_from = parametername, values_from = value) %>%
   mutate(!!newparname := (!!as.name(parname1a) + !!as.name(parname1b))/(!!as.name(parname2a) + !!as.name(parname2b))) %>%
@@ -495,16 +496,16 @@ dfm <- df %>% st_drop_geometry() %>%
   pivot_longer(cols = !!as.name(newparname), names_to = "parametername")
 
 
-dt <- tex2dt("Figuren/Fysisch/CNP/meanvalues.tex")
-knitr::kable(dt, col.names = c("Station","Afkorting","C-ratio","N-ratio","P-ratio"),
-             caption = "Gemiddelde molaire C-N-P-ratio uitgedrukt ten opzichte van een gehalte C van 106 gemiddeld over alle data van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
+# dt <- tex2dt("Figuren/Fysisch/CNP/meanvalues.tex")
+# knitr::kable(dt, col.names = c("Station","Afkorting","C-ratio","N-ratio","P-ratio"),
+#              caption = "Gemiddelde molaire C-N-P-ratio uitgedrukt ten opzichte van een gehalte C van 106 gemiddeld over alle data van het oppervlaktewater van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
 
 
-```{r fysischNJaar, fig.cap="De molaire N-C-ratio, N uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding."}
-knitr::include_graphics("Figuren/Fysisch/CNP/N_jaar.png")
-```
+<!-- ```{r fysischNJaar, fig.cap="De molaire N-C-ratio, N uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding."} -->
+<!-- knitr::include_graphics("Figuren/Fysisch/CNP/N_jaar.png") -->
+<!-- ``` -->
 
 
 <!-- ```{r fysischPJaar, fig.cap="De molaire P-C-ratio, P uitgedrukt ten opzichte van een gehalte C van 106, gemiddeld over een jaar in het oppervlaktewater van de Westerschelde en de monding."} -->
@@ -525,7 +526,7 @@ newparname = "N/C"
 
 # calculate ratio; this can be more automized, but perhaps not worth the trouble
 # Later ALLE ratios hierin berekenen en behandelen als parameter
-dfm <- df %>% st_drop_geometry() %>%
+dfm <- df %>% #st_drop_geometry() %>%
   filter(parametername %in% c(parname1a, parname1b, parname2a, parname2b)) %>%
   pivot_wider(id_cols = c(latitude, longitude, datetime, stationname), names_from = parametername, values_from = value) %>%
   mutate(!!newparname := (!!as.name(parname1a) + !!as.name(parname1b))/(!!as.name(parname2a) + !!as.name(parname2b))) %>%
@@ -551,7 +552,7 @@ plotTrends(dfm, parname = newparname, sf = F)
 
 
 ```{r fysischNPzw, fig.cap="De molaire N-P-ratio, N uitgedrukt ten opzichte van een gehalte P, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding."}
-knitr::include_graphics("Figuren/Fysisch/CNP/NP_Zomer_winter.png")
+# knitr::include_graphics("Figuren/Fysisch/CNP/NP_Zomer_winter.png")
 
 plotTrendsSeizoen(dfm, parname = newparname, sf = F)
 
