@@ -1,4 +1,13 @@
-
+---
+title: "Concept Eerstelijnsrapportage Westerschelde"
+subtitle: 2020
+author: "Deltares"
+date: '`r Sys.Date()`'
+documentclass: book
+# bibliography: 
+biblio-style: apalike
+link-citations: yes
+---
 # Voorwoord
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}

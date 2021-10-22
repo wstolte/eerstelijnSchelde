@@ -426,7 +426,7 @@ knitr::kable(dt,
 ```
 
 
-```{r gemiddeldekoolstofopg, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+```{r gemiddeldekoolstofpart, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 
 plotTrends(df, parname)
 ```
