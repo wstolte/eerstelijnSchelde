@@ -10,15 +10,10 @@ require(tidyverse)
 
 
 
-
-
-
-
-
 # Make table with statistics
 statTable <- function(df, parname, rounding, meanorder = "decreasing") {
   
-  stats <- df %>% sf::st_drop_geometry() %>%
+  stats <- df %>% #sf::st_drop_geometry() %>%
     filter(parametername == parname) %>%
     mutate(year = year(datetime), month = month(datetime)) %>%
     # group_by(stationname, year, month) %>% 
@@ -29,7 +24,7 @@ statTable <- function(df, parname, rounding, meanorder = "decreasing") {
     do(broom::tidy(lm(yearlymedian ~ year, data = .))) %>% 
     filter(term == "year")
   
-  df %>% sf::st_drop_geometry() %>%
+  df %>% #sf::st_drop_geometry() %>%
     filter(parametername == parname) %>% 
     mutate(year = year(datetime), month = month(datetime)) %>%
     group_by(stationname) %>% summarize(median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
@@ -47,7 +42,7 @@ statTable <- function(df, parname, rounding, meanorder = "decreasing") {
 
 # Plot trends of nutrients
 plotTrends <- function(df, parname, sf = T) {
-if(sf) df <- df %>% st_drop_geometry()
+if(sf) df <- df %>% #st_drop_geometry()
   df %>%
     filter(parametername == parname) %>%
     mutate(year = year(datetime), month = month(datetime)) %>%
@@ -70,7 +65,7 @@ if(sf) df <- df %>% st_drop_geometry()
 }
 
 plotTrendsSeizoen <- function(df, parname, sf = T) {
-  if(sf) df <- sf %>% st_drop_geometry()
+  if(sf) df <- sf %>% #st_drop_geometry()
   df %>%
     filter(parametername == parname) %>%
     mutate(year = year(datetime), month = month(datetime)) %>%
@@ -100,7 +95,7 @@ plotTrendsSeizoen <- function(df, parname, sf = T) {
 
 
 plotMeanMap <- function(df, parname) {
-  values = df %>% st_drop_geometry() %>%
+  values = df %>% #st_drop_geometry() %>%
     filter(parametername == parname) %>%
     group_by(stationname) %>% summarize(mean = mean(value, na.rm = T)) %>%
     select(mean) %>% unlist() %>% unname()
@@ -109,7 +104,7 @@ plotMeanMap <- function(df, parname) {
                       domain = values
   )
   
-  df %>% st_drop_geometry() %>%
+  df %>% #st_drop_geometry() %>%
     filter(parametername == parname) %>%
     group_by(stationname) %>% 
     summarize(mean = mean(value, na.rm = T), latitude = mean(latitude), longitude = mean(longitude)) %>%
