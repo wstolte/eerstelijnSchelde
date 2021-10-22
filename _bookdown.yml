@@ -2,6 +2,7 @@ title: "Concept Eerstelijnsrapportage Westerschelde"
 subtitle: 2020
 author: "Deltares, Rijkswaterstaat"
 date: '`r Sys.Date()`'
+rmd_subdir: 'Rmd/'
 bibliography: ["bib/library.bib"]
 biblio-style: "apalike"
 link-citations: yes
