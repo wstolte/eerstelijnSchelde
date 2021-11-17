@@ -1,5 +1,6 @@
 # functions to be used in the eerstelijnsrapportage
 require(tidyverse)
+require(viridis)
 
 # nog te maken functies
 # filternutriendata
@@ -11,9 +12,11 @@ require(tidyverse)
 
 
 # Make table with statistics
-statTable <- function(df, parname, rounding, meanorder = "decreasing") {
+statTable <- function(df, parname, rounding, meanorder = "decreasing", sf = F) {
   
-  stats <- df %>% #sf::st_drop_geometry() %>%
+  if(sf) df <- df %>% st_drop_geometry()
+  
+  stats <- df %>%
     filter(parametername == parname) %>%
     mutate(year = year(datetime), month = month(datetime)) %>%
     # group_by(stationname, year, month) %>% 
@@ -22,13 +25,13 @@ statTable <- function(df, parname, rounding, meanorder = "decreasing") {
     summarize(yearlymedian = median(value)) %>%
     group_by(stationname) %>%
     do(broom::tidy(lm(yearlymedian ~ year, data = .))) %>% 
-    filter(term == "year")
+    filter(term == "year") 
   
-  df %>% #sf::st_drop_geometry() %>%
+  df %>% 
     filter(parametername == parname) %>% 
     mutate(year = year(datetime), month = month(datetime)) %>%
     group_by(stationname) %>% summarize(median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
-    left_join(stats) %>%
+    left_join(stats)  %>%
     mutate(across(where(is.numeric), round, 3)) %>%
     mutate(across(where(is.numeric), signif, rounding)) %>%
     select(Station = stationname,
@@ -66,7 +69,7 @@ if(sf) df <- df %>% st_drop_geometry()
 }
 
 plotTrendsSeizoen <- function(df, parname, sf = T) {
-  if(sf) df <- sf %>% #st_drop_geometry()
+  if(sf) df <- df %>% st_drop_geometry()
   df %>%
     filter(parametername == parname) %>%
     mutate(year = year(datetime), month = month(datetime)) %>%
@@ -95,13 +98,38 @@ plotTrendsSeizoen <- function(df, parname, sf = T) {
 }
 
 
+stationMean <- function(df, parname){
+  df %>% #st_drop_geometry() %>%
+    filter(parametername == parname) %>%
+    group_by(stationname) %>% 
+    summarize(mean = mean(value, na.rm = T), latitude = mean(latitude), longitude = mean(longitude)) %>%
+    select(Station = stationname,
+           Gemiddelde = mean,
+           latitude,
+           longitude
+    )
+}
+
+stationMedian <- function(df, parname){
+  df %>% #st_drop_geometry() %>%
+    filter(parametername == parname) %>%
+    group_by(stationname) %>% 
+    summarize(median = median(value, na.rm = T), latitude = mean(latitude), longitude = mean(longitude)) %>%
+    select(Station = stationname,
+           Mediaan = median,
+           latitude,
+           longitude
+    )
+}
+
 plotMeanMap <- function(df, parname) {
+  
   values = df %>% #st_drop_geometry() %>%
     filter(parametername == parname) %>%
     group_by(stationname) %>% summarize(mean = mean(value, na.rm = T)) %>%
     select(mean) %>% unlist() %>% unname()
-  
-  pal <- colorNumeric(palette = "Blues",
+
+  pal <- colorNumeric(viridis(n = 7),
                       domain = values
   )
   
@@ -117,5 +145,31 @@ plotMeanMap <- function(df, parname) {
     leaflet() %>%
     addTiles() %>%
     addCircleMarkers(fillColor = ~pal(Gemiddelde), fillOpacity = 1, stroke = F) %>%
+    leaflet::addLegend("topright", pal, values, opacity = 1)
+}
+
+
+plotMedianMap <- function(df, parname) {
+  values = df %>% #st_drop_geometry() %>%
+    filter(parametername == parname) %>%
+    group_by(stationname) %>% summarize(median = median(value, na.rm = T)) %>%
+    select(median) %>% unlist() %>% unname()
+  
+  pal <- colorNumeric(viridis(n = 7),
+                      domain = values
+  )
+  
+  df %>% #st_drop_geometry() %>%
+    filter(parametername == parname) %>%
+    group_by(stationname) %>% 
+    summarize(median = median(value, na.rm = T), latitude = mean(latitude), longitude = mean(longitude)) %>%
+    select(Station = stationname,
+           Mediaan = median,
+           latitude,
+           longitude
+    ) %>% 
+    leaflet() %>%
+    addTiles() %>%
+    addCircleMarkers(fillColor = ~pal(Mediaan), fillOpacity = 1, stroke = F) %>%
     leaflet::addLegend("topright", pal, values, opacity = 1)
 }

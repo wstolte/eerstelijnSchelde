@@ -1,3 +1,5 @@
+require(tidyverse)
+require(lubridate)
 
 path_to_smwfs <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/smwfs_Rpackage/smwfs/smwfs_0.1.0.tar.gz"
 local_path_to_smwfs <- "c:/git_checkouts/smwfs_0.1.0.tar.gz"
@@ -26,7 +28,8 @@ u = httr::parse_url(url)
 v = httr::build_url(u)
 u$query # e.g. 149135
 
-parID <- c(119939)
+# Benthos, 1 soort
+parID <- c(119939) # Acanthomysis longicornis
 startyear = 2015
 endyear = 2020
 dt <- getSMoccurenceData(startyear = startyear, endyear = endyear, parID = parID)
@@ -41,8 +44,32 @@ data.table::fread(urlwaves) # werkt
 GEOTERM81-83          - Unknown (ZZ99)
 
 
+# Zooplankton
+
+url = 'http://geo.vliz.be/geoserver/wfs/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=Dataportal%3Abiotic_observations&resultType=results&viewParams=where%3Aobs.context+%26%26+ARRAY%5B1%5D%3Bcontext%3A0001&propertyName=stationname%2Caphiaid%2Cscientificname%2Cobservationdate%2Clongitude%2Clatitude%2Cvalue%2Cparametername%2Cdataprovider%2Cimisdatasetid%2Cdatasettitle%2Cdatafichetitle%2Cdataficheid%2Careaname%2Cdateprecision%2Cstadium%2Cgender%2Cvaluesign%2Cdepth%2Cclassunit%2Cclass%2Cstandardparameterid&outputFormat=csv'
+
+zoop <- read_delim(url, delim = ',')
+
+planktondatasets <- zoop %>% 
+  filter(grepl("zooplankton", datasettitle)) %>%
+  distinct(datasettitle) %>% unlist %>% unname
+
+zoop2 <- zoop %>% filter(datasettitle %in% planktondatasets)
+
+range(zoop2$observationdate)
+zoop2 %>% distinct(scientificname)
+zoop2 %>% distinct(dataprovider)
 
 
+zoop2 %>% 
+  filter(year(observationdate) > 2009) %>%
+  distinct(observationdate, datasettitle, stationname) %>%
+  group_by(observationdate, datasettitle) %>%
+  summarize(n_stations = n()) %>%
+  ggplot(aes(observationdate, datasettitle)) +
+  geom_point(aes(size = n_stations, color = datasettitle)) +
+  scale_y_discrete(labels = NULL, breaks = NULL) + labs(y = "") +
+  theme(legend.position = "bottom", legend.direction = "vertical")
 
 
 dt <- sf::st_read(sub("csv", "GML2", url))
