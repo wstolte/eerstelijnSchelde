@@ -20,20 +20,16 @@ source("R/functions.R")
 
 
 ```{r downloadNutrientData, include = F}
-parID <- c(26,2829,1996,528,2370,529,530,531,1843,1019,828,834,866,1010,3217,833,1021,1022,1972,
-           663,674,663,675,3621 # koolstof
-           )
-startyear = 1996
-endyear = 2019 #not included
+
 trendstations <- c("Schaar van Ouden Doel", "Hansweert geul", "Terneuzen boei 20",
 "Vlissingen boei SSVH", "not_Wielingen", "Walcheren 2 km uit de kust",
 "Walcheren 20 km uit de kust")
 
-df <- getSMdata(startyear = startyear, endyear = endyear, parID = parID)
 
-# df %>% st_drop_geometry() %>%
-#   distinct(stationname)
+frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_opp_test_1998_2020.csv"
+df <- read_delim(frozendatapath, delim = ",")
 
+# replace below partly by clean function in package smsfs
 df <- df %>% 
   # mutate(value = as.numeric(value)) %>%
   filter(stationname %in% trendstations) %>%
@@ -43,6 +39,7 @@ df <- df %>%
     valuesign == "=" ~ value,
     valuesign == "<" ~ 0.5 * value
   ))
+
 
 ```
 
@@ -112,7 +109,7 @@ plotTrends(df, parname)
 
 parname = "Stikstof in mg/l na filtratie in oppervlaktewater"
 
-plotMeanMap(df, parname = parname)
+plotMedianMap(df, parname = parname)
 ```
 
 
@@ -149,7 +146,7 @@ plotTrends(df, parname)
 
 parname = "Stikstof in mg/l particulair gebonden in oppervlaktewater"
 
-plotMeanMap(df, parname)
+plotMedianMap(df, parname)
 ```
 
 ## Ammonium {#ammonium}
@@ -180,7 +177,7 @@ plotTrends(df, parname) + coord_cartesian(ylim = c(0,0.5))
 ```{r gemiddeldeammonium, fig.cap="Gemiddelde ammoniumgehalte per station berekend op alle beschikbare data vanaf 1996."}
 
 parname = "Ammonium in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
-plotMeanMap(df, parname)
+plotMedianMap(df, parname)
 ```
 
 ## Nitriet {#nitriet}
@@ -214,7 +211,7 @@ plotTrends(df, parname)
 ```{r gemiddeldenitriet, fig.cap="Gemiddelde nitrietgehalte per station berekend op alle beschikbare data vanaf 1996."}
 
 parname = "Nitriet in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
-plotMeanMap(df, parname)
+plotMedianMap(df, parname)
 ```
 
 ## Nitraat {#nitraat}
@@ -244,7 +241,7 @@ plotTrends(df, parname) + coord_cartesian(ylim = c(0,6))
 
 ```{r gemiddeldenitraat, fig.cap="Gemiddelde nitraatgehalte per station berekend op alle beschikbare data vanaf 1996."}
 parname <- "Nitraat in mg/l uitgedrukt in stikstof / na filtratie in oppervlaktewater"
-plotMeanMap(df, parname)
+plotMedianMap(df, parname)
 ```
 
 
@@ -281,7 +278,7 @@ plotTrends(df, parname) +
 ```{r gemiddeldeorthofosfaat, fig.cap="Gemiddelde orthofosfaatgehalte per station berekend op alle beschikbare data vanaf 1996."}
 
 parname <- "Orthofosfaat in mg/l Uitgedrukt in Fosfor / Na filtratie in oppervlaktewater" 
-plotMeanMap(df, parname)
+plotMedianMap(df, parname)
 ```
 
 ## Totaal fosfaat {#totaal-fosfaat}
@@ -334,7 +331,7 @@ plotTrends(df, parname)
 ```{r gemiddeldefosfaatfil, fig.cap="Gemiddelde fosfaatgehalte na filtratie per station berekend op alle beschikbare data vanaf 1996."}
 
 parname <- "Fosfaat, totaal in mg/l na filtratie in oppervlaktewater"
-plotMeanMap(df, parname)
+plotMedianMap(df, parname)
 ```
 
 
@@ -342,7 +339,7 @@ plotMeanMap(df, parname)
 ```{r gemiddeldefosfaatpar, fig.cap="Gemiddelde particulair gebonden fosfaatgehalte per station berekend op alle beschikbare data vanaf 1996."}
 
 parname = "Fosfaat, totaal in mg/l particulair gebonden in oppervlaktewater" 
-plotMeanMap(df, parname)
+plotMedianMap(df, parname)
 ```
 
 ## Silicaat {#silicaat}
@@ -373,7 +370,7 @@ plotTrends(df, parname)
 ```{r gemiddeldesilicaat, fig.cap="Gemiddelde silicaatgehalte per station berekend op alle beschikbare data vanaf 1996."}
 
 parname <- "Silicaat in mg/l uitgedrukt in silicium na filtratie in oppervlaktewater"
-plotMeanMap(df, parname)
+plotMedianMap(df, parname)
 ```
 
 ## Organisch koolstof {#organisch-koolstof}
@@ -392,7 +389,7 @@ De gehaltes dalen in stroomafwaartse richting (met toenemende saliniteit), zie o
 
 
 
-```{r fysischKoolstofOpg}
+```{r fysischKoolstofOpgTab}
 
 parname <- "Opgelost organisch koolstof in mg/l na filtratie in oppervlaktewater"
 dt <- statTable(df, parname, 3)
@@ -401,8 +398,9 @@ knitr::kable(dt,
 ```
 
 
-```{r gemiddeldekoolstofopg, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
+```{r fysischKoolstofOpg, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 
+parname <- "Opgelost organisch koolstof in mg/l na filtratie in oppervlaktewater"
 plotTrends(df, parname)
 ```
 
@@ -428,31 +426,42 @@ knitr::kable(dt,
 
 ```{r gemiddeldekoolstofpart, fig.cap="Jaarlijks mediaan, 10-percentiel en 90-percentiel van het opgelost koolstofgehalte in het oppervlaktewater van de Westerschelde en de monding."}
 
+parname <- "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater"
 plotTrends(df, parname)
 ```
 
 
-<!-- #### Jaargemiddelden {#part-gebonden-organisch-koolstof-zomerwinter} -->
+#### Jaargemiddelden per seizoen {#part-gebonden-organisch-koolstof-zomerwinter}
 
-<!-- Figuur \@ref(fig:fysischKoolstofParZomerWinter) toont het seizoensgemiddelde gehalte particulaire koolstofgehalte per station voor de periode 1996-2018. Er is geen duidelijk verschil tussen zomer en winterwaarden, wat laat zien dat de fytoplanktonbloei wegvalt in de achtergrondwaarden. Ook is de variatie per station beperkt te noemen. -->
-
-
-
-<!-- ```{r fysischKoolstofParZomerWinter, fig.cap="Gemiddeld waardes voor de hoeveelheid particulaire koolstofgehalte gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding."} -->
-<!-- knitr::include_graphics("Figuren/Fysisch/Koolstof_par/Zomer_winter.png") -->
-<!-- ``` -->
+Figuur \@ref(fig:fysischKoolstofParZomerWinter) toont het seizoensgemiddelde gehalte particulaire koolstofgehalte per station voor de periode 1996-2018. Er is geen duidelijk verschil tussen zomer en winterwaarden, wat laat zien dat de fytoplanktonbloei wegvalt in de achtergrondwaarden. Ook is de variatie per station beperkt te noemen.
 
 
 
-<!-- ```{r gemiddeldekoolstofopg, fig.cap="Gemiddelde opgeloste koolstofgehalte per station berekend op alle beschikbare data vanaf 1996."} -->
-<!-- knitr::include_graphics("Figuren/Fysisch/Koolstof_opg/gemiddelde_waardes.png") -->
-<!-- ``` -->
+```{r fysischKoolstofParZomerWinter, fig.cap="Gemiddeld waardes voor de hoeveelheid particulaire koolstofgehalte gedurende de zomer en de winter in het oppervlaktewater van de Westerschelde en de monding."}
+
+# knitr::include_graphics("Figuren/Fysisch/Koolstof_par/Zomer_winter.png")
+
+parname <- "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater"
+plotTrendsSeizoen(df, parname, sf = F)
+
+```
 
 
 
-<!-- ```{r gemiddeldekoolstofpar, fig.cap="Gemiddelde particulaire koolstofgehalte per station berekend op alle beschikbare data vanaf 1996."} -->
-<!-- knitr::include_graphics("Figuren/Fysisch/Koolstof_par/gemiddelde_waardes.png") -->
-<!-- ``` -->
+```{r gemiddeldekoolstofopg, fig.cap="Gemiddelde opgeloste koolstofgehalte per station berekend op alle beschikbare data vanaf 1996."}
+# knitr::include_graphics("Figuren/Fysisch/Koolstof_opg/gemiddelde_waardes.png")
+parname <- "Opgelost organisch koolstof in mg/l na filtratie in oppervlaktewater"
+plotMedianMap(df, parname)
+```
+
+
+
+```{r gemiddeldekoolstofpar, fig.cap="Gemiddelde particulaire koolstofgehalte per station berekend op alle beschikbare data vanaf 1996."}
+# knitr::include_graphics("Figuren/Fysisch/Koolstof_par/gemiddelde_waardes.png")
+
+parname <- "Particulair organisch koolstof in mg/l particulair gebonden in oppervlaktewater"
+plotMedianMap(df, parname)
+```
 
 ## C:N:P ratio's {#cnp-ratio}
 
@@ -552,6 +561,7 @@ plotTrends(dfm, parname = newparname, sf = F)
 
 
 ```{r fysischNPzw, fig.cap="De molaire N-P-ratio, N uitgedrukt ten opzichte van een gehalte P, gemiddeld over de zomer en winterperiode in het oppervlaktewater van de Westerschelde en de monding."}
+
 # knitr::include_graphics("Figuren/Fysisch/CNP/NP_Zomer_winter.png")
 
 plotTrendsSeizoen(dfm, parname = newparname, sf = F)

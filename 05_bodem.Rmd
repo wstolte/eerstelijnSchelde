@@ -1,0 +1,297 @@
+<!-- TO DO:
+- Check of alles werkt.
+- bijlage referentie
+
+-->
+```{r setupBodem, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	out.width = "85%",
+	fig.align='center'
+)
+```
+
+```{r}
+# Load function to write Latex table structure to R 
+source("Rscripts/tex2Rtable.R")
+
+# Set year for use in the report
+dataJaar <- 2019
+```
+
+# Bodem - Fysisch-chemische parameters {#bodem}
+
+## Informatie over de metingen {#bodem-info-metingen}
+Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur \@ref(fig:meetstationsBodem) laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt. De locatie Walcheren 2 km uit de kust is sinds 2010 niet meer gemeten. Resultaten van dit station zijn terug te vinden in de Eerstelijnsrapportage 2010. 
+
+<!-- % Update this figure -->
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Meetstations_bodem.png} -->
+<!--   \caption{Ligging van de meetstations voor het bodemmateriaal} -->
+<!-- \label{fig:meetstations_bodem} -->
+<!-- \end{figure}  -->
+
+```{r meetstationsBodem, fig.cap="Ligging van de meetstations voor het bodemmateriaal"}
+knitr::include_graphics("Figuren/Meetstations_bodem.png")
+```
+
+## Metalen {#bodem-metalen}
+In Figuur \@ref(fig:arseenBodem) t/m Figuur \@ref(fig:zinkBodem) zijn de metalen in het bodemsediment in de Westerschelde weergegeven. Op de horizontale as zijn de stations gerangschikt van west (links) naar oost (rechts). Globaal gezien laten de meeste metalen laten op de meeste stations een afnemende trend in de tijd zien, die voor sommige metalen en stations sterker zijn dan voor andere. Daarnaast is voor sommige metalen (cadmium, koper, kwik en zink) te zien dat de hoeveelheid metaal in de richting van de Noordzee afneemt.
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_arseen.png} -->
+<!--   \caption{Arseen in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:arseen_bodem} -->
+<!-- \end{figure}  -->
+```{r arseenBodem, fig.cap="Arseen in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_arseen.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_cadmium.png} -->
+<!--   \caption{Cadmium in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:cadmium_bodem} -->
+<!-- \end{figure}  -->
+```{r cadmiumBodem, fig.cap="Cadmium in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_cadmium.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_chroom.png} -->
+<!--   \caption{Chroom in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:chroom_bodem} -->
+<!-- \end{figure}  -->
+```{r chroomBodem, fig.cap="Chroom in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_chroom.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_koper.png} -->
+<!--   \caption{Koper in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:koper_bodem} -->
+<!-- \end{figure}  -->
+```{r koperBodem, fig.cap="Koper in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_koper.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_kwik.png} -->
+<!--   \caption{Kwik in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:kwik_bodem} -->
+<!-- \end{figure}  -->
+```{r kwikBodem, fig.cap="Kwik in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_kwik.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_lood.png} -->
+<!--   \caption{Lood in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:lood_bodem} -->
+<!-- \end{figure}  -->
+```{r loodBodem, fig.cap="Lood in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_lood.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_zink.png} -->
+<!--   \caption{Zink in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:zink_bodem} -->
+<!-- \end{figure}  -->
+```{r zinkBodem, fig.cap="Zink in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_zink.png")
+```
+
+## Polycyclische Aromatische Koolwaterstoffen (PAK's) {#bodem-PAK}
+De PAK’s zijn afzonderlijk weergegeven in Figuur \@ref(fig:antraceenBodem) t/m Figuur \@ref(fig:indeno-pyreenBodem). De PAK’s zijn in hogere gehaltes aanwezig richting de Vlaams-Nederlandse grens. Ook bij Hansweert boei OHMG zijn in het verleden hoge gehaltes gemeten. Er is geen consistente temporele trend waar te nemen, maar de gemiddeldes liggen in de periode na 2007 over het algemeen lager dan in de periode voor 2007.
+<!-- %maar de gehaltes in 2016 zijn meestal wel hoger dan in 2013. -->
+<!-- %CHECK THIS STATEMENT! -->
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_antraceen.png} -->
+<!--   \caption{Antraceen in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:antraceen_bodem} -->
+<!-- \end{figure}  -->
+```{r antraceenBodem, fig.cap="Antraceen in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_antraceen.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_benzo(a)antraceen.png} -->
+<!--   \caption{Benzo(a)antraceen in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:benzo(a)antraceen_bodem} -->
+<!-- \end{figure}  -->
+```{r benzo-antraceenBodem, fig.cap="Benzo(a)antraceen in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(a)antraceen.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_benzo(a)pyreen.png} -->
+<!--   \caption{Benzo(a)pyreen in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:benzo(a)pyreen_bodem} -->
+<!-- \end{figure}  -->
+```{r benzo-pyreenBodem, fig.cap="Benzo(a)pyreen in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(a)pyreen.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_benzo(g,h,i)peryleen.png} -->
+<!--   \caption{Benzo(g,h,i)peryleen in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:benzo(g,h,i)peryleen_bodem} -->
+<!-- \end{figure}  -->
+```{r benzo-peryleenBodem, fig.cap="Benzo(g,h,i)peryleen in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(g,h,i)peryleen.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_benzo(k)fluorantheen.png} -->
+<!--   \caption{Benzo(k)fluorantheen in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:benzo(k)fluorantheen_bodem} -->
+<!-- \end{figure}  -->
+```{r benzo-fluorantheenBodem, fig.cap="Benzo(k)fluorantheen in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(k)fluorantheen.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_chryseen.png} -->
+<!--   \caption{Chryseen in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:chryseen_bodem} -->
+<!-- \end{figure}  -->
+```{r chryseenBodem, fig.cap="Chryseen in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_chryseen.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_fenanthreen.png} -->
+<!--   \caption{Fenanthreen in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:fenanthreen_bodem} -->
+<!-- \end{figure}  -->
+```{r fenanthreenBodem, fig.cap="Fenanthreen in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_fenanthreen.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_fluorantheen.png} -->
+<!--   \caption{Fluorantheen in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:Fluorantheen_bodem} -->
+<!-- \end{figure}  -->
+```{r fluorantheenBodem, fig.cap="Fluorantheen in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_fluorantheen.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_indeno(1,2,3-c,d)pyreen.png} -->
+<!--   \caption{Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:Indeno(1,2,3-c,d)pyreen_bodem} -->
+<!-- \end{figure}  -->
+```{r indeno-pyreenBodem, fig.cap="Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_indeno(1,2,3-c,d)pyreen.png")
+```
+
+## Polychloorbifenylen (PCB's) {#bodem-PCB}
+
+De PCB’s in het bodemsediment worden zowel afzonderlijk als gesommeerd weergegeven. In Figuur \@ref(fig:PCB180Bodem) t/m Figuur \@ref(fig:PCB28Bodem) zijn de onderstaande PCB’s afzonderlijk weergegeven. In Figuur \@ref(fig:SomPCBBodem) is de sommatie van de PCB’s weergegeven. De volgende PCB’s zijn gerapporteerd en gesommeerd:
+
+* 2,2',3,4,4',5,5'-heptachloorbifenyl (PCB180)
+* 2,2',3,4,4',5'-hexachloorbifenyl (PCB138)
+* 2,2',4,4',5,5'-hexachloorbifenyl (PCB153)
+* 2,2',4,5,5'-pentachloorbifenyl (PCB101)
+* 2,2',5,5'-tetrachloorbifenyl (PCB52)
+* 2,3',4,4',5-pentachloorbifenyl (PCB118)
+* 2,4,4'-trichloorbifenyl (PCB28)
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5,5'-heptachloorbifenyl.png} -->
+<!--   \caption{PCB180 in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:PCB180_bodem} -->
+<!-- \end{figure}  -->
+```{r PCB180Bodem, fig.cap="PCB180 in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5,5'-heptachloorbifenyl.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5'-hexachloorbifenyl.png} -->
+<!--   \caption{PCB138 in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:PCB138_bodem} -->
+<!-- \end{figure}  -->
+```{r PCB138Bodem, fig.cap="PCB138 in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5'-hexachloorbifenyl.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,2',4,4',5,5'-hexachloorbifenyl.png} -->
+<!--   \caption{PCB153 in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:PCB153_bodem} -->
+<!-- \end{figure}  -->
+```{r PCB153Bodem, fig.cap="PCB153 in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',4,4',5,5'-hexachloorbifenyl.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,2',4,5,5'-pentachloorbifenyl.png} -->
+<!--   \caption{PCB101 in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:PCB101_bodem} -->
+<!-- \end{figure}  -->
+```{r PCB101Bodem, fig.cap="PCB101 in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',4,5,5'-pentachloorbifenyl.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,2',5,5'-tetrachloorbifenyl_fix.png} -->
+<!--   \caption{PCB52 in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:PCB52_bodem} -->
+<!-- \end{figure}  -->
+```{r PCB52Bodem, fig.cap="PCB52 in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',5,5'-tetrachloorbifenyl.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,3',4,4',5-pentachloorbifenyl.png} -->
+<!--   \caption{PCB118 in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:PCB118_bodem} -->
+<!-- \end{figure}  -->
+```{r PCB118Bodem, fig.cap="PCB118 in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,3',4,4',5-pentachloorbifenyl.png")
+```
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,4,4'-trichloorbifenyl.png} -->
+<!--   \caption{PCB28 in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:PCB28_bodem} -->
+<!-- \end{figure} -->
+```{r PCB28Bodem, fig.cap="PCB28 in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,4,4'-trichloorbifenyl.png")
+```
+
+De hoeveelheid PCB’s neemt af in de richting van de Noordzee. Met name bij de oostelijke stations lijken de gehaltes af te nemen in de tijd.%, hoewel de gehaltes in 2016 wel hoger zijn dan in 2013.
+<!-- %CHECK THIS STATEMENT! -->
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_SomPCBs.png} -->
+<!--   \caption{Som van de PCB's in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:SomPCBs_bodem} -->
+<!-- \end{figure} -->
+```{r SomPCBBodem, fig.cap="Som van de PCB's in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_SomPCBs.png")
+```
+
+## Organotinverbindingen {#bodem-organotin}
+Tributyltin is de enige organotinverbinding die wordt gemeten in het bodemsediment. In Figuur \@ref(fig:tributyltinBodem) is de hoeveelheid tributyltin over de jaren weergegeven per station. De gehaltes in 2010, 2013 en 2016 zijn sterk lager dan die van 2001 en 2004. Ruimtelijk gezien zijn er grote variaties.
+<!-- %CHECK THIS STATEMENT! -->
+
+```{r tributyltinBodem, fig.cap="Tributyltin in het bodemsediment in de Westerschelde"}
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_tributyltin(kation).png")
+```
+
+<!-- \begin{figure}[h!]  -->
+<!-- \centering -->
+<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_tributyltin(kation).png} -->
+<!--   \caption{Tributyltin in het bodemsediment in de Westerschelde} -->
+<!-- \label{fig:tributyltin_bodem} -->
+<!-- \end{figure} -->

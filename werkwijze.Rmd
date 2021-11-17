@@ -1,6 +1,6 @@
 # (APPENDIX) Appendix {-} 
 
-# Appendix A - Werkwijze
+# Werkwijze
 
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}

@@ -4,7 +4,8 @@ new_session: true
 rmd_subdir: 'Rmd/'
 rmd_files: [
   "index.Rmd",
-  "nutrients.Rmd"
+  "nutrients.Rmd",
+  "werkwijze.Rmd"
 ]
 
 language:
