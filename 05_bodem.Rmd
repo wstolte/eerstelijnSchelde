@@ -1,9 +1,11 @@
 <!-- TO DO:
-- Check of alles werkt.
 - bijlage referentie
+- figuren headers bijwerken met percentiele ipv min-max
+- Som PCB mist nog data
+- Tributyltin heeft 2 parnames voor de complete serie
 
 -->
-```{r setupBodem, include=FALSE}
+```{r setupOppwater, include=FALSE}
 knitr::opts_chunk$set(
 	echo = FALSE,
 	message = FALSE,
@@ -11,14 +13,47 @@ knitr::opts_chunk$set(
 	out.width = "85%",
 	fig.align='center'
 )
+require(smwfs)
+require(tidyverse)
+require(lubridate)
+require(sf)
+require(leaflet)
+
+source("R/functions.R")
 ```
 
-```{r}
-# Load function to write Latex table structure to R 
-source("Rscripts/tex2Rtable.R")
-
+```{r downloadOppWaterdata, include = F}
 # Set year for use in the report
 dataJaar <- 2019
+
+trendstations <- c('Schaar van Ouden Doel',
+"Bath boei 68",
+"Bath boei 71",
+"Speelmansgat",
+"Kruiningen Perkpolder",
+"Hansweert boei OHMG",
+"Hansweert boei 4",
+"Baarland drempel",
+"Terneuzen boei WPT2",
+"Borssele drempel",
+"Vlissingen boei SSVH",
+"Wielingen oost"
+)
+
+#frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_zwevend_test_1998_2020.csv"
+df <- read_delim(frozendatapath, delim = ",")
+
+# replace below partly by clean function in package smsfs
+df <- df %>% 
+  # mutate(value = as.numeric(value)) %>%
+  filter(stationname %in% trendstations) %>%
+  mutate(stationname = factor(stationname, levels = trendstations)) %>%
+  filter(valuesign != ">") %>%
+  mutate(value = case_when(
+    valuesign == "=" ~ value,
+    valuesign == "<" ~ 0.5 * value
+  ))
+
 ```
 
 # Bodem - Fysisch-chemische parameters {#bodem}
@@ -26,13 +61,6 @@ dataJaar <- 2019
 ## Informatie over de metingen {#bodem-info-metingen}
 Eens in de drie jaar worden monsters genomen van het bodemmateriaal in de Westerschelde. Figuur \@ref(fig:meetstationsBodem) laat de 12 bemonsteringslocaties zien die in 2016 zijn gebruikt. De locatie Walcheren 2 km uit de kust is sinds 2010 niet meer gemeten. Resultaten van dit station zijn terug te vinden in de Eerstelijnsrapportage 2010. 
 
-<!-- % Update this figure -->
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Meetstations_bodem.png} -->
-<!--   \caption{Ligging van de meetstations voor het bodemmateriaal} -->
-<!-- \label{fig:meetstations_bodem} -->
-<!-- \end{figure}  -->
 
 ```{r meetstationsBodem, fig.cap="Ligging van de meetstations voor het bodemmateriaal"}
 knitr::include_graphics("Figuren/Meetstations_bodem.png")
@@ -41,68 +69,60 @@ knitr::include_graphics("Figuren/Meetstations_bodem.png")
 ## Metalen {#bodem-metalen}
 In Figuur \@ref(fig:arseenBodem) t/m Figuur \@ref(fig:zinkBodem) zijn de metalen in het bodemsediment in de Westerschelde weergegeven. Op de horizontale as zijn de stations gerangschikt van west (links) naar oost (rechts). Globaal gezien laten de meeste metalen laten op de meeste stations een afnemende trend in de tijd zien, die voor sommige metalen en stations sterker zijn dan voor andere. Daarnaast is voor sommige metalen (cadmium, koper, kwik en zink) te zien dat de hoeveelheid metaal in de richting van de Noordzee afneemt.
 
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_arseen.png} -->
-<!--   \caption{Arseen in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:arseen_bodem} -->
-<!-- \end{figure}  -->
 ```{r arseenBodem, fig.cap="Arseen in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_arseen.png")
+#knitr::include_graphics("Figuren/Fysisch/Bodem/bar_arseen.png")
+
+parname = "Arseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_cadmium.png} -->
-<!--   \caption{Cadmium in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:cadmium_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r cadmiumBodem, fig.cap="Cadmium in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_cadmium.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_cadmium.png")
+
+parname = "Cadmium in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_chroom.png} -->
-<!--   \caption{Chroom in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:chroom_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r chroomBodem, fig.cap="Chroom in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_chroom.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_chroom.png")
+
+parname = "Chroom in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_koper.png} -->
-<!--   \caption{Koper in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:koper_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r koperBodem, fig.cap="Koper in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_koper.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_koper.png")
+
+parname = "Koper in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_kwik.png} -->
-<!--   \caption{Kwik in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:kwik_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r kwikBodem, fig.cap="Kwik in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_kwik.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_kwik.png")
+
+parname = "Kwik in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_lood.png} -->
-<!--   \caption{Lood in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:lood_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r loodBodem, fig.cap="Lood in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_lood.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_lood.png")
+
+parname = "Lood in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_zink.png} -->
-<!--   \caption{Zink in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:zink_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r zinkBodem, fig.cap="Zink in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_zink.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_zink.png")
+
+parname = "Zink in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
 
 ## Polycyclische Aromatische Koolwaterstoffen (PAK's) {#bodem-PAK}
@@ -110,86 +130,76 @@ De PAK’s zijn afzonderlijk weergegeven in Figuur \@ref(fig:antraceenBodem) t/m
 <!-- %maar de gehaltes in 2016 zijn meestal wel hoger dan in 2013. -->
 <!-- %CHECK THIS STATEMENT! -->
 
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_antraceen.png} -->
-<!--   \caption{Antraceen in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:antraceen_bodem} -->
-<!-- \end{figure}  -->
 ```{r antraceenBodem, fig.cap="Antraceen in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_antraceen.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_antraceen.png")
+
+parname = "Antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_benzo(a)antraceen.png} -->
-<!--   \caption{Benzo(a)antraceen in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:benzo(a)antraceen_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r benzo-antraceenBodem, fig.cap="Benzo(a)antraceen in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(a)antraceen.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(a)antraceen.png")
+
+parname = "Benzo(a)antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_benzo(a)pyreen.png} -->
-<!--   \caption{Benzo(a)pyreen in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:benzo(a)pyreen_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r benzo-pyreenBodem, fig.cap="Benzo(a)pyreen in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(a)pyreen.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(a)pyreen.png")
+
+parname = "Benzo(a)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_benzo(g,h,i)peryleen.png} -->
-<!--   \caption{Benzo(g,h,i)peryleen in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:benzo(g,h,i)peryleen_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r benzo-peryleenBodem, fig.cap="Benzo(g,h,i)peryleen in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(g,h,i)peryleen.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(g,h,i)peryleen.png")
+
+parname = "Benzo(g,h,i)peryleen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_benzo(k)fluorantheen.png} -->
-<!--   \caption{Benzo(k)fluorantheen in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:benzo(k)fluorantheen_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r benzo-fluorantheenBodem, fig.cap="Benzo(k)fluorantheen in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(k)fluorantheen.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_benzo(k)fluorantheen.png")
+
+parname = "Benzo(k)fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_chryseen.png} -->
-<!--   \caption{Chryseen in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:chryseen_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r chryseenBodem, fig.cap="Chryseen in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_chryseen.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_chryseen.png")
+
+parname = "Chryseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_fenanthreen.png} -->
-<!--   \caption{Fenanthreen in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:fenanthreen_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r fenanthreenBodem, fig.cap="Fenanthreen in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_fenanthreen.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_fenanthreen.png")
+
+parname = "Fenantreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_fluorantheen.png} -->
-<!--   \caption{Fluorantheen in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:Fluorantheen_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r fluorantheenBodem, fig.cap="Fluorantheen in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_fluorantheen.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_fluorantheen.png")
+
+parname = "Fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_indeno(1,2,3-c,d)pyreen.png} -->
-<!--   \caption{Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:Indeno(1,2,3-c,d)pyreen_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r indeno-pyreenBodem, fig.cap="Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_indeno(1,2,3-c,d)pyreen.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_indeno(1,2,3-c,d)pyreen.png")
+
+parname = "Indeno(1,2,3-c,d)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
 
 ## Polychloorbifenylen (PCB's) {#bodem-PCB}
@@ -204,81 +214,71 @@ De PCB’s in het bodemsediment worden zowel afzonderlijk als gesommeerd weergeg
 * 2,3',4,4',5-pentachloorbifenyl (PCB118)
 * 2,4,4'-trichloorbifenyl (PCB28)
 
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5,5'-heptachloorbifenyl.png} -->
-<!--   \caption{PCB180 in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:PCB180_bodem} -->
-<!-- \end{figure}  -->
 ```{r PCB180Bodem, fig.cap="PCB180 in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5,5'-heptachloorbifenyl.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5,5'-heptachloorbifenyl.png")
+
+parname = "2,2',3,4,4',5,5'-Heptachloorbifenyl (PCB180) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5'-hexachloorbifenyl.png} -->
-<!--   \caption{PCB138 in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:PCB138_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r PCB138Bodem, fig.cap="PCB138 in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5'-hexachloorbifenyl.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',3,4,4',5'-hexachloorbifenyl.png")
+
+parname = "2,2',3,4,4',5'-Hexachloorbifenyl (PCB138) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,2',4,4',5,5'-hexachloorbifenyl.png} -->
-<!--   \caption{PCB153 in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:PCB153_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r PCB153Bodem, fig.cap="PCB153 in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',4,4',5,5'-hexachloorbifenyl.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',4,4',5,5'-hexachloorbifenyl.png")
+
+parname = "2,2',4,4',5,5'-Hexachloorbifenyl (PCB153) in ug/kg drooggewicht in sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,2',4,5,5'-pentachloorbifenyl.png} -->
-<!--   \caption{PCB101 in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:PCB101_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r PCB101Bodem, fig.cap="PCB101 in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',4,5,5'-pentachloorbifenyl.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',4,5,5'-pentachloorbifenyl.png")
+
+parname = "2,2',4,5,5'-Pentachloorbifenyl (PCB101) in ug/kg drooggewicht in sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,2',5,5'-tetrachloorbifenyl_fix.png} -->
-<!--   \caption{PCB52 in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:PCB52_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r PCB52Bodem, fig.cap="PCB52 in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',5,5'-tetrachloorbifenyl.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,2',5,5'-tetrachloorbifenyl.png")
+
+parname = "2,2',5,5'-Tetrachloorbifenyl (PCB52) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,3',4,4',5-pentachloorbifenyl.png} -->
-<!--   \caption{PCB118 in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:PCB118_bodem} -->
-<!-- \end{figure}  -->
+
 ```{r PCB118Bodem, fig.cap="PCB118 in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,3',4,4',5-pentachloorbifenyl.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,3',4,4',5-pentachloorbifenyl.png")
+
+parname = "2,3',4,4',5-Pentachloorbifenyl (PCB118) in ug/kg drooggewicht in sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_2,4,4'-trichloorbifenyl.png} -->
-<!--   \caption{PCB28 in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:PCB28_bodem} -->
-<!-- \end{figure} -->
+
 ```{r PCB28Bodem, fig.cap="PCB28 in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,4,4'-trichloorbifenyl.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_2,4,4'-trichloorbifenyl.png")
+
+parname = "2,4,4'-Trichloorbifenyl (PCB28) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
 ```
 
 De hoeveelheid PCB’s neemt af in de richting van de Noordzee. Met name bij de oostelijke stations lijken de gehaltes af te nemen in de tijd.%, hoewel de gehaltes in 2016 wel hoger zijn dan in 2013.
 <!-- %CHECK THIS STATEMENT! -->
 
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_SomPCBs.png} -->
-<!--   \caption{Som van de PCB's in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:SomPCBs_bodem} -->
-<!-- \end{figure} -->
 ```{r SomPCBBodem, fig.cap="Som van de PCB's in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_SomPCBs.png")
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_SomPCBs.png")
+
+# parname = "Chryseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
+# #plotTrends(df, parname, trend = F)
+# plotTrendsBar(df, parname)
 ```
 
 ## Organotinverbindingen {#bodem-organotin}
@@ -286,12 +286,9 @@ Tributyltin is de enige organotinverbinding die wordt gemeten in het bodemsedime
 <!-- %CHECK THIS STATEMENT! -->
 
 ```{r tributyltinBodem, fig.cap="Tributyltin in het bodemsediment in de Westerschelde"}
-knitr::include_graphics("Figuren/Fysisch/Bodem/bar_tributyltin(kation).png")
-```
+# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_tributyltin(kation).png")
 
-<!-- \begin{figure}[h!]  -->
-<!-- \centering -->
-<!--   \includegraphics[width=1\linewidth]{../Figuren/Fysisch/Bodem/bar_tributyltin(kation).png} -->
-<!--   \caption{Tributyltin in het bodemsediment in de Westerschelde} -->
-<!-- \label{fig:tributyltin_bodem} -->
-<!-- \end{figure} -->
+parname = "Tributyltin in ug/kg Standaard sediment in Bodem/Sediment"
+#plotTrends(df, parname, trend = F)
+plotTrendsBar(df, parname)
+```
