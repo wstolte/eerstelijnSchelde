@@ -4,7 +4,7 @@
 
 -->
 
-```{r setupOppwater, include=FALSE}
+```{r setupZwevend, include=FALSE}
 knitr::opts_chunk$set(
 	echo = FALSE,
 	message = FALSE,
@@ -21,13 +21,14 @@ require(leaflet)
 source("R/functions.R")
 ```
 
-```{r downloadOppWaterdata, include = F}
+```{r downloadZwevend, include = F}
 # Set year for use in the report
 dataJaar <- 2019
 
 trendstations <- c("Schaar van Ouden Doel", "Vlissingen boei SSVH")
 
 #frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_zwevend_test_1998_2020.csv"
+frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_zwevend_test_1998_2020.csv"
 df <- read_delim(frozendatapath, delim = ",")
 
 # replace below partly by clean function in package smsfs

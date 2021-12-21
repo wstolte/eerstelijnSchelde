@@ -88,7 +88,26 @@ plotTrendsWaterstand <- function(df, parname, locname, sf = F) {
     facet_grid(Parameter ~ ., scales="free_y") +
     theme_minimal() +
     ylab("Jaargemiddeld hoog- en laagwater in cm+NAP") +
-    coord_cartesian(ylim = c(0,NA))
+    theme(legend.position="none")
+  return(p)
+}
+
+plotTrendsByLocation <- function(df, parname, sf = F) {
+  
+  if(sf) df <- df %>% st_drop_geometry()
+  p <- df %>%
+    dplyr::filter(parametername %in% parname) %>%
+    dplyr::select(Station = stationname,
+                  Jaar = jaar,
+                  Value = value,
+                  Parameter = parametername) %>%
+    dplyr::arrange(-Value) %>%
+    ggplot(aes(Jaar, Value)) +
+    geom_line(aes(color=Station)) + 
+    geom_point(aes(fill=Station), color = "white", shape = 21) + 
+    #facet_grid(Parameter ~ ., scales="free_y") +
+    theme_minimal() +
+    ylab(parname)
   return(p)
 }
 

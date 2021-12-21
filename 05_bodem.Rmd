@@ -1,11 +1,12 @@
 <!-- TO DO:
 - bijlage referentie
 - figuren headers bijwerken met percentiele ipv min-max
+- merge fractie en geen fractie parameters tot 1 tijdserie
 - Som PCB mist nog data
 - Tributyltin heeft 2 parnames voor de complete serie
 
 -->
-```{r setupOppwater, include=FALSE}
+```{r setupBodem, include=FALSE}
 knitr::opts_chunk$set(
 	echo = FALSE,
 	message = FALSE,
@@ -22,9 +23,9 @@ require(leaflet)
 source("R/functions.R")
 ```
 
-```{r downloadOppWaterdata, include = F}
+```{r downloadBodem, include = F}
 # Set year for use in the report
-dataJaar <- 2019
+dataJaar <- 2020
 
 trendstations <- c('Schaar van Ouden Doel',
 "Bath boei 68",
@@ -41,6 +42,7 @@ trendstations <- c('Schaar van Ouden Doel',
 )
 
 #frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_zwevend_test_1998_2020.csv"
+frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_bodem_test_1998_2020.csv"
 df <- read_delim(frozendatapath, delim = ",")
 
 # replace below partly by clean function in package smsfs
@@ -274,7 +276,7 @@ De hoeveelheid PCB’s neemt af in de richting van de Noordzee. Met name bij de 
 <!-- %CHECK THIS STATEMENT! -->
 
 ```{r SomPCBBodem, fig.cap="Som van de PCB's in het bodemsediment in de Westerschelde"}
-# knitr::include_graphics("Figuren/Fysisch/Bodem/bar_SomPCBs.png")
+knitr::include_graphics("Figuren/Fysisch/Bodem/bar_SomPCBs.png")
 
 # parname = "Chryseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 # #plotTrends(df, parname, trend = F)
@@ -288,7 +290,7 @@ Tributyltin is de enige organotinverbinding die wordt gemeten in het bodemsedime
 ```{r tributyltinBodem, fig.cap="Tributyltin in het bodemsediment in de Westerschelde"}
 # knitr::include_graphics("Figuren/Fysisch/Bodem/bar_tributyltin(kation).png")
 
-parname = "Tributyltin in ug/kg Standaard sediment in Bodem/Sediment"
+parname = "Tributyltin in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
 plotTrendsBar(df, parname)
 ```
