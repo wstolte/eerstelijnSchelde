@@ -5,7 +5,7 @@ rmd_subdir: 'Rmd/'
 rmd_files: [
   "index.Rmd",
   "nutrients.Rmd",
-  "werkwijze.Rmd"
+  # "werkwijze.Rmd"
 ]
 
 language:
