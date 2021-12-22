@@ -9,12 +9,40 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r}
-# Load function to write Latex table structure to R 
-source("Rscripts/tex2Rtable.R")
+```{r laadData}
 
-# Set year for use in the report
-dataJaar <- 2019
+fytoplankton <- read_delim("n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/fytoplankton.csv", delim = ";")
+
+## FIX STATIONNAMES (ZIJN NU SOMS CODES, SOMS NAMEN). TERUGMELDEN AAN VLIZ EN RWS !!!!
+
+fytoplankton <- fytoplankton %>%
+  mutate(stationname = case_when(
+    grepl(pattern = "schaar", stationname, ignore.case = T) ~ "Schaar van Ouden Doel",
+    grepl(pattern = "hans", stationname, ignore.case = T) ~ "Hansweert Geul",
+    grepl(pattern = "vliss", stationname, ignore.case = T) ~ "Vlissingen Boei SSVH",
+    grepl(pattern = "walcheren 2 ", stationname, ignore.case = T) | stationname == "WALCRN2" ~ "Walcheren 2 km uit de kust",
+    grepl(pattern = "walcheren 20", stationname, ignore.case = T) | stationname == "WALCRN20" ~ "Walcheren 20 km uit de kust"
+  ))
+
+specieslist <- readxl::read_excel(
+  "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/generic/Fytoplankton/Specieslist_zelfuitgebreid_jh.xlsx",
+  col_names = F)
+
+names(specieslist) <- c(
+  "soortnaam",
+  "soortcode",
+  "TWN",
+  "TWN2",
+  "soortnaam2",
+  "trofie",
+  "groep",
+  "groepcode"
+)
+
+df.fyt <- fytoplankton %>% 
+  left_join(specieslist, by = c(scientificname = "soortnaam"))
+
+dataJaar <- 2020
 ```
 
 # Fytoplankton {#fytoplankton}
@@ -51,6 +79,13 @@ dt <- data.frame(
   col3 = c("Dinoflagellaten (9)","Overig (10)","","","","")
 )
 knitr::kable(dt, col.names = c("Autotroof","Heterotroof","Mixotroof"), caption = "Groepsindeling fytoplankton. Getallen tussen haakjes is de nummering per gedetermineerde groep van deze Eerstelijnsrapportage.")
+
+df.fyt %>% 
+  distinct(scientificname, trofie, groep) %>%
+  group_by(trofie, groep) %>% 
+  summarize(n = n()) %>% 
+  pivot_wider(id_cols = groep, names_from = trofie, values_from = n, values_fill = 0) %>% 
+  knitr::kable(caption = "Aantal soorten per groep en trofieniveau")
 ```
 
 ## Informatie over de metingen {#fyto-info-metingen}
@@ -69,7 +104,8 @@ Opvallend is dat bij ieder station na 2008  minder fytoplankton in de categorien
 <!-- \end{figure}  -->
 
 ```{r meetstationsFyto, fig.cap="Ligging van de meetstations voor fytoplankton"}
-knitr::include_graphics("Figuren/Meetstations_fyto.png")
+# knitr::include_graphics("Figuren/Meetstations_fyto.png")
+plotLocations(df.fyt)
 ```
 
 ### Figuren {#fyto-metingen-figuren}
@@ -94,9 +130,28 @@ Bij Schaar van Ouden Doel zien we dat vooral de blauwwieren en groenwieren in ho
 <!-- \end{table}  -->
 
 ```{r fytoSchaarJaarTab}
-dt <- tex2dt("Figuren/Fytoplankton/SchaarvanOudenDoel_meanvalues.tex")
-knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
-             caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Schaar van Ouden Doel. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+# dt <- tex2dt("Figuren/Fytoplankton/SchaarvanOudenDoel_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
+#              caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Schaar van Ouden Doel. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+
+df.fyt.groep <- df.fyt %>% 
+  drop_na(groep) %>%
+  unite("groep", c(trofie, groep), sep = " - ") %>%
+  group_by(stationname, observationdate, groep) %>% 
+  summarize(value = sum(value)/1e6) %>%
+  select(
+    stationname,
+    datetime = observationdate,
+    parametername = groep,
+    value
+  ) %>% ungroup()
+
+
+
+fytStatTable(df.fyt.groep,  statname = 'Schaar van Ouden Doel') %>%
+  select(-stationname) %>%
+  rename(groepsnaam = parametername) %>% 
+  knitr::kable(caption = "Gemiddeld celaantal per jaar en groep en trofieniveau bij Schaar van Ouden Doel.")
 ```
 
 <!-- \begin{figure}[h!]  -->
@@ -106,8 +161,13 @@ knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
 <!-- \label{fig:fyto_Schaar_jaar}  -->
 <!-- \end{figure}  -->
 
-```{r fytoSchaarJaar, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Schaar van Ouden Doel. De y-as representeert de maximaal gesommeerde gemeten waarde."}
+```{r fytoSchaarJaar, fig.height=8, fig.width=8, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Schaar van Ouden Doel. De y-as representeert de maximaal gesommeerde gemeten waarde."}
+
 knitr::include_graphics("Figuren/Fytoplankton/SchaarvanOudenDoel_jaar.png")
+
+statname = "Schaar van Ouden Doel"
+
+plotTrendFyto(df.fyt.groep, "Schaar van Ouden Doel")
 ```
 
 ### Hansweert geul {#fyto-resultaten-hansweert}
@@ -122,9 +182,14 @@ Voor de blauwwieren bij Hansweert geul zien we ongeveer hetzelfde beeld als bij 
 <!-- \end{table}  -->
 
 ```{r fytoHansJaarTab}
-dt <- tex2dt("Figuren/Fytoplankton/Hansweertgeul_meanvalues.tex")
-knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
-             caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Hansweert Geul. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+# dt <- tex2dt("Figuren/Fytoplankton/Hansweertgeul_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
+#              caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Hansweert Geul. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+#              
+fytStatTable(df.fyt.groep,  stationname = 'Hansweert Geul') %>%
+  select(-stationname) %>%
+  rename(groepsnaam = parametername) %>% 
+  knitr::kable(caption = "Gemiddeld celaantal per jaar en groep en trofieniveau bij Hansweert Geul.")
 ```
 
 <!-- \begin{figure}[h!]  -->
@@ -135,7 +200,23 @@ knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
 <!-- \end{figure}  -->
 
 ```{r fytoHansJaar, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Hansweert geul. De y-as representeert de maximaal gesommeerde gemeten waarde."}
-knitr::include_graphics("Figuren/Fytoplankton/Hansweertgeul_jaar.png")
+# knitr::include_graphics("Figuren/Fytoplankton/Hansweertgeul_jaar.png")
+
+df.fyt.groep %>%
+  mutate(jaar = year(datetime), maand = month(datetime)) %>%
+  mutate(seizoen = ifelse(maand %in% c(4:9), "zomer", "winter")) %>%
+  group_by(stationname, parametername, jaar, seizoen) %>%
+  summarize(`90-perc` = quantile(value, 0.9, na.rm = T)) %>% ungroup() %>%
+  ggplot(aes(jaar, `90-perc`)) +
+  geom_col(aes(fill = seizoen)) +
+  geom_hline(linetype = 2, color = "blue",
+    yintercept = 
+      df.fyt.groep %>% 
+      group_by() %>%
+      summarize(`90-perc` = quantile(value, 0.9, na.rm = T)) %>% ungroup() %>%
+      unlist() %>% unname()
+  ) +
+  facet_wrap(~ parametername, ncol = 2, scales = "free_y")
 ```
 
 ### Vlissingen boei SSVH {#fyto-resultaten-vlis}

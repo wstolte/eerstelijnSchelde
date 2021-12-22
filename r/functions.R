@@ -1,6 +1,7 @@
 # functions to be used in the eerstelijnsrapportage
 require(tidyverse)
 require(viridis)
+require(leaflet)
 
 # nog te maken functies
 # filternutriendata
@@ -9,6 +10,12 @@ require(viridis)
 #   - Bereken schatting van ontbrekende data per seizoen
 #   - 
 
+plotLocations <- function(df){
+  df %>% distinct(stationname, latitude, longitude) %>%
+    leaflet() %>%
+    addTiles() %>%
+    addCircleMarkers(label = ~stationname, labelOptions = labelOptions(noHide = T))
+}
 
 
 # Make table with statistics
@@ -30,7 +37,11 @@ statTable <- function(df, parname, rounding, meanorder = "decreasing", sf = F) {
   df %>% 
     filter(parametername == parname) %>% 
     mutate(year = year(datetime), month = month(datetime)) %>%
-    group_by(stationname) %>% summarize(median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
+    group_by(stationname) %>% 
+    summarize(
+      median = median(value, na.rm = T), 
+      `10-perc` = quantile(value, 0.1, na.rm = T), 
+      `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
     left_join(stats)  %>%
     mutate(across(where(is.numeric), round, 3)) %>%
     mutate(across(where(is.numeric), signif, rounding)) %>%
@@ -42,6 +53,17 @@ statTable <- function(df, parname, rounding, meanorder = "decreasing", sf = F) {
            p = p.value) #%>%
   # arrange(-Gemiddelde)
 }
+
+
+fytStatTable <- function(df, statname){
+  df %>% 
+    filter(stationname == statname) %>%
+    group_by(stationname, parametername) %>%
+    summarize(median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)) %>%
+    mutate(across(where(is.double), round, 3)) %>% ungroup()
+}
+
+
 
 # Plot trends of nutrients
 plotTrends <- function(df, parname, sf = F, trend = T) {
@@ -185,6 +207,26 @@ plotTrendsMaand <- function(df, parname, sf = T) {
     ylab(parname) +
     coord_cartesian(ylim = c(0,NA))
 }
+
+plotTrendFyto <- function(df, statname){
+  df %>% ungroup() %>%
+    filter(stationname == statname) %>%
+    mutate(jaar = year(datetime), maand = month(datetime)) %>%
+    mutate(seizoen = ifelse(maand %in% c(4:9), "zomer", "winter")) %>%
+    group_by(jaar, seizoen, parametername) %>%
+    summarize(`90-perc` = quantile(value, 0.9, na.rm = T)) %>% ungroup() %>% 
+    ggplot(aes(jaar, `90-perc`)) +
+    geom_col(aes(fill = seizoen), position = 'dodge') +
+    geom_hline(linetype = 2, color = "blue",
+               data = df.fyt.groep %>% 
+                 filter(stationname == statname) %>%
+                 group_by(parametername) %>%
+                 summarize(gemiddelde = mean(value, na.rm = T)) %>% ungroup(),
+               aes(yintercept = gemiddelde)
+    ) +
+    facet_wrap(~ parametername, ncol = 2, scales = "free_y")
+}
+
 
 stationMean <- function(df, parname){
   df %>% #st_drop_geometry() %>%
