@@ -12,8 +12,8 @@ require(rmarkdown)
 # require(tufte)
 require(bookdown)
 
-file.remove("Rmd/_main.Rmd")
-file.remove("Rmd/_main.md")
+file.remove("_main.Rmd")
+file.remove("_main.md")
 # gitbook formatted html pages (gebruikt op testpagina)
              bookdown::render_book("index.Rmd", output_dir = "docs",
                                    output_format = NULL, 

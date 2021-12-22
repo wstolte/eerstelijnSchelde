@@ -114,6 +114,30 @@ plotTrendsWaterstand <- function(df, parname, locname, sf = F) {
   return(p)
 }
 
+plotTrendsGolven <- function(df, parname, locname, sf = F) {
+  
+  if(sf) df <- df %>% st_drop_geometry()
+  p <- df %>%
+    dplyr::filter(parametername %in% parname, stationname %in% locname) %>%
+    dplyr::mutate(year = year(datetime), month = month(datetime)) %>%
+    dplyr::group_by(stationname, year, month, parametername) %>% 
+    dplyr::summarize(mean = mean(value, na.rm = T)) %>%
+    dplyr::select(Station = stationname,
+                  Jaar = year,
+                  Maand = month,
+                  Gemiddelde = mean,
+                  Parameter = parametername) %>%
+    dplyr::arrange(-Gemiddelde) %>%
+    ggplot(aes(Jaar, Gemiddelde)) +
+    geom_line(aes(color=Parameter)) + 
+    geom_point(aes(fill=Parameter), color = "white", shape = 21) + 
+    #facet_grid(Parameter ~ ., scales="free_y") +
+    theme_minimal() +
+    ylab(parname) +
+    theme(legend.position="none")
+  return(p)
+}
+
 plotTrendsByLocation <- function(df, parname, sf = F) {
   
   if(sf) df <- df %>% st_drop_geometry()
@@ -130,6 +154,28 @@ plotTrendsByLocation <- function(df, parname, sf = F) {
     #facet_grid(Parameter ~ ., scales="free_y") +
     theme_minimal() +
     ylab(parname)
+  return(p)
+}
+
+plotTrendsByLocationClass <- function(df, parname, classname, sf = F) {
+  
+  if(sf) df <- df %>% st_drop_geometry()
+  p <- df %>%
+    dplyr::filter(parametername %in% parname, class %in% classname) %>%
+    dplyr::mutate(year = year(datetime)) %>%
+    dplyr::group_by(stationname, year, parametername, class) %>% 
+    dplyr::summarize(mean = mean(value, na.rm = T)) %>%
+    dplyr::select(Station = stationname,
+                  Jaar = year,
+                  Mean = mean,
+                  Parameter = parametername) %>%
+    dplyr::arrange(-Mean) %>%
+    ggplot(aes(Jaar, Mean)) +
+    geom_line(aes(color=Station)) + 
+    geom_point(aes(fill=Station), color = "white", shape = 21) + 
+    #facet_grid(Parameter ~ ., scales="free_y") +
+    theme_minimal() +
+    ylab(paste(parname, classname))
   return(p)
 }
 
@@ -231,6 +277,18 @@ plotTrendFyto <- function(df, statname){
 stationMean <- function(df, parname){
   df %>% #st_drop_geometry() %>%
     filter(parametername == parname) %>%
+    group_by(stationname) %>% 
+    summarize(mean = mean(value, na.rm = T), latitude = mean(latitude), longitude = mean(longitude)) %>%
+    select(Station = stationname,
+           Gemiddelde = mean,
+           latitude,
+           longitude
+    )
+}
+
+stationMeanClass <- function(df, parname, classname){
+  df %>% #st_drop_geometry() %>%
+    filter(parametername == parname, class == classname) %>%
     group_by(stationname) %>% 
     summarize(mean = mean(value, na.rm = T), latitude = mean(latitude), longitude = mean(longitude)) %>%
     select(Station = stationname,
