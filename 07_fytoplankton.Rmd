@@ -42,6 +42,18 @@ names(specieslist) <- c(
 df.fyt <- fytoplankton %>% 
   left_join(specieslist, by = c(scientificname = "soortnaam"))
 
+df.fyt.groep <- df.fyt %>% 
+  drop_na(groep) %>%
+  unite("groep", c(trofie, groep), sep = " - ") %>%
+  group_by(stationname, observationdate, groep) %>% 
+  summarize(value = sum(value)/1e6) %>%
+  select(
+    stationname,
+    datetime = observationdate,
+    parametername = groep,
+    value
+  ) %>% ungroup()
+
 dataJaar <- 2020
 ```
 
@@ -73,12 +85,12 @@ Bovenstaande leidt tot de volgende pragmatische indeling, gepresenteerd in Tabel
 <!-- \end{table} -->
 
 ```{r indelingFytoplankton}
-dt <- data.frame(
-  col1 = c("Blauwwieren (1)","Diatomeeën (2)","Dinoflagellaten (3)","Phaeocystis (4)","Groenwieren (5)","Overig (6)"),
-  col2 = c("Dinoflagellaten (7)","Overig (8)","","","",""),
-  col3 = c("Dinoflagellaten (9)","Overig (10)","","","","")
-)
-knitr::kable(dt, col.names = c("Autotroof","Heterotroof","Mixotroof"), caption = "Groepsindeling fytoplankton. Getallen tussen haakjes is de nummering per gedetermineerde groep van deze Eerstelijnsrapportage.")
+# dt <- data.frame(
+#   col1 = c("Blauwwieren (1)","Diatomeeën (2)","Dinoflagellaten (3)","Phaeocystis (4)","Groenwieren (5)","Overig (6)"),
+#   col2 = c("Dinoflagellaten (7)","Overig (8)","","","",""),
+#   col3 = c("Dinoflagellaten (9)","Overig (10)","","","","")
+# )
+# knitr::kable(dt, col.names = c("Autotroof","Heterotroof","Mixotroof"), caption = "Groepsindeling fytoplankton. Getallen tussen haakjes is de nummering per gedetermineerde groep van deze Eerstelijnsrapportage.")
 
 df.fyt %>% 
   distinct(scientificname, trofie, groep) %>%
@@ -134,20 +146,6 @@ Bij Schaar van Ouden Doel zien we dat vooral de blauwwieren en groenwieren in ho
 # knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
 #              caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Schaar van Ouden Doel. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
 
-df.fyt.groep <- df.fyt %>% 
-  drop_na(groep) %>%
-  unite("groep", c(trofie, groep), sep = " - ") %>%
-  group_by(stationname, observationdate, groep) %>% 
-  summarize(value = sum(value)/1e6) %>%
-  select(
-    stationname,
-    datetime = observationdate,
-    parametername = groep,
-    value
-  ) %>% ungroup()
-
-
-
 fytStatTable(df.fyt.groep,  statname = 'Schaar van Ouden Doel') %>%
   select(-stationname) %>%
   rename(groepsnaam = parametername) %>% 
@@ -163,9 +161,7 @@ fytStatTable(df.fyt.groep,  statname = 'Schaar van Ouden Doel') %>%
 
 ```{r fytoSchaarJaar, fig.height=8, fig.width=8, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Schaar van Ouden Doel. De y-as representeert de maximaal gesommeerde gemeten waarde."}
 
-knitr::include_graphics("Figuren/Fytoplankton/SchaarvanOudenDoel_jaar.png")
-
-statname = "Schaar van Ouden Doel"
+# knitr::include_graphics("Figuren/Fytoplankton/SchaarvanOudenDoel_jaar.png")
 
 plotTrendFyto(df.fyt.groep, "Schaar van Ouden Doel")
 ```
@@ -185,8 +181,9 @@ Voor de blauwwieren bij Hansweert geul zien we ongeveer hetzelfde beeld als bij 
 # dt <- tex2dt("Figuren/Fytoplankton/Hansweertgeul_meanvalues.tex")
 # knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
 #              caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Hansweert Geul. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+#    
 #              
-fytStatTable(df.fyt.groep,  stationname = 'Hansweert Geul') %>%
+fytStatTable(df.fyt.groep,  statname = 'Hansweert Geul') %>%
   select(-stationname) %>%
   rename(groepsnaam = parametername) %>% 
   knitr::kable(caption = "Gemiddeld celaantal per jaar en groep en trofieniveau bij Hansweert Geul.")
@@ -199,24 +196,11 @@ fytStatTable(df.fyt.groep,  stationname = 'Hansweert Geul') %>%
 <!-- \label{fig:fyto_hans_jaar}  -->
 <!-- \end{figure}  -->
 
-```{r fytoHansJaar, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Hansweert geul. De y-as representeert de maximaal gesommeerde gemeten waarde."}
+```{r fytoHansJaar, fig.height=8, fig.width=8, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Hansweert geul. De y-as representeert de maximaal gesommeerde gemeten waarde."}
 # knitr::include_graphics("Figuren/Fytoplankton/Hansweertgeul_jaar.png")
 
-df.fyt.groep %>%
-  mutate(jaar = year(datetime), maand = month(datetime)) %>%
-  mutate(seizoen = ifelse(maand %in% c(4:9), "zomer", "winter")) %>%
-  group_by(stationname, parametername, jaar, seizoen) %>%
-  summarize(`90-perc` = quantile(value, 0.9, na.rm = T)) %>% ungroup() %>%
-  ggplot(aes(jaar, `90-perc`)) +
-  geom_col(aes(fill = seizoen)) +
-  geom_hline(linetype = 2, color = "blue",
-    yintercept = 
-      df.fyt.groep %>% 
-      group_by() %>%
-      summarize(`90-perc` = quantile(value, 0.9, na.rm = T)) %>% ungroup() %>%
-      unlist() %>% unname()
-  ) +
-  facet_wrap(~ parametername, ncol = 2, scales = "free_y")
+plotTrendFyto(df.fyt.groep, "Hansweert Geul")
+
 ```
 
 ### Vlissingen boei SSVH {#fyto-resultaten-vlis}
@@ -231,9 +215,14 @@ Bij Vlissingen boei SSVH vormen blauwwieren en groenwieren maar een hele kleine 
 <!-- \end{table}  -->
 
 ```{r fytoVlisJaarTab}
-dt <- tex2dt("Figuren/Fytoplankton/VlissingenboeiSSVH_meanvalues.tex")
-knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
-             caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Vlissingen boei SSVH. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+# dt <- tex2dt("Figuren/Fytoplankton/VlissingenboeiSSVH_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
+#              caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Vlissingen boei SSVH. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+
+fytStatTable(df.fyt.groep,  statname = 'Vlissingen Boei SSVH') %>%
+  select(-stationname) %>%
+  rename(groepsnaam = parametername) %>% 
+  knitr::kable(caption = "Gemiddeld celaantal per jaar en groep en trofieniveau bij Vlissingen Boei SSVH.")
 ```
 
 <!-- \begin{figure}[h!]  -->
@@ -243,8 +232,9 @@ knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
 <!-- \label{fig:fyto_vlis_jaar}  -->
 <!-- \end{figure}  -->
 
-```{r fytoVlisJaar, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Vlissingen boei SSVH. De y-as representeert de maximaal gesommeerde gemeten waarde."}
-knitr::include_graphics("Figuren/Fytoplankton/VlissingenboeiSSVH_jaar.png")
+```{r fytoVlisJaar, fig.height=8, fig.width=8, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Vlissingen boei SSVH. De y-as representeert de maximaal gesommeerde gemeten waarde."}
+# knitr::include_graphics("Figuren/Fytoplankton/VlissingenboeiSSVH_jaar.png")
+plotTrendFyto(df.fyt.groep, "Vlissingen Boei SSVH")
 ```
 
 ### Walcheren 2 km uit de kust {#fyto-resultaten-walch2km}
@@ -256,14 +246,20 @@ Qua aantallen zitten er niet hele grote verschillen tussen de fytoplankton waard
 
 
 ```{r fytoWal2JaarTab}
-dt <- tex2dt("Figuren/Fytoplankton/Walcheren2kmuitdekust_meanvalues.tex")
-knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
-             caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Walcheren 2km uit de kust. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+# dt <- tex2dt("Figuren/Fytoplankton/Walcheren2kmuitdekust_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
+#              caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Walcheren 2km uit de kust. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+
+fytStatTable(df.fyt.groep,  statname = 'Walcheren 2 km uit de kust') %>%
+  select(-stationname) %>%
+  rename(groepsnaam = parametername) %>% 
+  knitr::kable(caption = "Gemiddeld celaantal per jaar en groep en trofieniveau bij Walcheren 2 km uit de kust.")
 ```
 
 
-```{r fytoWal2Jaar, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Walcheren 2km uit de kust. De y-as representeert de maximaal gesommeerde gemeten waarde."}
-knitr::include_graphics("Figuren/Fytoplankton/Walcheren2kmuitdekust_jaar.png")
+```{r fytoWal2Jaar, fig.height=8, fig.width=8, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Walcheren 2km uit de kust. De y-as representeert de maximaal gesommeerde gemeten waarde."}
+# knitr::include_graphics("Figuren/Fytoplankton/Walcheren2kmuitdekust_jaar.png")
+plotTrendFyto(df.fyt.groep, "Walcheren 2 km uit de kust")
 ```
 
 ### Walcheren 20 km uit de kust {#fyto-resultaten-walch20km}
@@ -280,9 +276,14 @@ Bij Walcheren 20 km uit de kust komt minder fytoplankton voor dan bij de andere 
 <!-- \end{table}  -->
 
 ```{r fytoWal20JaarTab}
-dt <- tex2dt("Figuren/Fytoplankton/Walcheren20kmuitdekust_meanvalues.tex")
-knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
-             caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Walcheren 20km uit de kust. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+# dt <- tex2dt("Figuren/Fytoplankton/Walcheren20kmuitdekust_meanvalues.tex")
+# knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
+#              caption = "Jaarwaardes voor de tien fytoplanktongroepen bij station Walcheren 20km uit de kust. Gesommeerde waardes zijn in miljoenen (10 M of $10^7$ per L).")
+
+fytStatTable(df.fyt.groep,  statname = 'Walcheren 20 km uit de kust') %>%
+  select(-stationname) %>%
+  rename(groepsnaam = parametername) %>% 
+  knitr::kable(caption = "Gemiddeld celaantal per jaar en groep en trofieniveau bij Walcheren 20 km uit de kust.")
 ```
 
 <!-- \begin{figure}[h!]  -->
@@ -292,8 +293,9 @@ knitr::kable(dt, col.names = c("Groepsnaam","Gemiddelde","Maximum","Minimum"),
 <!-- \label{fig:fyto_wal20_jaar}  -->
 <!-- \end{figure}  -->
 
-```{r fytoWal20Jaar, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Walcheren 20km uit de kust. De y-as representeert de maximaal gesommeerde gemeten waarde."}
-knitr::include_graphics("Figuren/Fytoplankton/Walcheren20kmuitdekust_jaar.png")
+```{r fytoWal20Jaar, fig.height=8, fig.width=8, fig.cap="Jaarlijkse waardes voor fytoplankton in zomer (groen), winter (rood) en gemiddeld (blauw) voor station Walcheren 20km uit de kust. De y-as representeert de maximaal gesommeerde gemeten waarde."}
+# knitr::include_graphics("Figuren/Fytoplankton/Walcheren20kmuitdekust_jaar.png")
+plotTrendFyto(df.fyt.groep, "Walcheren 20 km uit de kust")
 ```
 
 ## Resultaten per groep {#fyto-resultaten-groep}
