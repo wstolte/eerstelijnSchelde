@@ -32,7 +32,8 @@ trendstations <- c("Schaar van Ouden Doel", "Hansweert geul", "Terneuzen boei 20
 "Vlissingen boei SSVH", "not_Wielingen", "Walcheren 2 km uit de kust",
 "Walcheren 20 km uit de kust")
 
-frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_opp_test_1998_2020.csv"
+#frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_opp_test_1998_2020.csv"
+frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_opp_test_1998_2020.csv"
 df <- read_delim(frozendatapath, delim = ",")
 
 # replace below partly by clean function in package smsfs

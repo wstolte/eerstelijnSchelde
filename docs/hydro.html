@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Hydrodynamiek | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)</title>
+  <meta name="description" content="3 Hydrodynamiek | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Hydrodynamiek | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Hydrodynamiek | Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)" />
+  
+  
+  
+
+<meta name="author" content="Deltares" />
+
+
+<meta name="date" content="2021-12-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="inleiding.html"/>
+<link rel="next" href="fysisch-oppwater.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<style>
+.zoomDiv {
+  opacity: 0;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 50;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 50px #888888;
+  max-height:100%; 
+  overflow: scroll;
+}
+
+.zoomImg {
+  width: 100%;
+}
+</style>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').prepend("<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"></div>");
+    // onClick function for all plots (img's)
+    $('img:not(.zoomImg):not(.logo)').click(function() {
+      $('.zoomImg').attr('src', $(this).attr('src'));
+      $('.zoomDiv').css({opacity: '1', width: '60%'});
+    });
+    // onClick function for zoomImg
+    $('img.zoomImg').click(function() {
+      $('.zoomDiv').css({opacity: '0', width: '0%'});
+    });
+  });
+</script>
+
+
+
+<link rel="stylesheet" href="navbar\navbar.css" type="text/css" />
+<link rel="stylesheet" href="style\deltares.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Voorwoord</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#samenvatting"><i class="fa fa-check"></i><b>1.1</b> Samenvatting</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#rapportversie"><i class="fa fa-check"></i><b>1.2</b> Versie</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="inleiding.html"><a href="inleiding.html"><i class="fa fa-check"></i><b>2</b> Inleiding</a><ul>
+<li class="chapter" data-level="2.1" data-path="inleiding.html"><a href="inleiding.html#achtergrond"><i class="fa fa-check"></i><b>2.1</b> Achtergrond</a></li>
+<li class="chapter" data-level="2.2" data-path="inleiding.html"><a href="inleiding.html#doelstelling"><i class="fa fa-check"></i><b>2.2</b> Doelstelling</a></li>
+<li class="chapter" data-level="2.3" data-path="inleiding.html"><a href="inleiding.html#verwerkte-data"><i class="fa fa-check"></i><b>2.3</b> Verwerkte data</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="inleiding.html"><a href="inleiding.html#ontbrekende-data"><i class="fa fa-check"></i><b>2.3.1</b> Ontbrekende data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="inleiding.html"><a href="inleiding.html#leeswijzer"><i class="fa fa-check"></i><b>2.4</b> Leeswijzer</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="hydro.html"><a href="hydro.html"><i class="fa fa-check"></i><b>3</b> Hydrodynamiek</a><ul>
+<li class="chapter" data-level="3.1" data-path="hydro.html"><a href="hydro.html#waterstanden"><i class="fa fa-check"></i><b>3.1</b> Waterstanden</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="hydro.html"><a href="hydro.html#hydroInfoMeting"><i class="fa fa-check"></i><b>3.1.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="3.1.2" data-path="hydro.html"><a href="hydro.html#hydroHWLW"><i class="fa fa-check"></i><b>3.1.2</b> Jaargemiddelde hoog- en laagwaterstanden</a></li>
+<li class="chapter" data-level="3.1.3" data-path="hydro.html"><a href="hydro.html#hydroGetijslag"><i class="fa fa-check"></i><b>3.1.3</b> Jaargemiddelde getijslag</a></li>
+<li class="chapter" data-level="3.1.4" data-path="hydro.html"><a href="hydro.html#hydroGetijcomponenten"><i class="fa fa-check"></i><b>3.1.4</b> Getijcomponenten</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="hydro.html"><a href="hydro.html#golven"><i class="fa fa-check"></i><b>3.2</b> Golven IN ONTWIKKELING</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="hydro.html"><a href="hydro.html#golvenInfoMeting"><i class="fa fa-check"></i><b>3.2.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="3.2.2" data-path="hydro.html"><a href="hydro.html#golvenHoogte"><i class="fa fa-check"></i><b>3.2.2</b> Golfhoogte</a></li>
+<li class="chapter" data-level="3.2.3" data-path="hydro.html"><a href="hydro.html#golvenPeriode"><i class="fa fa-check"></i><b>3.2.3</b> Golfperiode</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html"><i class="fa fa-check"></i><b>4</b> Oppervlaktewater - Fysisch-chemische parameters</a><ul>
+<li class="chapter" data-level="4.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#oppInfoMetingen"><i class="fa fa-check"></i><b>4.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="4.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#saliniteit"><i class="fa fa-check"></i><b>4.2</b> Saliniteit</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#saliniteit-jaargemiddelde"><i class="fa fa-check"></i><b>4.2.1</b> Jaargemiddelde</a></li>
+<li class="chapter" data-level="4.2.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#saliniteit-winterzomer"><i class="fa fa-check"></i><b>4.2.2</b> Gemiddelde waarde in de zomer en de winter</a></li>
+<li class="chapter" data-level="4.2.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#saliniteit-maandgemiddelde"><i class="fa fa-check"></i><b>4.2.3</b> Maandgemiddelde</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#watertemp"><i class="fa fa-check"></i><b>4.3</b> Watertemperatuur</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#watertemp-jaargemiddelde"><i class="fa fa-check"></i><b>4.3.1</b> Jaargemiddelde</a></li>
+<li class="chapter" data-level="4.3.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#watertemp-winterzomer"><i class="fa fa-check"></i><b>4.3.2</b> Gemiddelde waarde in de zomer en de winter</a></li>
+<li class="chapter" data-level="4.3.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#watertemp-maandgemiddelde"><i class="fa fa-check"></i><b>4.3.3</b> Maandgemiddelde</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof"><i class="fa fa-check"></i><b>4.4</b> Zuurstof</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof-jaar-verzadiging"><i class="fa fa-check"></i><b>4.4.1</b> Jaargemiddelde verzadigingspercentage zuurstof</a></li>
+<li class="chapter" data-level="4.4.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof-jaar-gehalte"><i class="fa fa-check"></i><b>4.4.2</b> Jaargemiddelde zuurstofgehalte</a></li>
+<li class="chapter" data-level="4.4.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof-maand-verzadiging"><i class="fa fa-check"></i><b>4.4.3</b> Maandgemiddelde verzadigingspercentage zuurstof</a></li>
+<li class="chapter" data-level="4.4.4" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstof-maand-gehalte"><i class="fa fa-check"></i><b>4.4.4</b> Maandgemiddelde zuurstofgehalte</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chlorofyl"><i class="fa fa-check"></i><b>4.5</b> Chlorofyl-a</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chlorofyl-jaar"><i class="fa fa-check"></i><b>4.5.1</b> Jaargemiddelde</a></li>
+<li class="chapter" data-level="4.5.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chlorofyl-zomerwinter"><i class="fa fa-check"></i><b>4.5.2</b> Gemiddelde waardes in de zomer en de winter</a></li>
+<li class="chapter" data-level="4.5.3" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chlorofyl-maand"><i class="fa fa-check"></i><b>4.5.3</b> Maandgemiddelde</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#feofytine"><i class="fa fa-check"></i><b>4.6</b> Feofytine-a</a></li>
+<li class="chapter" data-level="4.7" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zuurstofverbruik"><i class="fa fa-check"></i><b>4.7</b> Chemisch en biochemisch zuurstofverbruik</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#chemisch-zuurstofgebruik"><i class="fa fa-check"></i><b>4.7.1</b> Chemisch zuurstofgebruik</a></li>
+<li class="chapter" data-level="4.7.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#biochemisch-zuurstofgebruik"><i class="fa fa-check"></i><b>4.7.2</b> Biochemisch zuurstofgebruik</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#lichtklimaat"><i class="fa fa-check"></i><b>4.8</b> Lichtklimaat</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#doorzicht"><i class="fa fa-check"></i><b>4.8.1</b> Doorzicht</a></li>
+<li class="chapter" data-level="4.8.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#extinctiecoef"><i class="fa fa-check"></i><b>4.8.2</b> Extinctiecoefficient</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zwevende-stof"><i class="fa fa-check"></i><b>4.9</b> Zwevende stof</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zwevende-stof-jaar"><i class="fa fa-check"></i><b>4.9.1</b> Jaargemiddelden</a></li>
+<li class="chapter" data-level="4.9.2" data-path="fysisch-oppwater.html"><a href="fysisch-oppwater.html#zwevende-stof-zomerwinter"><i class="fa fa-check"></i><b>4.9.2</b> Gemiddelde waardes in de zomer en de winter</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="nutrienten.html"><a href="nutrienten.html"><i class="fa fa-check"></i><b>5</b> Nutriënten</a><ul>
+<li class="chapter" data-level="5.1" data-path="nutrienten.html"><a href="nutrienten.html#stikstof"><i class="fa fa-check"></i><b>5.1</b> Stikstof</a></li>
+<li class="chapter" data-level="5.2" data-path="nutrienten.html"><a href="nutrienten.html#part-gebonden-stikstof"><i class="fa fa-check"></i><b>5.2</b> Particulair gebonden stikstof</a></li>
+<li class="chapter" data-level="5.3" data-path="nutrienten.html"><a href="nutrienten.html#ammonium"><i class="fa fa-check"></i><b>5.3</b> Ammonium</a></li>
+<li class="chapter" data-level="5.4" data-path="nutrienten.html"><a href="nutrienten.html#nitriet"><i class="fa fa-check"></i><b>5.4</b> Nitriet</a></li>
+<li class="chapter" data-level="5.5" data-path="nutrienten.html"><a href="nutrienten.html#nitraat"><i class="fa fa-check"></i><b>5.5</b> Nitraat</a></li>
+<li class="chapter" data-level="5.6" data-path="nutrienten.html"><a href="nutrienten.html#orthofosfaat"><i class="fa fa-check"></i><b>5.6</b> Orthofosfaat</a></li>
+<li class="chapter" data-level="5.7" data-path="nutrienten.html"><a href="nutrienten.html#totaal-fosfaat"><i class="fa fa-check"></i><b>5.7</b> Totaal fosfaat</a></li>
+<li class="chapter" data-level="5.8" data-path="nutrienten.html"><a href="nutrienten.html#part-gebonden-fosfaat"><i class="fa fa-check"></i><b>5.8</b> Particulair gebonden fosfaat</a></li>
+<li class="chapter" data-level="5.9" data-path="nutrienten.html"><a href="nutrienten.html#silicaat"><i class="fa fa-check"></i><b>5.9</b> Silicaat</a></li>
+<li class="chapter" data-level="5.10" data-path="nutrienten.html"><a href="nutrienten.html#organisch-koolstof"><i class="fa fa-check"></i><b>5.10</b> Organisch koolstof</a><ul>
+<li class="chapter" data-level="5.10.1" data-path="nutrienten.html"><a href="nutrienten.html#opgelost-organisch-koolstof"><i class="fa fa-check"></i><b>5.10.1</b> Opgelost organisch koolstof</a></li>
+<li class="chapter" data-level="5.10.2" data-path="nutrienten.html"><a href="nutrienten.html#part-gebonden-organisch-koolstof"><i class="fa fa-check"></i><b>5.10.2</b> Particulair gebonden organisch koolstof</a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="nutrienten.html"><a href="nutrienten.html#cnp-ratio"><i class="fa fa-check"></i><b>5.11</b> C:N:P ratio’s</a></li>
+<li class="chapter" data-level="5.12" data-path="nutrienten.html"><a href="nutrienten.html#metalen"><i class="fa fa-check"></i><b>5.12</b> Metalen</a><ul>
+<li class="chapter" data-level="5.12.1" data-path="nutrienten.html"><a href="nutrienten.html#boor"><i class="fa fa-check"></i><b>5.12.1</b> Boor</a></li>
+<li class="chapter" data-level="5.12.2" data-path="nutrienten.html"><a href="nutrienten.html#boor-fil"><i class="fa fa-check"></i><b>5.12.2</b> Boor na filtratie</a></li>
+<li class="chapter" data-level="5.12.3" data-path="nutrienten.html"><a href="nutrienten.html#chroom"><i class="fa fa-check"></i><b>5.12.3</b> Chroom</a></li>
+<li class="chapter" data-level="5.12.4" data-path="nutrienten.html"><a href="nutrienten.html#chroom-fil"><i class="fa fa-check"></i><b>5.12.4</b> Chroom na filtratie</a></li>
+<li class="chapter" data-level="5.12.5" data-path="nutrienten.html"><a href="nutrienten.html#koper"><i class="fa fa-check"></i><b>5.12.5</b> Koper</a></li>
+<li class="chapter" data-level="5.12.6" data-path="nutrienten.html"><a href="nutrienten.html#koper-fil"><i class="fa fa-check"></i><b>5.12.6</b> Koper na filtratie</a></li>
+<li class="chapter" data-level="5.12.7" data-path="nutrienten.html"><a href="nutrienten.html#uranium"><i class="fa fa-check"></i><b>5.12.7</b> Uranium</a></li>
+<li class="chapter" data-level="5.12.8" data-path="nutrienten.html"><a href="nutrienten.html#uranium-fil"><i class="fa fa-check"></i><b>5.12.8</b> Uranium na filtratie</a></li>
+<li class="chapter" data-level="5.12.9" data-path="nutrienten.html"><a href="nutrienten.html#vanadium"><i class="fa fa-check"></i><b>5.12.9</b> Vanadium</a></li>
+<li class="chapter" data-level="5.12.10" data-path="nutrienten.html"><a href="nutrienten.html#vanadium-fil"><i class="fa fa-check"></i><b>5.12.10</b> Vanadium na filtratie</a></li>
+<li class="chapter" data-level="5.12.11" data-path="nutrienten.html"><a href="nutrienten.html#zink"><i class="fa fa-check"></i><b>5.12.11</b> Zink</a></li>
+<li class="chapter" data-level="5.12.12" data-path="nutrienten.html"><a href="nutrienten.html#zink-fil"><i class="fa fa-check"></i><b>5.12.12</b> Zink na filtratie</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="zwevend-stof.html"><a href="zwevend-stof.html"><i class="fa fa-check"></i><b>6</b> Zwevend stof - Fysisch-chemische parameters</a><ul>
+<li class="chapter" data-level="6.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-info-metingen"><i class="fa fa-check"></i><b>6.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="6.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#korrelgrootteverdeling"><i class="fa fa-check"></i><b>6.2</b> Korrelgrootteverdeling</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#korrelgrootteverdeling-tot63"><i class="fa fa-check"></i><b>6.2.1</b> Korrelgroottefractie tot 63 <span class="math inline">\(\mu\)</span>m</a></li>
+<li class="chapter" data-level="6.2.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#korrelgrootteverdeling-tot2"><i class="fa fa-check"></i><b>6.2.2</b> Korrelgroottefractie tot 2 <span class="math inline">\(\mu\)</span>m</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-metalen"><i class="fa fa-check"></i><b>6.3</b> Metalen</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-arseen"><i class="fa fa-check"></i><b>6.3.1</b> Arseen</a></li>
+<li class="chapter" data-level="6.3.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-cadmium"><i class="fa fa-check"></i><b>6.3.2</b> Cadmium</a></li>
+<li class="chapter" data-level="6.3.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-chroom"><i class="fa fa-check"></i><b>6.3.3</b> Chroom</a></li>
+<li class="chapter" data-level="6.3.4" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-kobalt"><i class="fa fa-check"></i><b>6.3.4</b> Kobalt</a></li>
+<li class="chapter" data-level="6.3.5" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-koper"><i class="fa fa-check"></i><b>6.3.5</b> Koper</a></li>
+<li class="chapter" data-level="6.3.6" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-kwik"><i class="fa fa-check"></i><b>6.3.6</b> Kwik</a></li>
+<li class="chapter" data-level="6.3.7" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-lood"><i class="fa fa-check"></i><b>6.3.7</b> Lood</a></li>
+<li class="chapter" data-level="6.3.8" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-vanadium"><i class="fa fa-check"></i><b>6.3.8</b> Vanadium</a></li>
+<li class="chapter" data-level="6.3.9" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-zink"><i class="fa fa-check"></i><b>6.3.9</b> Zink</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PAK"><i class="fa fa-check"></i><b>6.4</b> Polycyclische aromatische koolwaterstoffen (PAK’s)</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-antraceen"><i class="fa fa-check"></i><b>6.4.1</b> Antraceen</a></li>
+<li class="chapter" data-level="6.4.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Benzoapyreen"><i class="fa fa-check"></i><b>6.4.2</b> Benzo[<em>a</em>]pyreen</a></li>
+<li class="chapter" data-level="6.4.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Benzoghiperyleen"><i class="fa fa-check"></i><b>6.4.3</b> Benzo[<em>g,h,i</em>]peryleen</a></li>
+<li class="chapter" data-level="6.4.4" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Benzoaantraceen"><i class="fa fa-check"></i><b>6.4.4</b> Benzo[<em>a</em>]antraceen</a></li>
+<li class="chapter" data-level="6.4.5" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Benzokfluorantheen"><i class="fa fa-check"></i><b>6.4.5</b> Benzo[<em>k</em>]fluorantheen</a></li>
+<li class="chapter" data-level="6.4.6" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-chryseen"><i class="fa fa-check"></i><b>6.4.6</b> Chryseen</a></li>
+<li class="chapter" data-level="6.4.7" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-fenanthreen"><i class="fa fa-check"></i><b>6.4.7</b> Fenanthreen</a></li>
+<li class="chapter" data-level="6.4.8" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-fluorantheen"><i class="fa fa-check"></i><b>6.4.8</b> Fluorantheen</a></li>
+<li class="chapter" data-level="6.4.9" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-indeno"><i class="fa fa-check"></i><b>6.4.9</b> Indeno[<em>1,2,3-c,d</em>]pyreen</a></li>
+<li class="chapter" data-level="6.4.10" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-naftaleen"><i class="fa fa-check"></i><b>6.4.10</b> Naftaleen</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB"><i class="fa fa-check"></i><b>6.5</b> Polychloorbifenylen (PCB’s)</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB180"><i class="fa fa-check"></i><b>6.5.1</b> PCB180</a></li>
+<li class="chapter" data-level="6.5.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB138"><i class="fa fa-check"></i><b>6.5.2</b> PCB138</a></li>
+<li class="chapter" data-level="6.5.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB153"><i class="fa fa-check"></i><b>6.5.3</b> PCB153</a></li>
+<li class="chapter" data-level="6.5.4" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB101"><i class="fa fa-check"></i><b>6.5.4</b> PCB101</a></li>
+<li class="chapter" data-level="6.5.5" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB52"><i class="fa fa-check"></i><b>6.5.5</b> PCB52</a></li>
+<li class="chapter" data-level="6.5.6" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB118"><i class="fa fa-check"></i><b>6.5.6</b> PCB118</a></li>
+<li class="chapter" data-level="6.5.7" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-PCB28"><i class="fa fa-check"></i><b>6.5.7</b> PCB28</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-overig"><i class="fa fa-check"></i><b>6.6</b> Overige stoffen</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-dieldrin"><i class="fa fa-check"></i><b>6.6.1</b> Dieldrin</a></li>
+<li class="chapter" data-level="6.6.2" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Hexachloorbenzeen"><i class="fa fa-check"></i><b>6.6.2</b> Hexachloorbenzeen</a></li>
+<li class="chapter" data-level="6.6.3" data-path="zwevend-stof.html"><a href="zwevend-stof.html#zwevend-Tributyltin"><i class="fa fa-check"></i><b>6.6.3</b> Tributyltin</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="bodem.html"><a href="bodem.html"><i class="fa fa-check"></i><b>7</b> Bodem - Fysisch-chemische parameters</a><ul>
+<li class="chapter" data-level="7.1" data-path="bodem.html"><a href="bodem.html#bodem-info-metingen"><i class="fa fa-check"></i><b>7.1</b> Informatie over de metingen</a></li>
+<li class="chapter" data-level="7.2" data-path="bodem.html"><a href="bodem.html#bodem-metalen"><i class="fa fa-check"></i><b>7.2</b> Metalen</a></li>
+<li class="chapter" data-level="7.3" data-path="bodem.html"><a href="bodem.html#bodem-PAK"><i class="fa fa-check"></i><b>7.3</b> Polycyclische Aromatische Koolwaterstoffen (PAK’s)</a></li>
+<li class="chapter" data-level="7.4" data-path="bodem.html"><a href="bodem.html#bodem-PCB"><i class="fa fa-check"></i><b>7.4</b> Polychloorbifenylen (PCB’s)</a></li>
+<li class="chapter" data-level="7.5" data-path="bodem.html"><a href="bodem.html#bodem-organotin"><i class="fa fa-check"></i><b>7.5</b> Organotinverbindingen</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="fytoplankton.html"><a href="fytoplankton.html"><i class="fa fa-check"></i><b>8</b> Fytoplankton</a><ul>
+<li class="chapter" data-level="8.1" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-soorten"><i class="fa fa-check"></i><b>8.1</b> Indeling soorten</a></li>
+<li class="chapter" data-level="8.2" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-info-metingen"><i class="fa fa-check"></i><b>8.2</b> Informatie over de metingen</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-metingen-stations"><i class="fa fa-check"></i><b>8.2.1</b> Stations en jaren</a></li>
+<li class="chapter" data-level="8.2.2" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-metingen-figuren"><i class="fa fa-check"></i><b>8.2.2</b> Figuren</a></li>
+<li class="chapter" data-level="8.2.3" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-metingen-trendbreuk"><i class="fa fa-check"></i><b>8.2.3</b> Trendbreuk</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-station"><i class="fa fa-check"></i><b>8.3</b> Resultaten per station</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-schaar"><i class="fa fa-check"></i><b>8.3.1</b> Schaar van Ouden Doel</a></li>
+<li class="chapter" data-level="8.3.2" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-hansweert"><i class="fa fa-check"></i><b>8.3.2</b> Hansweert geul</a></li>
+<li class="chapter" data-level="8.3.3" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-vlis"><i class="fa fa-check"></i><b>8.3.3</b> Vlissingen boei SSVH</a></li>
+<li class="chapter" data-level="8.3.4" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-walch2km"><i class="fa fa-check"></i><b>8.3.4</b> Walcheren 2 km uit de kust</a></li>
+<li class="chapter" data-level="8.3.5" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-walch20km"><i class="fa fa-check"></i><b>8.3.5</b> Walcheren 20 km uit de kust</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-groep"><i class="fa fa-check"></i><b>8.4</b> Resultaten per groep</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-blauw"><i class="fa fa-check"></i><b>8.4.1</b> Autotroof - Blauwwieren</a></li>
+<li class="chapter" data-level="8.4.2" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-dia"><i class="fa fa-check"></i><b>8.4.2</b> Autotroof - Diatomeeën</a></li>
+<li class="chapter" data-level="8.4.3" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-dino"><i class="fa fa-check"></i><b>8.4.3</b> Autotroof - Dinoflagellaten</a></li>
+<li class="chapter" data-level="8.4.4" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-groen"><i class="fa fa-check"></i><b>8.4.4</b> Autotroof - Groenwieren</a></li>
+<li class="chapter" data-level="8.4.5" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-phaeo"><i class="fa fa-check"></i><b>8.4.5</b> Autotroof - Phaeocystis</a></li>
+<li class="chapter" data-level="8.4.6" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-auto-overig"><i class="fa fa-check"></i><b>8.4.6</b> Autotroof - overig</a></li>
+<li class="chapter" data-level="8.4.7" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-hetero-dino"><i class="fa fa-check"></i><b>8.4.7</b> Heterotroof - Dinoflagellaten</a></li>
+<li class="chapter" data-level="8.4.8" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-hetero-overig"><i class="fa fa-check"></i><b>8.4.8</b> Heterotroof - overig</a></li>
+<li class="chapter" data-level="8.4.9" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-mix-dino"><i class="fa fa-check"></i><b>8.4.9</b> Mixotroof - dinoflagellaten</a></li>
+<li class="chapter" data-level="8.4.10" data-path="fytoplankton.html"><a href="fytoplankton.html#fyto-resultaten-mix-overig"><i class="fa fa-check"></i><b>8.4.10</b> Mixotroof - overig</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" type="image/jpg" href="navbar/images/icon-deltares.svg"/>
+</head>
+<body>
+
+<nav class="navigation-bar">
+    <a href="index.html"><i class="fa fa-home"></i></a>
+    <div class="logos">
+        <img class="logo" src="navbar/images/deltares_logo.png" />
+        <img class="logo" src="navbar/images/Rijkswaterstaat-logo-e1473888123824-1-300x300.jpg" />
+    </div>
+</nav>
+
+</body>
+</html>
+<div id="hydro" class="section level1">
+<h1><span class="header-section-number">3</span> Hydrodynamiek</h1>
+<p>Dit hoofdstuk betreft metingen van de waterbeweging in de Westerschelde en de monding. De rapportage wordt hierbij beperkt tot waterstanden en golven. De waterstanden zijn opgenomen als jaargemiddelde hoog- en laagwaterstanden en de gemiddelde getijslag. Daarnaast zijn de belangrijkste componenten van het getij (M2, S2 en M4-component) weergegeven. Voor golven worden maandgemiddelden en -maxima van de golfhoogte en -periode gepresenteerd.</p>
+<div id="waterstanden" class="section level2">
+<h2><span class="header-section-number">3.1</span> Waterstanden</h2>
+<div class="figure" style="text-align: center"><span id="fig:getijgolf"></span>
+<img src="Figuren/Inscape/getijgolf.png" alt="Weergave van een getijgolf met aanduiding hoogwater, laagwater, getijslag en dagelijkse ongelijkheid op basis van @VanRijn1994a" width="85%" />
+<p class="caption">
+Figuur 3.1: Weergave van een getijgolf met aanduiding hoogwater, laagwater, getijslag en dagelijkse ongelijkheid op basis van <span class="citation">@VanRijn1994a</span>
+</p>
+</div>
+<p>De waterstanden in de Westerschelde worden voor het grootste deel bepaald door het getij. Het getij ontstaat door de aantrekkende kracht van de maan en de zon op de aarde. De variaties in het getij ontstaan door de draaiing van de aarde en de positie van de aarde t.o.v. de maan en de zon en doordat de maan en de aarde zich in een baan rond de zon bewegen. Daarnaast wordt het getij vervormd door de bodemligging van zeeën en oceanen. Wiskundig gezien is het getij een combinatie van een groot aantal sinusvormige golven: de getijcomponenten. De M2-component ontstaat door de aantrekkingskracht van de maan en is een belangrijke getijcomponent in de Noordzee en de Westerschelde, zie verder Paragraaf <a href="hydro.html#hydroGetijcomponenten">3.1.4</a>. De belangrijkste periodieke variaties in het getij zorgen voor de zogeheten dagelijkse ongelijkheid (Figuur <a href="hydro.html#fig:getijgolf">3.1</a>), de springtij-doodtij cyclus en de 18,6-jarige cyclus.</p>
+<p>Het getij wordt verder vervormd in het estuarium. Vanaf de monding dringt het tij als een langgerekte golf het estuarium binnen. De geringer wordende diepte en vernauwing van de bedding vervormen het getij. Door die versmalling ondergaat het vloedwater een opstuwing; de hoogwaters worden hoger naarmate ze het estuarium dieper binnendringen. Energieverliezen ten gevolge van wrijving doen de verhoging door de opstuwing gedeeltelijk weer teniet. Tot slot zijn er nog de weersinvloeden zoals windopzet en luchtdruk. Al deze effecten zijn terug te zien in de gemeten waterstanden van de verschillende meetstations in de Westerschelde.</p>
+<div id="hydroInfoMeting" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Informatie over de metingen</h3>
+<p>De waterstand in de Westerschelde wordt tegenwoordig continu gemeten op meerdere vaste stations in de Westerschelde. Van deze continue meting wordt een 10-minuten gemiddelde bepaald. Deze meetreeks wordt gebruikt om o.a. de getijcomponenten te bepalen. Daarnaast worden de maximale hoog- en laagwaterstanden geregistreerd, wat betekent dat ongeveer elke 6 uur een waarde wordt geregistreerd.</p>
+<p>De stations zijn zowel landelijke als regionale meetpunten (zie Figuur <a href="hydro.html#fig:metingenWaterstanden">3.2</a> en Tabel <a href="hydro.html#tab:metingenWaterstandenTab">3.1</a>), waarvan de meetdata beschikbaar zijn gesteld door het VLIZ (Vlaams Instituut voor de Zee). Alleen voor de landelijke meetpunten wordt een getijanalyse uitgevoerd en daarom worden voor deze stations de getijcomponenten M2, M4 en S2 gerapporteerd.</p>
+<p>In Paragraaf <a href="hydro.html#hydroHWLW">3.1.2</a> zijn de jaargemiddelde hoog- en laagwaterstanden per station weergegeven. Het verschil tussen de hoog- en laagwaterstanden geeft de gemiddelde getijslag, zie Paragraaf <a href="hydro.html#hydroGetijslag">3.1.3</a>. De meetgegevens zijn <em>niet</em> gecorrigeerd voor de 18,6-jarige cyclus. Tot slot wordt voor de landelijke meetpunten de amplitude en fase van de M2, M4 en S2 getijcomponenten weergegeven in Paragraaf <a href="hydro.html#hydroGetijcomponenten">3.1.4</a>.</p>
+<p>Om trends in de waterstanden te kunnen herkennen, wordt de data over een lange periode weergegeven: vanaf 1950 tot heden. Sommige stations zijn pas na 1950 in werking getreden. Vanzelfsprekend wordt voor deze stations de gehele beschikbare meetperiode weergegeven. Het waterstandsmeetpunt Schaar van de Noord is van 9 juli 2013 tot 25 juni 2015 niet in gebruik geweest.</p>
+<div class="figure" style="text-align: center"><span id="fig:metingenWaterstanden"></span>
+<img src="Figuren/Meetstations_waterstanden.png" alt="Ligging van de meetstations voor de waterstanden" width="85%" />
+<p class="caption">
+Figuur 3.2: Ligging van de meetstations voor de waterstanden
+</p>
+</div>
+<table>
+<caption><span id="tab:metingenWaterstandenTab">Tabel 3.1: </span>Overzicht meetperiode van de waterstand per meetstation. Een asterisk (*) betekent dat data vanaf 1950 is gebruikt.</caption>
+<thead>
+<tr class="header">
+<th align="left">Landelijk meetstation</th>
+<th align="left">Meetperiode</th>
+<th align="left">Regionaal meetstation</th>
+<th align="left">Meetperiode</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bath</td>
+<td align="left">1957-heden</td>
+<td align="left">Baalhoek</td>
+<td align="left">1996-heden</td>
+</tr>
+<tr class="even">
+<td align="left">Hansweert</td>
+<td align="left">1880*-heden</td>
+<td align="left">Gat van Borssele</td>
+<td align="left">1996, 1998-heden</td>
+</tr>
+<tr class="odd">
+<td align="left">Terneuzen</td>
+<td align="left">1878*-heden</td>
+<td align="left">Breskens voorhaven</td>
+<td align="left">1996, 1998-2016</td>
+</tr>
+<tr class="even">
+<td align="left">Vlissingen</td>
+<td align="left">1881*-heden</td>
+<td align="left">Overloop van Hansweert</td>
+<td align="left">1996, 1998-2004, 2008-heden</td>
+</tr>
+<tr class="odd">
+<td align="left">Cadzand</td>
+<td align="left">1966-heden</td>
+<td align="left">Vlakte van de Raan</td>
+<td align="left">1996, 1998-heden</td>
+</tr>
+<tr class="even">
+<td align="left">Westkapelle</td>
+<td align="left">1954-heden</td>
+<td align="left">Schaar van de Noord</td>
+<td align="left">1996-2013, 2015-heden</td>
+</tr>
+<tr class="odd">
+<td align="left">Europlatform</td>
+<td align="left">1983-heden</td>
+<td align="left">Walsoorden</td>
+<td align="left">1996, 1998-heden</td>
+</tr>
+</tbody>
+</table>
+<!-- %CHECK: -->
+<!-- %Het waterstandsmeetpunt Schaar van de Noord is sinds 2014 niet meer in gebruik en daarom is in deze Eerstelijnsrapportage dit meetpunt niet (meer) opgenomen. Voor metingen tot en met 2013 wordt er verwezen naar de Eerstelijnsrapportage 2013. -->
+</div>
+<div id="hydroHWLW" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Jaargemiddelde hoog- en laagwaterstanden</h3>
+<p>In de grafieken (Figuur <a href="#fig:hydroJaarEuro"><strong>??</strong></a> tot en met Figuur <a href="hydro.html#fig:hydroJaarBath">3.15</a>) onderstaand en op de volgende pagina’s zijn de hoog- en laagwaterstanden ten opzichte van NAP per jaar gemiddeld en uitgezet in de tijd. Gemiddelde hoogwaterstanden in blauw corresponderen met de blauwe y-as (links) en gemiddelde laagwaterstanden zijn weergegeven in rood en corresponderen met de rode y-as (rechts). Voor jaren met missende data voor twee of meer maanden worden de gemiddeldes met dunnere en transparante kleuren weergegeven. Aan deze gemiddeldes kan minder waarde gehecht worden. De volgorde waarin de stations zijn weergegeven is stroomopwaarts: vanaf het Europlatform in de Noordzee tot de Belgische grens.</p>
+<p>Het station Schaar van de Noord heeft voor 2014 geen data. In 2013 is alleen data beschikbaar voor tot juli 2013, dus slechts ongeveer een half jaar. Het jaar 2013 lijkt voor Schaar van de Noord een lagere waarde te geven (zie Figuur <a href="hydro.html#fig:hydroJaarSvdn">3.14</a>), maar het kan zijn dat de lengte van de dataset van 2013 dit gemiddelde beïnvloedt. De laatste twee jaren geven waardes die in het verlengde liggen van de jaren voor 2013.</p>
+<p><em>Let op: de y-assen van de figuur van het Europlatform verschillen van de y-assen van de andere stations.</em></p>
+<div class="figure" style="text-align: center"><span id="fig:hydroJaarRaan"></span>
+<img src="_main_files/figure-html/hydroJaarRaan-1.png" alt="Jaargemiddelde hoog- en laagwaterstanden bij de Vlakte van Raan" width="85%" />
+<p class="caption">
+Figuur 3.3: Jaargemiddelde hoog- en laagwaterstanden bij de Vlakte van Raan
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroJaarCadz"></span>
+<img src="_main_files/figure-html/hydroJaarCadz-1.png" alt="Jaargemiddelde hoog- en laagwaterstanden bij Cadzand" width="85%" />
+<p class="caption">
+Figuur 3.4: Jaargemiddelde hoog- en laagwaterstanden bij Cadzand
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroJaarWkap"></span>
+<img src="_main_files/figure-html/hydroJaarWkap-1.png" alt="Jaargemiddelde hoog- en laagwaterstanden bij Westkapelle" width="85%" />
+<p class="caption">
+Figuur 3.5: Jaargemiddelde hoog- en laagwaterstanden bij Westkapelle
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroJaarBres"></span>
+<img src="_main_files/figure-html/hydroJaarBres-1.png" alt="Jaargemiddelde hoog- en laagwaterstanden bij Breskens veerhaven" width="85%" />
+<p class="caption">
+Figuur 3.6: Jaargemiddelde hoog- en laagwaterstanden bij Breskens veerhaven
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroJaarVlis"></span>
+<img src="_main_files/figure-html/hydroJaarVlis-1.png" alt="Jaargemiddelde hoog- en laagwaterstanden bij Vlissingen" width="85%" />
+<p class="caption">
+Figuur 3.7: Jaargemiddelde hoog- en laagwaterstanden bij Vlissingen
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroJaarBors"></span>
+<img src="_main_files/figure-html/hydroJaarBors-1.png" alt="Jaargemiddelde hoog- en laagwaterstanden bij Gat van Borssele" width="85%" />
+<p class="caption">
+Figuur 3.8: Jaargemiddelde hoog- en laagwaterstanden bij Gat van Borssele
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroJaarOvlh"></span>
+<img src="_main_files/figure-html/hydroJaarOvlh-1.png" alt="Jaargemiddelde hoog- en laagwaterstanden bij Overloop van Hansweert" width="85%" />
+<p class="caption">
+Figuur 3.9: Jaargemiddelde hoog- en laagwaterstanden bij Overloop van Hansweert
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroJaarTern"></span>
+<img src="_main_files/figure-html/hydroJaarTern-1.png" alt="Jaargemiddelde hoog- en laagwaterstanden bij Terneuzen" width="85%" />
+<p class="caption">
+Figuur 3.10: Jaargemiddelde hoog- en laagwaterstanden bij Terneuzen
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroJaarHans"></span>
+<img src="_main_files/figure-html/hydroJaarHans-1.png" alt="Jaargemiddelde hoog- en laagwaterstanden bij Hansweert" width="85%" />
+<p class="caption">
+Figuur 3.11: Jaargemiddelde hoog- en laagwaterstanden bij Hansweert
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroJaarWals"></span>
+<img src="_main_files/figure-html/hydroJaarWals-1.png" alt="Jaargemiddelde hoog- en laagwaterstanden bij Walsoorden" width="85%" />
+<p class="caption">
+Figuur 3.12: Jaargemiddelde hoog- en laagwaterstanden bij Walsoorden
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroJaarBaal"></span>
+<img src="_main_files/figure-html/hydroJaarBaal-1.png" alt="Jaargemiddelde hoog- en laagwaterstanden bij Baalhoek" width="85%" />
+<p class="caption">
+Figuur 3.13: Jaargemiddelde hoog- en laagwaterstanden bij Baalhoek
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroJaarSvdn"></span>
+<img src="_main_files/figure-html/hydroJaarSvdn-1.png" alt="Jaargemiddelde hoog- en laagwaterstanden bij Schaar van de Noord" width="85%" />
+<p class="caption">
+Figuur 3.14: Jaargemiddelde hoog- en laagwaterstanden bij Schaar van de Noord
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroJaarBath"></span>
+<img src="_main_files/figure-html/hydroJaarBath-1.png" alt="Jaargemiddelde hoog- en laagwaterstanden bij Bath" width="85%" />
+<p class="caption">
+Figuur 3.15: Jaargemiddelde hoog- en laagwaterstanden bij Bath
+</p>
+</div>
+<p>Het Europlatform dient als referentiestation. Door de ligging in de Noordzee zijn de geregistreerde waterstanden bij dit station niet beïnvloed door vorm van het estuarium en de ligging in het estuarium. Bij het Europlatform bedraagt de gemiddelde hoogwaterstand ongeveer +1 m NAP. Laagwaterstanden bereiken gemiddeld een waarde van -0,75 m NAP.</p>
+<p>De gemiddelde hoog- en laagwaterstand in de westelijke meetstations (vanaf de Vlakte van Raan tot het Gat van Borssele) blijft min of meer gelijk gedurende de gehele meetperiode. Vanaf de Vlakte van Raan in oostwaartse richting zakt de gemiddelde laagwaterstand van circa -1,50 m NAP tot circa -1,80 m NAP bij Gat van Borssele. De hoogwaterstand neemt in die richting licht toe, van circa +1,75 m NAP bij de Vlakte van de Raan tot circa +2,25 m NAP bij Gat van Borssele. Hoewel Westkapelle en Cadzand ongeveer even ver in de monding liggen, is de getijslag bij Westkapelle minder groot dan bij Cadzand. Dit komt door de vervorming van het getij in de Noordzee, waardoor de getijslag in de Noordzee niet overal gelijk is.</p>
+<p>Vanaf Terneuzen geven de stations zowel in stroomopwaartse richting als in tijd een stijgende trend in hoogwaterstanden: van circa +2,0 m NAP tot circa +2,25 m NAP in Terneuzen en van circa +2,50 m NAP tot circa +2,75 m NAP in Bath. Deze stijging vond plaats over de periode 1950 <span class="math inline">\(-\)</span> 1980 bij Terneuzen en lijkt bij Bath nog voort te duren tot ca. 2000. De laagwaterstanden in Bath zijn in de jaren ’70 afgenomen van circa -2,0 m NAP tot circa -2,25 m NAP. Voor de andere stations in de Westerschelde lijkt er sinds 2007 een lichte afname te zitten in de laagwaterstanden en een lichte toename in de hoogwaterstanden. Dit is waarschijnlijk de invloed van de 18,6-jarige cyclus, zoals ook duidelijk te zien is in de getijslag (Figuur <a href="hydro.html#fig:hydroGetijslag">3.18</a>). Bij de getijslag is dit effect duidelijker te zien, omdat dan de hoog- en laagwaterstand bij elkaar worden opgeteld waardoor het effect twee keer wordt meegeteld.</p>
+<p>Daarnaast constateren we een toename van gemiddeld hoogwater en een afname van gemiddeld laagwater naar mate men meer stroomopwaarts (i.e. oostelijke richting) van de Westerschelde komt, zoals te zien in Figuur <a href="hydro.html#fig:hydroGemiddeldLW">3.16</a> en Figuur <a href="hydro.html#fig:hydroGemiddeldHW">3.17</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:hydroGemiddeldLW"></span>
+<div id="htmlwidget-0a34dff1de34867b93c0" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0a34dff1de34867b93c0">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.4617,51.38,51.522,51.41265,51.443,51.4172,51.422,51.337,51.446,51.3893,51.37145,51.3871,51.4],[3.2681,3.376,3.44,3.56628,3.596,3.69982,3.9679,3.82,4.007,4.0661,4.08503,4.1871,4.21],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#FDE725","#34B17C","#CCE036","#33AD7E","#2A9B87","#248C8C","#3A5A8B","#306E8E","#462E77","#462E77","#461C65","#440154","#450958"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #462E77 12.5%, #3A5A8B 28.125%, #2B818D 43.75%, #30A682 59.375%, #6BC762 75%, #C2DF39 90.625%, #FDE725 "],"labels":["-210","-200","-190","-180","-170","-160"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.125,"p_n":0.90625},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.337,51.522],"lng":[3.2681,4.21]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 3.16: Gemiddeld laagwater per station berekend op alle beschikbare data vanaf 1950
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroGemiddeldHW"></span>
+<div id="htmlwidget-e2fc491d6664e5f1f4b6" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e2fc491d6664e5f1f4b6">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.4617,51.38,51.522,51.41265,51.443,51.4172,51.422,51.337,51.446,51.3893,51.37145,51.3871,51.4],[3.2681,3.376,3.44,3.56628,3.596,3.69982,3.9679,3.82,4.007,4.0661,4.08503,4.1871,4.21],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#440154","#433E84","#450B59","#31688E","#3B588A","#29858D","#3EB976","#248C8C","#33AD7E","#81D052","#D7E233","#FDE725","#D1E135"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #450B59 2.02020202020202%, #414A87 22.2222222222222%, #2C7E8D 42.4242424242424%, #33AD7E 62.6262626262626%, #8DD646 82.8282828282828%, #FDE725 "],"labels":["180","200","220","240","260"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.0202020202020202,"p_n":0.828282828282828},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.337,51.522],"lng":[3.2681,4.21]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 3.17: Gemiddeld hoogwater per station berekend op alle beschikbare data vanaf 1950
+</p>
+</div>
+</div>
+<div id="hydroGetijslag" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> Jaargemiddelde getijslag</h3>
+<p>De getijslag is voor alle meetstations bepaald aan de hand van het verschil tussen de jaargemiddelde hoog- en laagwaterstanden. Op de Noordzee bij het Europlatform bedraagt de getijslag ongeveer 1,65 m en is weinig variatie in de getijslag te zien. In de monding is de getijslag al toegenomen tot 3 à 3,5 m. Verder stroomopwaarts de Westerschelde op blijft de getijslag toenemen tot aan Bath. Daar is de getijslag met een waarde van bijna 5 m het grootst, zie Figuur <a href="hydro.html#fig:hydroGetijslag">3.18</a>, Figuur <a href="hydro.html#fig:hydroGetijslagGemiddeld">3.19</a> en Tabel <a href="hydro.html#tab:hydroGemiddeldeHWLWGetij">3.2</a>.</p>
+<p>Sinds 2000 constateren we een toename van de getijslag tot maximaal 1,35 cm/jaar, zie Tabel <a href="hydro.html#tab:hydroGemiddeldeHWLWGetij">3.2</a> bij station Breskens havenmond. De correlatiecoëfficiënt (i.e. <span class="math inline">\(R\)</span>) varieert sterk per station tot station wat betekent dat er andere relevante factoren, naast deze lineaire trend, van invloed zijn op de getijslag.</p>
+<p>De 18,6-jarige getijdencyclus, bijvoorbeeld, is van invloed op de resultaten en duidelijk zichtbaar in de figuur. De 18,6-jarige cyclus zorgt voor een periodieke toe en afname van de waterstand en getijslag en is maximaal rond 1960, 1979, 1997 en 2014. De 18,6-jarige cyclus zit ook in de stations buiten de Westerschelde. Verder stroomopwaarts wordt de getijslag groter. De versterking in de stroomopwaartse richting wordt voornamelijk veroorzaakt door de vorm van het estuarium (ondieper en smaller in stroomopwaartse richting). In de jaren ’70 is vooral bij Bath een sterke toename te zien in de getijslag, die waarschijnlijk het gevolg is van de ingrepen in het kader van de ‘eerste verruiming’.</p>
+<p>In 2013 en 2014 werd de licht stijgende trend in de getijslag sinds 2007 doorgezet, conform de 18,6-jarige cyclus. Sinds 2015 neemt de getijslag juist weer licht af (figuur <a href="hydro.html#fig:hydroGetijslag">3.18</a>), wat strookt met het idee dat de 18,6-jarige cyclus de dominante oorzaak is van de trend in de getijslag. Dit wordt ook door de licht dalende trend in 2017 bevestigd. Dit lijkt niet op te gaan voor Breskens dat nog wel een stijgende lijn laat zien in 2016 ten opzichte van 2015, maar voor de periode na september 2016 zijn voor Breskens geen gegevens beschikbaar en kan de trend hierdoor niet worden bevestigd. In 2018 stijgt de getijslag ten opzichte van 2017 bij bijna alle stations. Terwijl in 2019 t.o.v. 2018 de getijslag weer daalt en daardoor lijkt de trend zich voort te zetten.</p>
+<table>
+<caption><span id="tab:hydroGemiddeldeHWLWGetij">Tabel 3.2: </span>Jaarlijks mediaan van hoogwater, laagwater en getijslag (cm + NAP) van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">Hoogwater</th>
+<th align="center">Laagwater</th>
+<th align="center">Getijslag</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Vlakte van de Raan</td>
+<td align="center">178</td>
+<td align="center">-154</td>
+<td align="center">332</td>
+</tr>
+<tr class="even">
+<td align="center">Cadzand</td>
+<td align="center">196</td>
+<td align="center">-177</td>
+<td align="center">373</td>
+</tr>
+<tr class="odd">
+<td align="center">Westkapelle</td>
+<td align="center">180</td>
+<td align="center">-159</td>
+<td align="center">339</td>
+</tr>
+<tr class="even">
+<td align="center">Breskens Veerhaven</td>
+<td align="center">211</td>
+<td align="center">-178</td>
+<td align="center">389</td>
+</tr>
+<tr class="odd">
+<td align="center">Vlissingen</td>
+<td align="center">205</td>
+<td align="center">-183</td>
+<td align="center">388</td>
+</tr>
+<tr class="even">
+<td align="center">Gat van Borssele</td>
+<td align="center">223</td>
+<td align="center">-187</td>
+<td align="center">410</td>
+</tr>
+<tr class="odd">
+<td align="center">Overloop van Hansweert</td>
+<td align="center">245</td>
+<td align="center">-200</td>
+<td align="center">445</td>
+</tr>
+<tr class="even">
+<td align="center">Terneuzen</td>
+<td align="center">226</td>
+<td align="center">-195</td>
+<td align="center">421</td>
+</tr>
+<tr class="odd">
+<td align="center">Hansweert</td>
+<td align="center">240</td>
+<td align="center">-210</td>
+<td align="center">450</td>
+</tr>
+<tr class="even">
+<td align="center">Walsoorden</td>
+<td align="center">257</td>
+<td align="center">-210</td>
+<td align="center">467</td>
+</tr>
+<tr class="odd">
+<td align="center">Baalhoek</td>
+<td align="center">271</td>
+<td align="center">-214</td>
+<td align="center">485</td>
+</tr>
+<tr class="even">
+<td align="center">Schaar van de Noord</td>
+<td align="center">277</td>
+<td align="center">-218</td>
+<td align="center">495</td>
+</tr>
+<tr class="odd">
+<td align="center">Bath</td>
+<td align="center">270</td>
+<td align="center">-217</td>
+<td align="center">487</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:hydroGetijslag"></span>
+<img src="_main_files/figure-html/hydroGetijslag-1.png" alt="De gemiddelde getijslag over tijd op de Noordzee, in de monding en in de Westerschelde. Dunnere en transparante kleuren geven jaarlijkse gemiddeldes aan met twee of meer maanden met missende data." width="85%" />
+<p class="caption">
+Figuur 3.18: De gemiddelde getijslag over tijd op de Noordzee, in de monding en in de Westerschelde. Dunnere en transparante kleuren geven jaarlijkse gemiddeldes aan met twee of meer maanden met missende data.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroGetijslagGemiddeld"></span>
+<div id="htmlwidget-cd46aa358548277bb953" style="width:85%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cd46aa358548277bb953">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[51.5955,51.4648795925926,51.38,51.522,51.41265,51.4430057854794,51.4172,51.4214000768182,51.3370027545206,51.4460126238356,51.3893,51.3703818792593,51.3871,51.4],[3.1635,3.26617971259259,3.376,3.44,3.56628,3.59600645150685,3.69982,3.96786260045455,3.82000065479452,4.00700540876712,4.0661,4.08577368148148,4.1871,4.21],10,null,null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":["#808080","#440154","#3E5188","#45145F","#306E8E","#316A8E","#248C8C","#4EBD70","#2B9D86","#61C367","#94D843","#E2E330","#FDE725","#F5E628"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154 , #45145F 4.07523510971787%, #443A83 16.6144200626959%, #395D8B 29.153605015674%, #2D7C8D 41.692789968652%, #299A88 54.2319749216301%, #36B779 66.7711598746082%, #7FCF53 79.3103448275862%, #CAE037 91.8495297805643%, #FDE725 "],"labels":["340","360","380","400","420","440","460","480"],"na_color":"#808080","na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":null,"extra":{"p_1":0.0407523510971787,"p_n":0.918495297805643},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.3370027545206,51.5955],"lng":[3.1635,4.21]}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figuur 3.19: Gemiddelde getijslag per station berekend op alle beschikbare data vanaf 1950
+</p>
+</div>
+</div>
+<div id="hydroGetijcomponenten" class="section level3">
+<h3><span class="header-section-number">3.1.4</span> Getijcomponenten</h3>
+<p>Het gemeten waterstandssignaal kan geanalyseerd worden met een getijanalyse. Hierbij wordt het waterstandssignaal ontleed in verschillende harmonische componenten: sinussen met een zekere amplitude, frequentie en fase. De amplitude en fase van een component verschillen per positie op aarde, de frequentie is altijd gelijk. De hoofdcomponent van het getij is de M2-component, die wordt veroorzaakt door de aantrekkingskracht van de maan op de aarde en een periode heeft van ongeveer 12 uur en 25 minuten. De S2 component is een soortgelijke component (tweedagelijks) maar is gegenereerd door de aantrekkingskracht van de zon op de aarde. Hogere harmonische getijcomponenten (zoals M4) worden vaak als ‘overtides’ aangeduid. M4 is het eerste overtide en is gegenereerd door eerste orde niet-lineaire processen. De S2-component is het gevolg van de aantrekkingskracht van de zon en is samen met M2 verantwoordelijk voor de springtij-doodtij variatie. M4 is de eerste hogere harmonische component en is samen met M2 van belang voor sedimenttransport.</p>
+<p>De amplitude is de uitwijking van de getijcomponent ten opzichte van de middenstand. De fase van de getijcomponent wordt weergegeven ten opzichte van Midden Europese Tijd (MET). Verandering in de fase van een getijcomponent kan van belang zijn voor de interactie met andere getijcomponenten, maar ook voor de looptijd van het getij in het estuarium. De amplituden en fases van de M2, M4 en S2 componenten worden weergegeven in Figuur <a href="hydro.html#fig:hydroHarmoM2amp">3.20</a> tot en met <a href="hydro.html#fig:hydroHarmoS2fase">3.25</a> en in Tabel <a href="hydro.html#tab:hydroHarmoTab">3.3</a>.</p>
+<p>De amplitude van de M2-component neemt toe in stroomopwaartse richting: de trechtervorm van het estuarium veroorzaakt een opslingering van het getij. In de tijd zien we in de oostelijkere stations, en vooral bij Bath, een toename van de amplitude. Dit komt overeen met het beeld uit de hoog- en laagwaterstanden. De laatste jaren lijkt de amplitude van de M2-component een licht dalende trend te volgen (met name voor de meer oostelijke stations) met wat kleinere schommelingen. De M2 Bath in 2017 is ongeveer 5cm kleiner dan in 2014.</p>
+<p>De fase van de M2-component lijkt voor de westelijke stations weinig te veranderen. Bij Hansweert is de fase in de jaren ’50 en ’60 afgenomen (ook voor M4-component). Ook in Bath is de fase veranderd, en is de fase afgenomen over de periode 1970-2000. Dit betekent dat de looptijd van het getij, d.w.z. de tijd die zit tussen het moment van hoogwater in Vlissingen en het moment van hoogwater in Bath, is afgenomen.</p>
+<p>De amplitude van de M4-component laat een tegenovergestelde ruimtelijke relatie als de M2-component zien. Hiermee wordt bedoeld dat de M4 afneemt voor oostelijkere stations. De S2-component gedraagt zich vergelijkbaar met de M2-component. De amplitude van de S2- en M4-componenten varieert slechts beperkt over de tijd.</p>
+<p>De fase van de M4-component bij Hansweert neemt af en Bath neemt toe. De afname bij Hansweert is abrupt. Bij Bath geleidelijker. Vanaf 1980 zou bij Bath dus eerder hoogwater zijn dan bij Hansweert terwijl Hansweert dichter bij zee ligt. Mogelijke aanleiding kan een verandering in de geometrie zijn. Voor meer onderbouwing is een nadere analyse noodzakelijk in een vervolg studie.</p>
+<table>
+<caption><span id="tab:hydroHarmoTab">Tabel 3.3: </span>Gemiddelde waardes van de drie belangrijkste getijcomponenten voor de landelijke meetstations voor de gehele periode. Amplitude in cm. Fase in graden.</caption>
+<thead>
+<tr class="header">
+<th align="center">Station</th>
+<th align="center">M2.amplitude</th>
+<th align="center">M4.amplitude</th>
+<th align="center">S2.amplitude</th>
+<th align="center">M2.fase</th>
+<th align="center">M4.fase</th>
+<th align="center">S2.fase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Europlatform</td>
+<td align="center">73.74233</td>
+<td align="center">10.48425</td>
+<td align="center">18.05325</td>
+<td align="center">53.49333</td>
+<td align="center">129.26917</td>
+<td align="center">110.5517</td>
+</tr>
+<tr class="even">
+<td align="center">Cadzand</td>
+<td align="center">167.16935</td>
+<td align="center">11.84444</td>
+<td align="center">47.01248</td>
+<td align="center">49.02708</td>
+<td align="center">90.98896</td>
+<td align="center">105.1012</td>
+</tr>
+<tr class="odd">
+<td align="center">Westkapelle</td>
+<td align="center">153.46702</td>
+<td align="center">13.74544</td>
+<td align="center">42.57696</td>
+<td align="center">53.40646</td>
+<td align="center">96.34583</td>
+<td align="center">109.3454</td>
+</tr>
+<tr class="even">
+<td align="center">Vlissingen</td>
+<td align="center">173.84445</td>
+<td align="center">12.62831</td>
+<td align="center">47.88871</td>
+<td align="center">59.35109</td>
+<td align="center">118.20971</td>
+<td align="center">116.5501</td>
+</tr>
+<tr class="odd">
+<td align="center">Terneuzen</td>
+<td align="center">186.20319</td>
+<td align="center">11.69292</td>
+<td align="center">50.15466</td>
+<td align="center">69.33060</td>
+<td align="center">134.57120</td>
+<td align="center">128.7989</td>
+</tr>
+<tr class="even">
+<td align="center">Hansweert</td>
+<td align="center">197.52225</td>
+<td align="center">11.26073</td>
+<td align="center">52.07259</td>
+<td align="center">80.68401</td>
+<td align="center">169.18810</td>
+<td align="center">142.2525</td>
+</tr>
+<tr class="odd">
+<td align="center">Schaar van de Noord</td>
+<td align="center">211.50033</td>
+<td align="center">12.40183</td>
+<td align="center">54.56867</td>
+<td align="center">89.18583</td>
+<td align="center">180.39167</td>
+<td align="center">153.2800</td>
+</tr>
+<tr class="even">
+<td align="center">Bath</td>
+<td align="center">209.98829</td>
+<td align="center">11.81498</td>
+<td align="center">54.40592</td>
+<td align="center">92.30479</td>
+<td align="center">171.66021</td>
+<td align="center">155.8421</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span id="fig:hydroHarmoM2amp"></span>
+<img src="_main_files/figure-html/hydroHarmoM2amp-1.png" alt="Amplitude van de M2-getijcomponent voor de landelijke meetstations." width="85%" />
+<p class="caption">
+Figuur 3.20: Amplitude van de M2-getijcomponent voor de landelijke meetstations.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroHarmoM4amp"></span>
+<img src="_main_files/figure-html/hydroHarmoM4amp-1.png" alt="Amplitude van de M4-getijcomponent voor de landelijke meetstations." width="85%" />
+<p class="caption">
+Figuur 3.21: Amplitude van de M4-getijcomponent voor de landelijke meetstations.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroHarmoS2amp"></span>
+<img src="_main_files/figure-html/hydroHarmoS2amp-1.png" alt="Amplitude van de S2-getijcomponent voor de landelijke meetstations." width="85%" />
+<p class="caption">
+Figuur 3.22: Amplitude van de S2-getijcomponent voor de landelijke meetstations.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroHarmoM2fase"></span>
+<img src="_main_files/figure-html/hydroHarmoM2fase-1.png" alt="Fase van de M2-getijcomponent voor de landelijke meetstations." width="85%" />
+<p class="caption">
+Figuur 3.23: Fase van de M2-getijcomponent voor de landelijke meetstations.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroHarmoM4fase"></span>
+<img src="_main_files/figure-html/hydroHarmoM4fase-1.png" alt="Fase van de M4-getijcomponent voor de landelijke meetstations." width="85%" />
+<p class="caption">
+Figuur 3.24: Fase van de M4-getijcomponent voor de landelijke meetstations.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroHarmoS2fase"></span>
+<img src="_main_files/figure-html/hydroHarmoS2fase-1.png" alt="Fase van de S2-getijcomponent voor de landelijke meetstations." width="85%" />
+<p class="caption">
+Figuur 3.25: Fase van de S2-getijcomponent voor de landelijke meetstations.
+</p>
+</div>
+</div>
+</div>
+<div id="golven" class="section level2">
+<h2><span class="header-section-number">3.2</span> Golven IN ONTWIKKELING</h2>
+<div class="figure" style="text-align: center"><span id="fig:golfspectrum"></span>
+<img src="Figuren/Inscape/spectrum.png" alt="Voorbeeld van een geschematiseerd golfspectrum op zee (naar: www.infrawiki.nl)." width="85%" />
+<p class="caption">
+Figuur 3.26: Voorbeeld van een geschematiseerd golfspectrum op zee (naar: www.infrawiki.nl).
+</p>
+</div>
+<p>Golven die voorkomen op de Noordzee en in de Westerschelde hebben steeds verschillende golfhoogte, -periode en richting. Dit is afhankelijk van de wind (kracht, duur, richting, strijklengte), de waterdiepte en de golfvoortplanting. Van golfmetingen wordt meestal per periode van ongeveer 15 minuten een spectrum afgeleid, waarin golven met verschillende golfhoogte en -periode (in de vorm van een frequentie = 1 / periode) zijn opgenomen, zie Figuur <a href="hydro.html#fig:golfspectrum">3.26</a>. De golven die in deze paragraaf worden meegenomen bevinden zich aan de rechterkant van het in Figuur <a href="hydro.html#fig:golfspectrum">3.26</a> weergegeven spectrum en zijn aangeduid met deining en wind. Deining wordt veroorzaakt door golfvoortplanting van golven die verder weg zijn opgewekt. Windgolven zijn lokaal opgewekte golven.</p>
+<p>Een belangrijke golfkarakteristiek is de significante golfhoogte. De significante golfhoogte kan op twee verschillende manieren berekend worden: als het gemiddelde van het hoogste 1/3 deel van de golven in een periode van 10 minuten (<span class="math inline">\(H_{1/3}\)</span>) of uit het energiedichtheidsspectrum (<span class="math inline">\(H_{m0}\)</span>) op basis van viermaal de standaardafwijking. Hoewel beide methodes een andere berekeningswijze hebben (de eerste gaat uit van de hoogte van individuele golven, de tweede wordt berekend uit het energiedichtheidsspectrum), komt het resultaat in hoge mate overeen. De significante golfhoogte komt goed overeen met de op het oog geschatte golfhoogte (<span class="citation">@Holthuijsen2007</span>). Vroeger werden golven op die manier gemeten (o.a. vanaf schepen), waardoor het een belangrijke parameter is geworden in de golfstatistiek.</p>
+<p>In deze rapportage wordt steeds het maandelijkse gemiddelde en het maandelijkse maximum van de significante golfhoogte weergegeven. Het maximum van de significante golfhoogte per maand betreft dus geen maximum van alle individuele golven in die maand, maar het maximum van het gemiddelde 1/3 hoogste deel in een periode van 10 minuten of het maximum van de significante golfhoogte uit het spectrum.</p>
+<p>Naast de golfhoogte wordt ook de golfperiode gerapporteerd, zowel de gemiddelde periode van het hoogste 1/3 deel van de golven (<span class="math inline">\(T_{H,1/3}\)</span>), als de gemiddelde golfperiode van alle golven berekend uit het spectrum (<span class="math inline">\(T_{m02}\)</span>). <span class="math inline">\(T_{m02}\)</span> wordt bepaald uit het spectrale gemiddelde van het kwadraat van de frequentie en is daarom in het algemeen lager dan <span class="math inline">\(T_{H,1/3}\)</span>. <span class="math inline">\(T_{m02}\)</span> is dus niet direct gerelateerd aan <span class="math inline">\(H_{m0}\)</span>.</p>
+<p>Op verzoek van RWS worden de golfrozen sinds de Eerstelijnsrapportage 2015 niet meer weergegeven. Dit heeft te maken met kleine wijzigingen in rekenparameters in de Evaluatiesystematiek (update 2014). Voor golfrichtinginformatie wordt verwezen naar de Eerstelijnsrapportage 2014 (<span class="citation">@ELR2014</span> &amp; <span class="citation">@ELR2015</span>).</p>
+<div id="golvenInfoMeting" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Informatie over de metingen</h3>
+<p>Golven worden in de Westerschelde en in de monding op een aantal stations (zie Figuur <a href="hydro.html#fig:meetstationsGolven">3.27</a>) gemeten. Niet op alle stations wordt met dezelfde instrumenten gemeten. Ook in de tijd heeft er een verschuiving plaatsgevonden in het frequentiebereik van de metingen. Het frequentiebereik wordt van tevoren ingesteld aan de hand van de te verwachten golfperioden op de betreffende locatie en zijn aangeduid als:</p>
+<ul>
+<li>GSO2 met een frequentiebereik van 0 tot 700 mHz</li>
+<li>GHr2 met een frequentiebereik van 0 tot 1000 mHz</li>
+<li>GDr2 met een frequentiebereik van 0 tot 500 mHz</li>
+</ul>
+<p>De parameters die uit het spectrum worden bepaald, de significante golfhoogte <span class="math inline">\(H_{m0}\)</span> en periodeparameter <span class="math inline">\(T_{m02}\)</span>, zijn berekend uit het deel van het spectrum van 30 mHz tot de bovengrens (700, 1000 en 500 mHz). Voor GSO2 is geen significante golfhoogte uit het spectrum bepaald. In Tabel <a href="hydro.html#tab:golfstations">3.4</a> zijn de verschillende aanduidingen en meetinstrumenten per station en per meetperiode gegeven. Gemiddelde, minimale en maximale waardes in bijgevoegde tabellen zijn gebaseerd over de tijdsperiode weergegeven in de figuren. In Tabel <a href="hydro.html#tab:golfstations">3.4</a> is te zien dat voor Hoofdplaat sinds januari 2016 geen nieuwe data beschikbaar is.</p>
+<div class="figure" style="text-align: center"><span id="fig:meetstationsGolven"></span>
+<img src="Figuren/Meetstations_golfboei.png" alt="Ligging van de meetstations voor de golfhoogte en -periode. Groen is een directional wave rider, rood is een golfbaak en geel is een boei." width="85%" />
+<p class="caption">
+Figuur 3.27: Ligging van de meetstations voor de golfhoogte en -periode. Groen is een directional wave rider, rood is een golfbaak en geel is een boei.
+</p>
+</div>
+<table>
+<caption><span id="tab:golfstations">Tabel 3.4: </span>Golfspectrum per meetperiode en locatie en meetinstrument in 2018.</caption>
+<thead>
+<tr class="header">
+<th align="left">Meetstation</th>
+<th align="left">Code</th>
+<th align="left">Meetperiode</th>
+<th align="left">Meetinstrument</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bath</td>
+<td align="left">BAT2</td>
+<td align="left">jan ’98-dec ’11, jan ’12-heden</td>
+<td align="left">Golfbraak</td>
+</tr>
+<tr class="even">
+<td align="left">Cadzand</td>
+<td align="left">CADW</td>
+<td align="left">jan ’97-dec ’11, jan ’12-heden</td>
+<td align="left">Directional waverider</td>
+</tr>
+<tr class="odd">
+<td align="left">Deurloo</td>
+<td align="left">DEUR</td>
+<td align="left">jan ’97-jul ’98, jul’98-mrt ’02, mrt’02-dec’02, jan’03-mrt ’03, mrt’03-dec ’11, jan’12-heden</td>
+<td align="left">Directional waverider</td>
+</tr>
+<tr class="even">
+<td align="left">Hansweert</td>
+<td align="left">HAWI</td>
+<td align="left">jan’98-dec ’11, jan’12-heden</td>
+<td align="left">Golfbraak</td>
+</tr>
+<tr class="odd">
+<td align="left">Honte</td>
+<td align="left">HNTE</td>
+<td align="left">jan’12-heden</td>
+<td align="left">Boei</td>
+</tr>
+<tr class="even">
+<td align="left">Hoofdplaat</td>
+<td align="left">HFPL</td>
+<td align="left">jan’98-dec ’11, jan’12-jan’16</td>
+<td align="left">Golfbraak</td>
+</tr>
+<tr class="odd">
+<td align="left">Overloop van Hansweert</td>
+<td align="left">OVHW</td>
+<td align="left">jan’12-heden</td>
+<td align="left">Golfbraak</td>
+</tr>
+<tr class="even">
+<td align="left">Overloop van Valkenisse</td>
+<td align="left">OVVA</td>
+<td align="left">jan’13-heden</td>
+<td align="left">Golfbraak</td>
+</tr>
+<tr class="odd">
+<td align="left">Pas van Terneuzen</td>
+<td align="left">PVT</td>
+<td align="left">jan’10-jan’15, jan’16-heden</td>
+<td align="left">Waverider</td>
+</tr>
+<tr class="even">
+<td align="left">Wielingen</td>
+<td align="left">WIEL</td>
+<td align="left">jan’97-jul ’98, jul’98-dec ’11, jan’12-heden</td>
+<td align="left">Waverider</td>
+</tr>
+</tbody>
+</table>
+<p>Een beschrijving van de verschillende meetinstrumenten in Tabel <a href="hydro.html#tab:golfstations">3.4</a>:</p>
+<p><strong>Directional waverider</strong>
+De directional waverider is een boei die de verticale versnellingen en horizontale plaatsen, ‘pitch’, ‘roll’ en ‘heave’ meet. Bovendien is de boei uitgerust met twee vaste versnellingsmeters, een kompas en een richtingsmeter. Het golffrequentiebereik van de directional waverider wordt verschillend ingesteld afhankelijk van de ligging van de boei en de daarvoor te verwachte golfperioden. Op de Noordzee en de Delta is het golffrequentiebereik van directional waverider ingesteld op 0,03 Hz – 0,5 Hz (GDr2). Omdat in de Westerschelde de golven over het algemeen korter zijn (kleinere periode dus een grotere frequentie) is het golffrequentiebereik hoger ingesteld namelijk: 0,03 Hz – 1,0 Hz (GHr2). De bemonsteringsfrequentie van de directional waverider is 1,28 Hz.</p>
+<p><strong>Waverider</strong>
+De waverider is een bolvormige boei en meet de versnellingen in verticale richting, die worden veroorzaakt door de golfkrachten op de boei. Hieruit kunnen de hoogteveranderingen van het zeeoppervlak worden berekend en daaruit kunnen weer golfkarakteristieken worden bepaald. Het golffrequentiebereik van de waverider wordt verschillend ingesteld afhankelijk van de ligging van de boei en de daarvoor te verwachte golfperioden. Op de Noordzee en de Delta is het golffrequentiebereik van waverider ingesteld op 0,03 Hz – 0,5 Hz (GDr2). Omdat in de Westerschelde de golven over het algemeen korter zijn (kleinere periode dus een grotere frequentie) is het golffrequentiebereik hoger ingesteld namelijk: 0,03 Hz – 1,0 Hz (GHr2). De bemonsteringsfrequentie is 2,56 Hz.</p>
+<p><strong>Golfbraak</strong>
+Een golfbaak is een verticaal gemonteerde kunststofbuis, waaraan op regelmatige afstanden van 5 cm elektroden zijn bevestigd aan de hand waarvan continue wordt gemeten wat de hoogste elektrode is die zich nog onder water bevindt. Daarmee worden de veranderingen van het zeeoppervlak in de tijd vastgelegd en daaruit worden karakteristieken van de golfbeweging bepaald. De golfbaak is gemonteerd aan een platform of een meetpaal. De bemonsteringsfrequentie is 2,56 Hz.</p>
+</div>
+<div id="golvenHoogte" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Golfhoogte</h3>
+<p>De maandelijkse gemiddelden en maandelijkse maxima van de significante golfhoogte zijn weergegeven in Figuur <a href="hydro.html#fig:hydroHsDeurloo">3.28</a> t/m Figuur <a href="hydro.html#fig:hydroHsBath">3.32</a> voor <span class="math inline">\(H_{1/3}\)</span> (telkens bovenste figuur) en <span class="math inline">\(H_{m0}\)</span> (telkens onderste figuur). De meetstations zijn gerangschikt in stroomopwaartse richting. Voor maanden met een kwart of meer aan missende data worden de gemiddeldes met dunnere en transparante kleuren weergegeven. Aan deze gemiddeldes kan minder waarde gehecht worden.</p>
+<p>De significante golfhoogte, <span class="math inline">\(H_{1/3}\)</span>, komt voor windgolven goed overeen met de significante golfhoogte die bepaald is uit het spectrum, <span class="math inline">\(H_{m0}\)</span>. Op basis van de tijdseries per station constateren we geen trend in toe of afname van de golfhoogtes.</p>
+<p>Zoals te verwachten zijn de golven in de monding (Deurloo, Cadzand, Wielingen) het hoogste, met gemiddelden van ~1 m en maxima net boven de 4 m bij Deurloo, zie ook Figuur <a href="#fig:gemiddeldeHs"><strong>??</strong></a>. Niet al deze golven propageren de Westerschelde in, alleen het deel wat naar het (zuid)oosten propageert. Een deel van de golfenergie die wel richting de Westerschelde propageert, wordt verder gedissipeerd op de ondiepe delen in de monding en de Westerschelde. In de Westerschelde zijn de gemiddelde significante golfhoogtes daardoor een stuk lager, rond 25 cm, met maxima rond de 1 m en 1,5 m bij Hansweert. De meeste golven in de Westerschelde zijn lokaal opgewekte golven (door de wind, maar deels ook door schepen), waarbij de noordelijke boeien (Honte, Hansweert en Bath) een grotere golfhoogte laten zien dan de zuidelijke (Hoofdplaat en Pas van Terneuzen). Dit heeft waarschijnlijk te maken met een overheersende zuidwestenwind, waardoor de strijklengte van de noordelijke stations groter is.</p>
+<p>Maximale significante golfhoogtes voor windgolven worden in de Westerschelde geschat op 1.5 meter op basis van <span class="citation">@BreugemHolt2006</span>. Dit is gebaseerd op een strijklengte van 10 kilometer met een wind snelheid van 22 m/s. Golfhoogtes groter dan 1.5 meter zijn daarom te wijten aan schepen en/of meetfouten. Maximale golfhoogtes op de Noordzee zijn in de orde grootte van meerdere meters (e.g. <span class="math inline">\(H_s\)</span> &gt; 5 meter tijdens een grotere storm). Figuur <a href="#fig:cdfplotHs"><strong>??</strong></a> laat de empirische distributie van golfhoogte op basis van alle beschikbare data zien. Hierin constateren we dat de mediaan van de significante golfhoogte in de Westerschelde tussen de 9 en 70 centimeter ligt. Voor stations verder vanaf de monding is minder dan 10% groter dan 50 centimeter, terwijl in Deurloo dit 3x zo hoog is (i.e. 150 centimeter). Al met al lijkt de golfhoogte in de Westerschelde veelal lager dan 25 cm, terwijl de golfhoogte in de monding (i.e. Cadzand, Deurloo en Wielingen) tussen de 40 en 70 cm ligt. Voor sommige locaties treedt wel eens een groot verschil tussen <span class="math inline">\(H_{1/3}\)</span> en <span class="math inline">\(H_{m0}\)</span> op. Dit wijst erop dat het scheepsgolven of meetfouten betreft en geen windgolven.</p>
+<div class="figure" style="text-align: center"><span id="fig:hydroHsDeurloo"></span>
+<img src="_main_files/figure-html/hydroHsDeurloo-1.png" alt="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Deurloo." width="85%" />
+<p class="caption">
+Figuur 3.28: Maandelijks gemiddelde en maximum van de significante golfhoogte <span class="math inline">\(H_{1/3}\)</span> (boven) en <span class="math inline">\(H_{m0}\)</span> (onder) voor station Deurloo.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroHsHonte"></span>
+<img src="_main_files/figure-html/hydroHsHonte-1.png" alt="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Honte." width="85%" />
+<p class="caption">
+Figuur 3.29: Maandelijks gemiddelde en maximum van de significante golfhoogte <span class="math inline">\(H_{1/3}\)</span> (boven) en <span class="math inline">\(H_{m0}\)</span> (onder) voor station Honte.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroHsPVT"></span>
+<img src="_main_files/figure-html/hydroHsPVT-1.png" alt="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Pas van Terneuzen." width="85%" />
+<p class="caption">
+Figuur 3.30: Maandelijks gemiddelde en maximum van de significante golfhoogte <span class="math inline">\(H_{1/3}\)</span> (boven) en <span class="math inline">\(H_{m0}\)</span> (onder) voor station Pas van Terneuzen.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroHsOVHW"></span>
+<img src="_main_files/figure-html/hydroHsOVHW-1.png" alt="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Overloop van Hansweert." width="85%" />
+<p class="caption">
+Figuur 3.31: Maandelijks gemiddelde en maximum van de significante golfhoogte <span class="math inline">\(H_{1/3}\)</span> (boven) en <span class="math inline">\(H_{m0}\)</span> (onder) voor station Overloop van Hansweert.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:hydroHsBath"></span>
+<img src="_main_files/figure-html/hydroHsBath-1.png" alt="Maandelijks gemiddelde en maximum van de significante golfhoogte $H_{1/3}$ (boven) en $H_{m0}$ (onder) voor station Bath." width="85%" />
+<p class="caption">
+Figuur 3.32: Maandelijks gemiddelde en maximum van de significante golfhoogte <span class="math inline">\(H_{1/3}\)</span> (boven) en <span class="math inline">\(H_{m0}\)</span> (onder) voor station Bath.
+</p>
+</div>
+</div>
+<div id="golvenPeriode" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Golfperiode</h3>
+<p>De golfperiode wordt weergegeven met twee parameters: <span class="math inline">\(T_{H,1/3}\)</span> (de gemiddelde periode van de golven behorende bij de significante golfhoogte <span class="math inline">\(H_{1/3}\)</span>) en <span class="math inline">\(T_{m02}\)</span> (de gemiddelde periode van alle golven). De maandelijkse gemiddelden en maandelijkse maxima van de golfperiode zijn weergegeven in Figuur <a href="#fig:hydroTDeurloo"><strong>??</strong></a> t/m Figuur <a href="#fig:hydroTBath"><strong>??</strong></a> voor <span class="math inline">\(T_{H,1/3}\)</span> (telkens bovenste figuur) en <span class="math inline">\(T_{m02}\)</span> (telkens onderste figuur). De meetstations zijn gerangschikt in stroomopwaartse richting. Voor maanden met een kwart of meer aan missende data worden de gemiddeldes met dunnere en transparante kleuren weergegeven. Aan deze gemiddeldes kan minder waarde gehecht worden.</p>
+<p>De golfperiode <span class="math inline">\(T_{H,1/3}\)</span> laat bij Hansweert en Bath een paar breuken in de meetreeksen zien, dit is waarschijnlijk te wijten aan meetgaten of <span class="math inline">\(-\)</span>fouten. Op basis van de tijdseries per station constateren we geen trend in toe- of afname van de golfperiode. Wel opvallend dat de golfperiode <span class="math inline">\(T_{H,1/3}\)</span> sinds 2015 voor de meeste stations langer is dan in 2014. Er is geen voor de hand liggende verklaring voor deze observatie.</p>
+<p>De gemiddelde golfperiode behorende bij het hoogste 1/3 deel van de golven is duidelijk anders dan de gemiddelde golfperiode uit het spectrum, waarbij het spectrale gemiddelde van het kwadraat van de frequentie van alle golven is bepaald. %alle golven worden meegenomen.
+Hogere golven hebben een langere periode, zoals blijkt het verschil tussen <span class="math inline">\(T_{H,1/3}\)</span> en <span class="math inline">\(T_{m02}\)</span>. Vooral in de Westerschelde is het verschil tussen de twee periodeparameters groot. Mogelijk speelt een rol dat <span class="math inline">\(T_{H,1/3}\)</span> gedomineerd wordt door niet-lokaal opgewekte golven, en <span class="math inline">\(T_{m02}\)</span> door kortere lokaal opgewekte golven. Er is geen voor de hand liggende reden hiervoor te noemen.
+Voor beide periodeparameters geldt dat de golven in de monding de langste periode hebben, zoals te zien in Figuur <a href="#fig:gemiddeldeTm02"><strong>??</strong></a>. De maximale gemiddelde golfperiode van lokaal opgewekte golven in de Westerschelde wordt, op basis van <span class="citation">@BreugemHolt2006</span>, geschat op 4,3 seconden. Dit is gebaseerd op een strijklengte van 10 kilometer met een wind snelheid van 22 m/s. Voor stations op de Noordzee loopt de maximale golfperiode op tot +/- 18 seconden (e.g. swell condities). Langere golfperiodes hoeven niet noodzakelijkerwijs incorrect te zijn, maar het is twijfelachtig dat golfperiodes van meer dan 15 s en soms zelfs 30 s aan windgolven toe te schrijven, zeker als die op slechts op één locatie tegelijk optreden. Het is goed mogelijk dat de waarnemingen als bij Hansweert (Figuur <a href="#fig:hydroTHansweert"><strong>??</strong></a>) samenhangen met scheepsgolven of met effect van een schip dat voorbij komt.</p>
+<p>Figuur <a href="#fig:cdfplotTmo2"><strong>??</strong></a> laat de empirische distributie van gemiddelde golfperiode op basis van alle beschikbare data zien. Hierin constateren we dat de mediaan van de golfperiode in de Westerschelde tussen de 1,5 en 4,0 seconden ligt. Voor de stations in de Westerschelde heeft 10% van de golven een periode korter dan 2 seconden. Algemeen geldt dat golven in de monding golfperiodes van 3-4 seconden hebben. In de Westerschelde neemt dit af en zijn er golf periodes van 1,5 tot 3 seconden. Opvallend is dat de golfperiode bij Cadzand langer is dan Wielingen.</p>
+
+<!-- TO DO:
+- Referenties goed zetten
+- bijlage referentie
+- CNP ratio tabel & NP ratio plots
+- Chroom na filtratie plots?
+- figuren headers bijwerken met percentiele ipv min-max
+
+-->
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="inleiding.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fysisch-oppwater.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"toc_float": {
+"collapsed": false,
+"smooth_scroll": false
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

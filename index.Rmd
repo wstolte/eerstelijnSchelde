@@ -1,5 +1,5 @@
 ---
-title: "Concept Eerstelijnsrapportage Westerschelde"
+title: "Concept Eerstelijnsrapportage Westerschelde (IN ONTWIKKELING)"
 subtitle: 2020
 author: "Deltares"
 date: '`r Sys.Date()`'
@@ -15,7 +15,7 @@ link-citations: yes
 knitr::opts_chunk$set(echo = FALSE,	message = FALSE, warning = FALSE)
 
 # Set the newest year for use in the report
-dataJaar <- 2019
+dataJaar <- 2020
 ```
 
 ```{r logos, out.width="30%"}
