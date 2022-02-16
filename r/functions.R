@@ -24,6 +24,12 @@ statTable <- function(df, parname, rounding, meanorder = "decreasing", sf = F) {
   
   if(sf) df <- df %>% st_drop_geometry()
   
+anydata <- df %>% filter(parametername == parname) %>% nrow()
+if(anydata == 0){
+  return(paste("Er zijn geen data gevonden voor", parname))
+}
+  
+if(anydata > 0){
   stats <- df %>%
     filter(parametername == parname) %>%
     mutate(year = year(datetime), month = month(datetime)) %>%
@@ -53,6 +59,8 @@ statTable <- function(df, parname, rounding, meanorder = "decreasing", sf = F) {
            Trend = estimate,
            p = p.value) #%>%
   # arrange(-Gemiddelde)
+  
+}
 }
 
 
@@ -69,7 +77,15 @@ fytStatTable <- function(df, statname){
 # Plot trends of nutrients
 plotTrends <- function(df, parname, sf = F, trend = T) {
   
+  
+  
 if(sf) df <- df %>% st_drop_geometry()
+
+anydata <- df %>% filter(parametername == parname) %>% nrow()
+if(anydata == 0){
+  return(paste("Er zijn geen data gevonden voor", parname))
+} else
+
   p <- df %>%
     dplyr::filter(parametername == parname) %>%
     dplyr::mutate(year = year(datetime), month = month(datetime)) %>%

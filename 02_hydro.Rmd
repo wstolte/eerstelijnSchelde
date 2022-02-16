@@ -33,10 +33,11 @@ frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrap
 # frozendatapath <- "c:\\Users\\ronge_bb\\R\\eerstelijnSchelde\\download\\Data_Hydro_1950_2020.csv"
 df <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>% 
   filter(stationname %in% trendstations) %>%
-  mutate(stationname = factor(stationname, levels = trendstations))
+  mutate(stationname = factor(stationname, levels = trendstations)) %>%
+  repair_limits() %>%
+  group_by(parametername, stationname) %>%
+  mutate(across(value, remove_outliers))
 
-unique(df$valuesign)
-# only "=" or NA.
 
 ```
 
@@ -381,8 +382,8 @@ Maximale significante golfhoogtes voor windgolven worden in de Westerschelde ges
 
 trendstations <- c("Deurloo (DELO)","HONTE","Pas van Terneuzen (PVT1)","Overloop van Hansweert","Bath (BAT1)")
 
-#frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_opp_test_1998_2020.csv"
-frozendatapath <- "c:\\Users\\ronge_bb\\R\\Data\\Data_Hydro_Golven_1998_2020.csv"
+frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_opp_test_1998_2020.csv"
+# frozendatapath <- "c:\\Users\\ronge_bb\\R\\Data\\Data_Hydro_Golven_1998_2020.csv"
 df <- read_delim(frozendatapath, delim = ",")
 
 # replace below partly by clean function in package smsfs

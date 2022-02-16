@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 	out.width = "85%",
 	fig.align='center'
 )
+
 require(smwfs)
 require(tidyverse)
 require(lubridate)
@@ -39,7 +40,7 @@ frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrap
 ```{r downloadOppWaterdata, include = F}
 # Set year for use in the report
 
-df <- read_delim(frozendatapath, delim = ",", guess_max = 200000) %>% select(-X1)
+df <- read_delim(frozendatapath, delim = ",", guess_max = 200000) #%>% select(-X1)
 
 df2 <- df %>% 
   filter(stationname %in% trendstations) %>% 
@@ -100,6 +101,7 @@ De toenemende trend is significant bij stations Schaar van Ouden Doel en Hanswee
 # knitr::include_graphics("Figuren/Fysisch/Saliniteit/jaar.png")
 
 plotTrends(df2, parname)
+
 ```
 
 ```{r gemiddeldSali, fig.cap="Mediaan saliniteit per station berekend op alle beschikbare data vanaf 1997."}
@@ -125,7 +127,8 @@ Figuur \@ref(fig:fysischSaliMaand) toont de maandelijkse medianen van de salinit
 ```{r fysischSaliMaand, fig.cap="Maandgemiddelde saliniteit in het oppervlaktewater van de Westerschelde en de monding.", fig.width=10}
 #knitr::include_graphics("Figuren/Fysisch/Saliniteit/Maand.png")
 
-plotTrendsMaand(df2, parname, sf = F)
+p <- plotTrendsMaand(df2, parname, sf = F)
+ggplotly(p)
 ```
 
 ## Watertemperatuur {#watertemp}
@@ -180,7 +183,8 @@ Figuur \@ref(fig:fysischTempMaand) toont de maandelijkse mediaanwaarden van de w
 ```{r fysischTempMaand, fig.width=10, fig.cap="Maandelijkse mediaantemperatuur in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Temperatuur/Maand.png")
 
-plotTrendsMaand(df2, parname, sf = F)
+p <- plotTrendsMaand(df2, parname, sf = F)
+ggplotly(p)
 ```
 
 ## Zuurstof {#zuurstof}
@@ -256,7 +260,8 @@ De bloei van phytoplankton kan leiden tot tijdelijk en plaatselijk (sterk) overv
 #knitr::include_graphics("Figuren/Fysisch/Zuurstof_percentage/maand.png")
 
 parname = "Zuurstof in % in oppervlaktewater"
-plotTrendsMaand(df2, parname, sf = F)
+p <- plotTrendsMaand(df2, parname, sf = F)
+ggplotly(p)
 ```
 
 ### Maandelijkse waarden zuurstofgehalte {#zuurstof-maand-gehalte}
@@ -317,7 +322,8 @@ Figuur \@ref(fig:fysischChlorofylMaand) toont het maandelijkse mediane gehalte c
 ```{r fysischChlorofylMaand, fig.width=10, fig.cap="Maandgemiddelde chlorofyl-a in het oppervlaktewater van de Westerschelde en de monding. Statistiek is uitgevoerd op loggetransformeerde data. De y-as is loggetransformeerd."}
 #knitr::include_graphics("Figuren/Fysisch/Chlorofyl/maand.png")
 
-plotLogTrendsMaand(df2, parname, sf = F)
+p <- plotLogTrendsMaand(df2, parname, sf = F)
+ggplotly(p)
 ```
 
 ## Feofytine-a {#feofytine}
@@ -411,7 +417,8 @@ plotMedianMap(df2, parname)
 ```{r fysischChemischZuurstofverbruikMaand, fig.width = 10, fig.cap="Maandelijkse mediaanwaarde van het chemisch zuurstofverbruik in het oppervlaktewater van de Westerschelde en de monding. De stippellijn geeft de bepalingsgrens weer per station in de bijbehorende kleur (valt soms buiten het weergegeven grafiekgebied)."}
 # knitr::include_graphics("Figuren/Fysisch/Chemisch_zuurstof/Maand.png")
 
-plotTrendsCZVMaand(df2, parname, sf = F)
+p <- plotTrendsCZVMaand(df2, parname, sf = F)
+ggplotly(p)
 ```
 
 ### Biochemisch zuurstofgebruik {#biochemisch-zuurstofgebruik}
@@ -441,7 +448,7 @@ plotTrends(df2, parname)
 
 #### Maandelijkse waarden {#biochemisch-zuurstofgebruik-maand}
 
-In Figuur \@ref(fig:fysischBiochemischZuurstofverbruikMaand) zijn de maandelijks gemeten waardes van biochemisch zuurstofverbruik bij Schaar van Ouden Doel weergegeven in groen en de bepalingsgrens in zwart. Bij Terneuzen en Vlissingen boei SSVH is in 2011 en 2013 ook gemeten. Bijna alle metingen liggen onder of op de bepalingsgrens.
+In Figuur \@ref(fig:fysischBiochemischZuurstofverbruikMaand) zijn de maandelijks gemeten waardes van biochemisch zuurstofverbruik bij Schaar van Ouden Doel weergegeven in groen en de bepalingsgrens als rode onderbroken lijn. Bij Terneuzen en Vlissingen boei SSVH is in 2011 en 2013 ook gemeten. Bijna alle metingen liggen onder of op de bepalingsgrens.
 
 ```{r fysischBiochemischZuurstofverbruikMaand, fig.width = 10, fig.cap="Maandgemiddelde waarde van het biochemisch zuurstofverbruik in het oppervlaktewater van de Westerschelde en de monding. De roze stippellijn is de bepalingsgrens."}
 
@@ -481,7 +488,7 @@ Bij het meetpunt Schaar van Ouden Doel is het doorzicht beduidend lager dan bij 
 ```{r fysischDoorzicht, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van het doorzicht in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Doorzicht/jaar.png")
 
-plotTrends(df2, parname)
+plotTrends(df2, parname, trend = F)
 ```
 
 ### Extinctiecoefficient {#extinctiecoef}
@@ -506,7 +513,7 @@ knitr::kable(dt,
 ```{r fysischExtinctiecoef, fig.cap="Jaarlijkse mediaan, 10- en 90-percentiel van de extinctiecoefficiënt in het oppervlaktewater van de Westerschelde en de monding."}
 #knitr::include_graphics("Figuren/Fysisch/Extinctiecoefficient/jaar.png")
 
-plotTrends(df2, parname)
+plotTrends(df2, parname, trend = F)
 ```
 
 ```{r gemiddeldedoorz, fig.cap="Mediaan doorzicht per station berekend op alle beschikbare data vanaf 1996."}

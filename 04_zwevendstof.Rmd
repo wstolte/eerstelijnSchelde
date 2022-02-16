@@ -1,8 +1,7 @@
-<!-- TO DO:
+ TO DO:
 - bijlage referentie
 - figuren headers bijwerken met percentiele ipv min-max
 
--->
 
 ```{r setupZwevend, include=FALSE}
 knitr::opts_chunk$set(
@@ -31,9 +30,10 @@ frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrap
 ```
 
 ```{r downloadZwevend, include = F}
-df <- read_delim(frozendatapath, delim = ",")
 
-df_clean <- df %>% 
+df_original <- read_delim(frozendatapath, delim = ",")
+
+df <- df_original %>% 
   filter(stationname %in% trendstations) %>% 
   mutate(stationname = factor(stationname, levels = trendstations)) %>%
   repair_limits() %>%
@@ -63,7 +63,7 @@ Voor de bepaling van de fysisch-chemische parameters in het zwevend stof vinden 
 
 ```{r meetstationsZwevend, fig.cap="Ligging van de meetstations voor het zwevende stof"}
 # knitr::include_graphics("Figuren/Meetstations_zwevend.png")
-plotLocations(df_clean)
+plotLocations(df)
 ```
 
 De meetdata worden gepresenteerd door middel van jaargemiddelden, en de minimale en maximale waarde die in elk jaar gemeten is. Voor sommige parameters zijn ook maandgemiddelden en/of seizoensgemiddelden weergegeven. Als er slechts een meting per maand beschikbaar is (of minder), zijn deze waardes gepresenteerd. Bij het middelen van parameters over een bepaalde periode is de datadichtheid van belang. Een overzicht van het aantal metingen per parameter, per station, per jaar is daarom opgenomen in Bijlage \@ref(BijlageB-meetdichtheid-zwevend).
@@ -93,11 +93,11 @@ knitr::kable(dt,
              caption = "Jaarlijks mediaan, 10-percentiel en 90-percentiel en de trend en p waarde van de trend van korrelgrootte tot 63 $\\mu$m (%) van het zwevende stof van de Westerschelde en de monding berekend op alle beschikbare data vanaf 1996.")
 ```
 
-```{r zwevendKorrelgroottefractietot63um, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 63$\\mu$m voor 2 stations"}
+```{r zwevendKorrelgroottefractietot63um, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 63$\\mu$m voor 2 stations."}
 #knitr::include_graphics("Figuren/Zwevend/Korrelgroottefractietot63um.png")
 
-plotTrends(df_clean, parname)
-# plotTrendsLimits(df_clean, parname)
+plotTrends(df, parname, trend = F)
+plotTrendsLimits(df, parname, trend = F) + ggtitle("test met aantallen metingen per jaar")
 ```
 
 ### Korrelgroottefractie tot 2 $\mu$m {#korrelgrootteverdeling-tot2}
@@ -122,8 +122,7 @@ knitr::kable(dt,
 ```{r zwevendKorrelgroottefractietot2um, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 2$\\mu$m voor beide stations"}
 #knitr::include_graphics("Figuren/Zwevend/Korrelgroottefractietot2um.png")
 
-plotTrends(df_clean, parname)
-plotTrendsLimits(df_clean, parname)
+plotTrends(df, parname, trend = F)
 ```
 
 ## Metalen {#zwevend-metalen}
@@ -162,8 +161,8 @@ knitr::kable(dt,
 ```{r zwevendArseen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Arseen voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Arseen.png")
 
-plotTrends(df_clean, parname)
-plotTrendsLimits(df_clean, parname)
+plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Cadmium {#zwevend-cadmium}
@@ -189,8 +188,8 @@ knitr::kable(dt,
 ```{r zwevendCadmium, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Cadmium voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Cadmium.png")
 
-plotTrends(df_clean, parname)
-plotTrendsLimits(df_clean, parname)
+plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Chroom {#zwevend-chroom}
@@ -215,8 +214,8 @@ knitr::kable(dt,
 ```{r zwevendChroom, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Chroom voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Chroom.png")
 
-plotTrends(df_clean, parname)
-plotTrendsLimits(df_clean, parname)
+plotTrends(df, parname)
+plotTrendsLimits(df, parname)
 ```
 
 ### Kobalt {#zwevend-kobalt}
@@ -730,8 +729,8 @@ knitr::kable(dt,
 ```{r zwevendPCB101, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB101 voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/PCB101.png")
 
-plotTrends(df_clean, parname)
-plotTrendsLimits(df_clean, parname)
+plotTrends(df, parname)
+
 ```
 
 ### PCB52 {#zwevend-PCB52}
@@ -754,8 +753,8 @@ knitr::kable(dt,
 ```{r zwevendPCB52, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB52 voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/PCB52.png")
 
-plotTrends(df_clean, parname)
-plotTrendsLimits(df_clean, parname)
+plotTrends(df, parname)
+
 ```
  
 ### PCB118 {#zwevend-PCB118}

@@ -70,13 +70,13 @@ plotLocations(df_clean)
 ## Metalen {#bodem-metalen}
 In Figuur \@ref(fig:arseenBodem) t/m Figuur \@ref(fig:zinkBodem) zijn de metalen in het bodemsediment in de Westerschelde weergegeven. Op de horizontale as zijn de stations gerangschikt van west (links) naar oost (rechts). Globaal gezien laten de meeste metalen laten op de meeste stations een afnemende trend in de tijd zien, die voor sommige metalen en stations sterker zijn dan voor andere. Daarnaast is voor sommige metalen (cadmium, koper, kwik en zink) te zien dat de hoeveelheid metaal in de richting van de Noordzee afneemt.
 
-```{r arseenBodem, fig.height = 8, fig.cap="Arseen in het bodemsediment in de Westerschelde"}
+```{r arseenBodem, fig.height = 12, fig.cap="Arseen in het bodemsediment in de Westerschelde"}
 #knitr::include_graphics("Figuren/Fysisch/Bodem/bar_arseen.png")
 
 parname = "Arseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrends(df, parname) + facet_wrap(~Station, ncol = 4)
-plotTrendsLimits(df_clean, parname) + facet_wrap(~Station, ncol = 4)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
+# plotTrendsLimits(df_clean, parname) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r cadmiumBodem, fig.cap="Cadmium in het bodemsediment in de Westerschelde"}
@@ -84,7 +84,7 @@ plotTrendsLimits(df_clean, parname) + facet_wrap(~Station, ncol = 4)
 
 parname = "Cadmium in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r chroomBodem, fig.cap="Chroom in het bodemsediment in de Westerschelde"}
@@ -92,7 +92,7 @@ plotTrendsBar(df, parname)
 
 parname = "Chroom in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r koperBodem, fig.cap="Koper in het bodemsediment in de Westerschelde"}
@@ -100,7 +100,7 @@ plotTrendsBar(df, parname)
 
 parname = "Koper in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r kwikBodem, fig.cap="Kwik in het bodemsediment in de Westerschelde"}
@@ -108,7 +108,7 @@ plotTrendsBar(df, parname)
 
 parname = "Kwik in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r loodBodem, fig.cap="Lood in het bodemsediment in de Westerschelde"}
@@ -116,7 +116,7 @@ plotTrendsBar(df, parname)
 
 parname = "Lood in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r zinkBodem, fig.cap="Zink in het bodemsediment in de Westerschelde"}
@@ -124,7 +124,7 @@ plotTrendsBar(df, parname)
 
 parname = "Zink in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ## Polycyclische Aromatische Koolwaterstoffen (PAK's) {#bodem-PAK}
@@ -137,7 +137,7 @@ De PAK’s zijn afzonderlijk weergegeven in Figuur \@ref(fig:antraceenBodem) t/m
 
 parname = "Antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r benzo-antraceenBodem, fig.cap="Benzo(a)antraceen in het bodemsediment in de Westerschelde"}
@@ -145,7 +145,7 @@ plotTrendsBar(df, parname)
 
 parname = "Benzo(a)antraceen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r benzo-pyreenBodem, fig.cap="Benzo(a)pyreen in het bodemsediment in de Westerschelde"}
@@ -153,7 +153,7 @@ plotTrendsBar(df, parname)
 
 parname = "Benzo(a)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r benzo-peryleenBodem, fig.cap="Benzo(g,h,i)peryleen in het bodemsediment in de Westerschelde"}
@@ -161,7 +161,7 @@ plotTrendsBar(df, parname)
 
 parname = "Benzo(g,h,i)peryleen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r benzo-fluorantheenBodem, fig.cap="Benzo(k)fluorantheen in het bodemsediment in de Westerschelde"}
@@ -169,7 +169,7 @@ plotTrendsBar(df, parname)
 
 parname = "Benzo(k)fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r chryseenBodem, fig.cap="Chryseen in het bodemsediment in de Westerschelde"}
@@ -177,7 +177,7 @@ plotTrendsBar(df, parname)
 
 parname = "Chryseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r fenanthreenBodem, fig.cap="Fenanthreen in het bodemsediment in de Westerschelde"}
@@ -185,7 +185,7 @@ plotTrendsBar(df, parname)
 
 parname = "Fenantreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r fluorantheenBodem, fig.cap="Fluorantheen in het bodemsediment in de Westerschelde"}
@@ -193,7 +193,7 @@ plotTrendsBar(df, parname)
 
 parname = "Fluorantheen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r indeno-pyreenBodem, fig.cap="Indeno(1,2,3-c,d)pyreen in het bodemsediment in de Westerschelde"}
@@ -201,7 +201,7 @@ plotTrendsBar(df, parname)
 
 parname = "Indeno(1,2,3-c,d)pyreen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ## Polychloorbifenylen (PCB's) {#bodem-PCB}
@@ -221,7 +221,7 @@ De PCB’s in het bodemsediment worden zowel afzonderlijk als gesommeerd weergeg
 
 parname = "2,2',3,4,4',5,5'-Heptachloorbifenyl (PCB180) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r PCB138Bodem, fig.cap="PCB138 in het bodemsediment in de Westerschelde"}
@@ -229,7 +229,7 @@ plotTrendsBar(df, parname)
 
 parname = "2,2',3,4,4',5'-Hexachloorbifenyl (PCB138) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r PCB153Bodem, fig.cap="PCB153 in het bodemsediment in de Westerschelde"}
@@ -237,7 +237,7 @@ plotTrendsBar(df, parname)
 
 parname = "2,2',4,4',5,5'-Hexachloorbifenyl (PCB153) in ug/kg drooggewicht in sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r PCB101Bodem, fig.cap="PCB101 in het bodemsediment in de Westerschelde"}
@@ -245,7 +245,7 @@ plotTrendsBar(df, parname)
 
 parname = "2,2',4,5,5'-Pentachloorbifenyl (PCB101) in ug/kg drooggewicht in sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r PCB52Bodem, fig.cap="PCB52 in het bodemsediment in de Westerschelde"}
@@ -253,7 +253,7 @@ plotTrendsBar(df, parname)
 
 parname = "2,2',5,5'-Tetrachloorbifenyl (PCB52) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r PCB118Bodem, fig.cap="PCB118 in het bodemsediment in de Westerschelde"}
@@ -261,7 +261,7 @@ plotTrendsBar(df, parname)
 
 parname = "2,3',4,4',5-Pentachloorbifenyl (PCB118) in ug/kg drooggewicht in sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ```{r PCB28Bodem, fig.cap="PCB28 in het bodemsediment in de Westerschelde"}
@@ -269,7 +269,7 @@ plotTrendsBar(df, parname)
 
 parname = "2,4,4'-Trichloorbifenyl (PCB28) in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 De hoeveelheid PCB’s neemt af in de richting van de Noordzee. Met name bij de oostelijke stations lijken de gehaltes af te nemen in de tijd.%, hoewel de gehaltes in 2016 wel hoger zijn dan in 2013.
@@ -280,7 +280,7 @@ knitr::include_graphics("Figuren/Fysisch/Bodem/bar_SomPCBs.png")
 
 # parname = "Chryseen in mg/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 # #plotTrends(df, parname, trend = F)
-# plotTrendsBar(df, parname)
+# plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
 
 ## Organotinverbindingen {#bodem-organotin}
@@ -292,5 +292,5 @@ Tributyltin is de enige organotinverbinding die wordt gemeten in het bodemsedime
 
 parname = "Tributyltin in ug/kg in de fractie < 63 um drooggewicht in bodem/sediment"
 #plotTrends(df, parname, trend = F)
-plotTrendsBar(df, parname)
+plotTrends(df, parname, trend = F) + facet_wrap(~Station, ncol = 4)
 ```
