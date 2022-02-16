@@ -92,6 +92,45 @@ if(sf) df <- df %>% st_drop_geometry()
     return(p)
 }
 
+
+plotTrendsLimits <- function(df, parname, sf = F, trend = T) {
+  
+  if(sf) df <- df %>% st_drop_geometry()
+  p <- df %>%
+    separate(originalvalue, c("limiet", "originalvalue"), " ") %>%
+    dplyr::filter(parametername == parname) %>%
+    dplyr::mutate(year = year(datetime), month = month(datetime)) %>%
+    dplyr::group_by(stationname, year) %>% 
+    dplyr::summarize(
+      `n(<)` = ifelse(sum(limiet == "<") == 0 , NA, sum(limiet == "<")), 
+      `n(=)` = ifelse(sum(limiet == "=") == 0 , NA, sum(limiet == "=")),
+      `n(>)` = ifelse(sum(limiet == ">") == 0 , NA, sum(limiet == ">")), 
+      median = median(value, na.rm = T), `10-perc` = quantile(value, 0.1, na.rm = T), `90-perc` = quantile(value, 0.9, na.rm = T)
+    ) %>%
+    dplyr::select(Station = stationname,
+                  Jaar = year,
+                  Mediaan = median,
+                  `90-perc`,
+                  `10-perc`,
+                  `n(=)`,
+                  `n(<)`,
+                  `n(>)`) %>%
+    dplyr::arrange(-Mediaan) %>%
+    ggplot(aes(Jaar, Mediaan)) +
+    geom_ribbon(aes(ymin = `10-perc`, ymax = `90-perc`), fill = "lightgrey") +
+    geom_line() + 
+    geom_point(aes(size = `n(=)`), fill = "white", shape = 21) +
+    geom_text(aes(y = 0, label = `n(<)`), size = 4) +
+    geom_text(aes(y = 10, label = `n(>)`), size = 4)
+  
+  if(trend)    p <- p + geom_smooth(method = "lm", fill = "blue", alpha = 0.2)
+  p <- p + facet_wrap(~Station, ncol = 2) +
+    theme_minimal() +
+    ylab(parname) +
+    coord_cartesian(ylim = c(0,NA))
+  return(p)
+}
+
 # Plot trends of nutrients
 plotLogTrends <- function(df, parname, sf = F, trend = T) {
   

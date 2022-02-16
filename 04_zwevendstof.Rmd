@@ -19,28 +19,37 @@ require(sf)
 require(leaflet)
 
 source("R/functions.R")
-```
 
-```{r downloadZwevend, include = F}
 # Set year for use in the report
 dataJaar <- 2019
 
 trendstations <- c("Schaar van Ouden Doel", "Vlissingen boei SSVH")
 
-#frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_zwevend_test_1998_2020.csv"
-frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_zwevend_test_1998_2020.csv"
+frozendatapath <- "n:/Projects/1209000/1209394/C. Report - advise/Eerstelijnsrapportage/2021/Data/Data_FysChem_zwevend_test_1998_2020.csv"
+# frozendatapath <- "c:/Users/ronge_bb/R/Data/Data_FysChem_zwevend_test_1998_2020.csv"
+
+```
+
+```{r downloadZwevend, include = F}
 df <- read_delim(frozendatapath, delim = ",")
 
-# replace below partly by clean function in package smsfs
-df <- df %>% 
-  # mutate(value = as.numeric(value)) %>%
-  filter(stationname %in% trendstations) %>%
+df_clean <- df %>% 
+  filter(stationname %in% trendstations) %>% 
   mutate(stationname = factor(stationname, levels = trendstations)) %>%
-  filter(valuesign != ">") %>%
-  mutate(value = case_when(
-    valuesign == "=" ~ value,
-    valuesign == "<" ~ 0.5 * value
-  ))
+  repair_limits() %>%
+  group_by(parametername, stationname) %>%
+  mutate(across(value, remove_outliers))
+
+# replace below partly by clean function in package smsfs
+# df <- df %>% 
+#   # mutate(value = as.numeric(value)) %>%
+#   filter(stationname %in% trendstations) %>%
+#   mutate(stationname = factor(stationname, levels = trendstations)) %>%
+#   filter(valuesign != ">") %>%
+#   mutate(value = case_when(
+#     valuesign == "=" ~ value,
+#     valuesign == "<" ~ 0.5 * value
+#   ))
 
 ```
 
@@ -53,7 +62,8 @@ Voor de bepaling van de fysisch-chemische parameters in het oppervlaktewater en 
 Voor de bepaling van de fysisch-chemische parameters in het zwevend stof vinden in het kader van MWTL maandelijkse vaartochten (tochtnummer 11) plaats, die de locaties Schaar van Ouden Doel en Vlissingen boei SSVH bemonsteren. Bij Schaar van Ouden Doel wordt maandelijks gemeten en bij Vlissingen eens per kwartaal. De monsters worden genomen met een doorstroomcentrifuge, waarbij een bepaalde hoeveelheid slib moet worden verzameld en afgeleverd aan het laboratorium voor analyse. In verband met het getij wordt ook altijd de saliniteit gemeten, zie Paragraaf \@ref(saliniteit). De stations zijn gepresenteerd in Figuur \@ref(fig:meetstationsZwevend) en zijn steeds gerangschikt in stroomafwaartse richting.
 
 ```{r meetstationsZwevend, fig.cap="Ligging van de meetstations voor het zwevende stof"}
-knitr::include_graphics("Figuren/Meetstations_zwevend.png")
+# knitr::include_graphics("Figuren/Meetstations_zwevend.png")
+plotLocations(df_clean)
 ```
 
 De meetdata worden gepresenteerd door middel van jaargemiddelden, en de minimale en maximale waarde die in elk jaar gemeten is. Voor sommige parameters zijn ook maandgemiddelden en/of seizoensgemiddelden weergegeven. Als er slechts een meting per maand beschikbaar is (of minder), zijn deze waardes gepresenteerd. Bij het middelen van parameters over een bepaalde periode is de datadichtheid van belang. Een overzicht van het aantal metingen per parameter, per station, per jaar is daarom opgenomen in Bijlage \@ref(BijlageB-meetdichtheid-zwevend).
@@ -86,7 +96,8 @@ knitr::kable(dt,
 ```{r zwevendKorrelgroottefractietot63um, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 63$\\mu$m voor 2 stations"}
 #knitr::include_graphics("Figuren/Zwevend/Korrelgroottefractietot63um.png")
 
-plotTrends(df, parname)
+plotTrends(df_clean, parname)
+# plotTrendsLimits(df_clean, parname)
 ```
 
 ### Korrelgroottefractie tot 2 $\mu$m {#korrelgrootteverdeling-tot2}
@@ -111,7 +122,8 @@ knitr::kable(dt,
 ```{r zwevendKorrelgroottefractietot2um, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van de korrelgroottefractie tot 2$\\mu$m voor beide stations"}
 #knitr::include_graphics("Figuren/Zwevend/Korrelgroottefractietot2um.png")
 
-plotTrends(df, parname)
+plotTrends(df_clean, parname)
+plotTrendsLimits(df_clean, parname)
 ```
 
 ## Metalen {#zwevend-metalen}
@@ -150,7 +162,8 @@ knitr::kable(dt,
 ```{r zwevendArseen, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Arseen voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Arseen.png")
 
-plotTrends(df, parname)
+plotTrends(df_clean, parname)
+plotTrendsLimits(df_clean, parname)
 ```
 
 ### Cadmium {#zwevend-cadmium}
@@ -176,7 +189,8 @@ knitr::kable(dt,
 ```{r zwevendCadmium, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Cadmium voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Cadmium.png")
 
-plotTrends(df, parname)
+plotTrends(df_clean, parname)
+plotTrendsLimits(df_clean, parname)
 ```
 
 ### Chroom {#zwevend-chroom}
@@ -201,7 +215,8 @@ knitr::kable(dt,
 ```{r zwevendChroom, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van Chroom voor beide stations."}
 #knitr::include_graphics("Figuren/Zwevend/Chroom.png")
 
-plotTrends(df, parname)
+plotTrends(df_clean, parname)
+plotTrendsLimits(df_clean, parname)
 ```
 
 ### Kobalt {#zwevend-kobalt}
@@ -715,7 +730,8 @@ knitr::kable(dt,
 ```{r zwevendPCB101, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB101 voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/PCB101.png")
 
-plotTrends(df, parname)
+plotTrends(df_clean, parname)
+plotTrendsLimits(df_clean, parname)
 ```
 
 ### PCB52 {#zwevend-PCB52}
@@ -738,7 +754,8 @@ knitr::kable(dt,
 ```{r zwevendPCB52, fig.cap="Jaarlijks gemiddelde (groen), minimum (blauw) en maximum (rood) van PCB52 voor beide stations."}
 # knitr::include_graphics("Figuren/Zwevend/PCB52.png")
 
-plotTrends(df, parname)
+plotTrends(df_clean, parname)
+plotTrendsLimits(df_clean, parname)
 ```
  
 ### PCB118 {#zwevend-PCB118}
