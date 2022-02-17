@@ -230,7 +230,9 @@ plotTrendsWaterstand <- function(df, parname, locname, sf = F) {
     facet_grid(Parameter ~ ., scales="free_y") +
     theme_light() +
     ylab("Jaargemiddeld hoog- en laagwater in cm+NAP") +
-    theme(legend.position="none")
+    theme(
+      legend.position="none",
+      strip.text.y = element_text(angle = 0, face = "bold"))
   return(p)
 }
 
