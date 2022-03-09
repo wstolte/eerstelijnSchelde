@@ -2,6 +2,8 @@
 require(httr)
 require(sf)
 require(tidyverse)
+# remotes::install_github("scheldemonitor/smwfs")
+require(smwfs)
 
 getSMdata = function(startyear, endyear, parID) {
   
