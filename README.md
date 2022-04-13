@@ -1,5 +1,7 @@
 # eerstelijnSchelde
 
+Deze repository is niet meer actueel. De Eerstelijnsrapportage code is verhuisd naar https://github.com/scheldemonitor/Eerstelijnsrapportage
+
 ## Achtergrond
 
 Deltares maakt elk jaar een eerstelijnsrapportage voor Rijkswaterstaat over de monitoring in de Westerschelde en de monding daarvan. dit is een beschrijving van alle metingen, statistiek, trends, ontbrekende waarden, kaarten en dergelijke. De rapportage wordt gebruikt om een eerste indruk te krijgen van de toestand in de Westerschelde. 
